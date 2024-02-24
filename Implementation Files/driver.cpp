@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
 
-    MovieManager inventory;
+    //MovieManager inventory;
 
     inventory.ReadCustomers();
 
