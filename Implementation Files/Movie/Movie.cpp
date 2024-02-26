@@ -1,9 +1,9 @@
 #include "Movie.h"
 
 Movie::Movie(){
-    director_ = " ";
+    director = " ";
     title = " ";
-    release_year_ = 0;
+    release_year = 0;
 }
 
 Movie::~Movie(){}
@@ -21,15 +21,15 @@ string Movie::getDirector() const{
 }
 
 void Movie::setTitle(string title){
-    this->title_ = title;
+    this->title = title;
 }
 
 int Movie::setYear(int year){
-    this->release_year_ = year;
+    this->release_year = year;
 }
 
 void Movie::setDirector(string title){
-    this->director_ = title;
+    this->director = title;
 }
 
 MovieType Movie::getMovieType() const{

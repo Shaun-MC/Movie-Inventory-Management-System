@@ -33,8 +33,8 @@ class Movie : public Media {
   
   MovieType movieType;
   
-  string director_;
-  string title_;
-  int release_year_;
+  string director;
+  string title;
+  int release_year;
 
 }
