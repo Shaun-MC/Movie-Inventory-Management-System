@@ -22,8 +22,6 @@ class AVLTree {
 
     TreeNode(): key(0), value(0), left(nullptr), right(nullptr), height(0) {};
     TreeNode(int key, int val): key(key), value(val), left(nullptr), right(nullptr), height(1) {};
-
-    // Get balance factor
   };
   
   // Constructors - Destructor
@@ -38,7 +36,7 @@ class AVLTree {
   
   // Actions
   bool insert(int key, int val);
-  bool retrieve(int key, int val); 
+  bool retrieve(int key, int& ret_val) const; 
 
  private:
   
@@ -53,7 +51,8 @@ class AVLTree {
 
   // Helper Functions
   TreeNode* insertHelper(TreeNode* currNode, int key, int val); 
-  
+  bool retrieveHelper(TreeNode* currNode, int target_key, int& ret_val) const;
+
   void clearHelper(TreeNode*& delete_node);
 
   // Member Data

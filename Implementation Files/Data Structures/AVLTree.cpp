@@ -1,7 +1,7 @@
 #include "AVLTree.h" 
 
 // Constructors - Destructor
-////template <class T>
+// template <class T>
 AVLTree::AVLTree() { // DONE
 
     this->root = nullptr;
@@ -38,23 +38,11 @@ int AVLTree::get_balance_factor(TreeNode* currNode) {
 //template <class T>
 bool AVLTree::insert(int key, int val) {
 
-    // Gaurd clase, empty tree
-    if (this->root == nullptr) {
-
-        TreeNode* insertNode = new TreeNode(key, val); // Deleted in Destructor
-
-        this->root = insertNode;
-        ++this->nodeCount;
-
-        return true;
-    }
-
-    const int prevCount = this->nodeCount;
+    const int starting_node_count = this->nodeCount;
 
     this->root = insertHelper(this->root, key, val);
 
-    // If a new node was inserted, then nodeCount will be incremented 
-    return !(prevCount == this->nodeCount);    
+    return !(starting_node_count == this->nodeCount);
 }
 
 //template <class T>
@@ -62,49 +50,54 @@ AVLTree::TreeNode* AVLTree::insertHelper(TreeNode* currNode, int key, int val) {
 
     if (currNode == nullptr) {
 
-        return new TreeNode(key, val); 
-    } else if (key == currNode->key) { // FIGURE IT OUT
+        currNode = new TreeNode(key, val);
 
+        ++this->nodeCount;
 
+        return currNode;
+    } else if (key == currNode->key) { // Make no changes to the current tree
+
+        return currNode;
     } else if (key < currNode->key) { 
 
         currNode->left = insertHelper(currNode->left, key, val);
-    } else { 
+    } else { // Go right
 
-        currNode->left = insertHelper(currNode->left, key, val);
+        currNode->right = insertHelper(currNode->right, key, val);
     }
 
-    currNode->height = 1 + std::max(currNode->left->height, currNode->right->height);
-
-    const int balance_factor = get_balance_factor(currNode);
-
-    if (balance_factor < -1 && key > currNode->right->key) { 
-
-        return leftLeftRotation(currNode);
-    } 
-
-    if (balance_factor > 1 && key < currNode->left->key) { 
-
-        return rightRightRotation(currNode);
-    }
-
-    if (balance_factor < -1 && key < currNode->right->key) {
-
-        return leftRightRotation(currNode);
-    }
-
-    if (balance_factor > 1 && key > currNode->left->key) { 
-
-        return rightLeftRotation(currNode);
-    }
-
-    return currNode; 
+    return currNode;
 }
 
 //template<class T>
-bool AVLTree::retrieve(int key, int val) {
+bool AVLTree::retrieve(int key, int& ret_val) const {
 
-    return true;
+    if (this->root == nullptr) {
+
+        return false;
+    }
+
+    return retrieveHelper(this->root, key, ret_val);
+}
+
+bool AVLTree::retrieveHelper(TreeNode* currNode, int target_key, int& ret_val) const {
+
+    // Base Cases 
+    if (currNode == nullptr) { // Target not in the list
+
+        return false;
+    } else if (target_key == currNode->key) { 
+
+        ret_val = currNode->value;
+
+        return true;
+    } else if (target_key < currNode->key) { 
+
+        return retrieveHelper(currNode->left, target_key, ret_val); 
+    } else {
+
+        return retrieveHelper(currNode->right, target_key, ret_val);
+    }
 }
 
 //template<class T>
@@ -133,15 +126,12 @@ AVLTree::TreeNode* AVLTree::leftRightRotation(TreeNode*& U) {
 
 void AVLTree::clear() {
 
-    if (this->root == nullptr) { // Assumption: empty list
+    if (this->root == nullptr) { 
 
         return;
     }
 
     clearHelper(this->root);
-
-    delete this->root; // Unessecary
-    this->root = nullptr;
 }
 
 void AVLTree::clearHelper(TreeNode*& delete_node) {
@@ -160,6 +150,3 @@ void AVLTree::clearHelper(TreeNode*& delete_node) {
 
     --this->nodeCount;
 }
-
-
-
