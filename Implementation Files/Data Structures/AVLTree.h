@@ -11,18 +11,35 @@ class AVLTree {
  public: 
 
   // Memeber Data
-  struct TreeNode {
+  class TreeNode {
+    public: 
+     
+     // Constructors - Destructor
+     TreeNode();
+     TreeNode(int key, int val);
+     TreeNode(int key, int* val);
 
-    int key;
-    int value; // change to a pointer eventually
+     // Destructor
+     ~TreeNode();
 
-    TreeNode* left;
-    TreeNode* right;
+     // Getters - Setters
+     int get_height() const;
+     int get_balance_factor() const;
 
-    int height;
+     void set_height(int new_height);
 
-    TreeNode(): key(0), value(0), left(nullptr), right(nullptr), height(0) {};
-    TreeNode(int key, int val): key(key), value(val), left(nullptr), right(nullptr), height(0) {};
+     // Actions
+     void updateHeight();
+
+     int key;
+     int height;
+     int* value;
+
+     TreeNode* left;
+     TreeNode* right;
+
+     //TreeNode(): key(0), value(0), left(nullptr), right(nullptr), height(0) {};
+     //TreeNode(int key, int val): key(key), value(val), left(nullptr), right(nullptr), height(0) {};
   };
   
   // Constructors - Destructor
@@ -30,20 +47,17 @@ class AVLTree {
   AVLTree(const AVLTree& rval);
 
   ~AVLTree();
-
-  // Getter
-  int get_height(TreeNode* currNode);
-  int get_balance_factor(TreeNode* currNode);
   
   // Actions
   bool insert(int key, int val);
   bool retrieve(int key, int& ret_val) const; 
 
-  //void displayTree() const;
+  void displayTree() const;
 
  private:
   
   // Member Functions
+  void makeRotation(const int bf, const int key, TreeNode*& curNode);
   void clear();
 
   void leftLeftRotation(TreeNode*& U);
@@ -59,7 +73,7 @@ class AVLTree {
   void clearHelper(TreeNode*& delete_node);
 
   // Display Debugging
-  //void displayTreeHelper(TreeNode* currNode, int width_value) const;
+  void displayTreeHelper(TreeNode* currNode, int width_value) const;
 
   // Member Data
   TreeNode* root;

@@ -1,15 +1,48 @@
 #include "AVLTree.h" 
 
-// Constructors - Destructor
-// template <class T>
-AVLTree::AVLTree() { // DONE
+// TreeNode
+AVLTree::TreeNode::TreeNode() : key(0), value(nullptr), left(nullptr), right(nullptr), height(0) {};
 
-    this->root = nullptr;
+AVLTree::TreeNode::TreeNode(int key, int val): key(key), value(new int(val)), left(nullptr), right(nullptr), height(0) {};
 
-    this->nodeCount = 0;
+AVLTree::TreeNode::TreeNode(int key, int* val) : key(key), value(new int(*value)), left(nullptr), right(nullptr), height(0) {};
+
+AVLTree::TreeNode::~TreeNode() {
+
+    delete this->value;
+    this->value = nullptr;
 }
 
-////template <class T>
+// Getters - Setters
+int AVLTree::TreeNode::get_height() const {
+
+    // Gives Warnings
+    return (this == nullptr) ? 0 : this->height; 
+}
+
+int AVLTree::TreeNode::get_balance_factor() const {
+
+    // Gives warning
+    return (this == nullptr) ? 0 : this->left->get_height() - this->right->get_height();
+}
+
+void AVLTree::TreeNode::set_height(int new_height) {
+
+    this->height = new_height;
+}
+
+// Actions
+void AVLTree::TreeNode::updateHeight() {
+
+    this->height = 1 + max(this->left->get_height(), this->right->get_height());
+}
+
+// AVLTree 
+// Constructors - Destructor
+// template <class T>
+AVLTree::AVLTree() : root(nullptr), nodeCount(0) {}; // DONE
+
+//template <class T>
 AVLTree::AVLTree(const AVLTree& rval) { // Questioning Nessecity
 
     return;
@@ -22,17 +55,6 @@ AVLTree::~AVLTree() { // DONE
 }
 
 // Getters 
-//template<class T>
-int AVLTree::get_height(TreeNode* currNode) { // DONE
-
-    return (currNode == nullptr) ? 0 : currNode->height;
-}
-
-//template<class T>
-int AVLTree::get_balance_factor(TreeNode* currNode) { // DONE
-
-    return (currNode == nullptr) ? 0 : get_height(currNode->left) - get_height(currNode->right);
-}
 
 // Actions
 //template <class T>
@@ -66,29 +88,44 @@ AVLTree::TreeNode* AVLTree::insertHelper(TreeNode* currNode, int key, int val) {
 
     }
     
-    currNode->height = 1 + max(get_height(currNode->left), get_height(currNode->right));
+    currNode->updateHeight();
 
-    const int balance_factor = get_balance_factor(currNode);
+    const int balanace_factor = currNode->get_balance_factor();
 
-    if (balance_factor > 1 && key < currNode->left->key)
-        
-        leftLeftRotation(currNode);
-        
-    if (balance_factor < -1 && key > currNode->right->key)
-            
-        rightRightRotation(currNode);
-        
-    if (balance_factor > 1 && key > currNode->left->key) {
+    switch (currNode->get_balance_factor()) {
 
-        leftRightRotation(currNode);
-    }
-    
-    if (balance_factor < -1 && key < currNode->right->key) {
+        case 0:
+        case -1:
+        case 1:
+        break;
 
-        rightLeftRotation(currNode);
+        default: 
+
+        makeRotation(balanace_factor, key, currNode);
     }
     
     return currNode;
+}
+
+void AVLTree::makeRotation(const int bf, const int key, TreeNode*& curr) {
+
+    if (bf > 1 && key < curr->left->key)
+        
+        leftLeftRotation(curr);
+        
+    if (bf < -1 && key > curr->right->key)
+            
+        rightRightRotation(curr);
+        
+    if (bf > 1 && key > curr->left->key) {
+
+        leftRightRotation(curr);
+    }
+    
+    if (bf < -1 && key < curr->right->key) {
+
+        rightLeftRotation(curr);
+    }
 }
 
 //template<class T>
@@ -110,7 +147,7 @@ bool AVLTree::retrieveHelper(TreeNode* currNode, int target_key, int& ret_val) c
         return false;
     } else if (target_key == currNode->key) { 
 
-        ret_val = currNode->value;
+        ret_val = *currNode->value;
 
         return true;
     } else if (target_key < currNode->key) { 
@@ -123,35 +160,27 @@ bool AVLTree::retrieveHelper(TreeNode* currNode, int target_key, int& ret_val) c
 }
 
 //template<class T>
-void AVLTree::leftLeftRotation(TreeNode*& unbalanced) { // REFACTOR
+void AVLTree::leftLeftRotation(TreeNode*& unbalanced) { // DONE
 
-    // Execute Rotation
     TreeNode* lhs = unbalanced->left;
-    
     unbalanced->left = lhs->right;
-    
     lhs->right = unbalanced;
-    
     unbalanced = lhs;
 
-    // Update Node Heights
-    unbalanced->right->height = 1 + max(get_height(unbalanced->right->left), get_height(unbalanced->right->right));
-    unbalanced->height = 1 + max(get_height(unbalanced->left), get_height(unbalanced->right));
+    unbalanced->right->updateHeight();
+    unbalanced->updateHeight();
 }
   
 //template<class T>
-void AVLTree::rightRightRotation(TreeNode*& unbalanced) { // REFACTOR
+void AVLTree::rightRightRotation(TreeNode*& unbalanced) { // DONE
 
     TreeNode* rhs = unbalanced->right;
-    
     unbalanced->right = rhs->left;
-    
     rhs->left = unbalanced;
-    
     unbalanced = rhs;
 
-    unbalanced->left->height = 1 + max(get_height(unbalanced->left->left), get_height(unbalanced->left->right));
-    unbalanced->height =  1 + max(get_height(unbalanced->left), get_height(unbalanced->right));
+    unbalanced->left->updateHeight();
+    unbalanced->updateHeight();
 }
 
 //template<class T>
@@ -191,24 +220,25 @@ void AVLTree::clearHelper(TreeNode*& delete_node) { // DONE
 
     clearHelper(delete_node->right); 
 
+    delete_node->~TreeNode(); // ??
     delete delete_node;
     delete_node = nullptr;
 
     --this->nodeCount;
 }
 
-/*void AVLTree::displayTree() const { // Checks other function correctness
+void AVLTree::displayTree() const { // Checks other function correctness
 
     int width_value = 5;
     
     cout << setfill(' ') << setw(width_value) << "Root: ";
     
-    if (this->isEmpty()) { // Gaurd clause, empty tree
+    /*if (this->isEmpty()) { // Gaurd clause, empty tree
 
         return;
-    }
+    }*/
 
-    cout << this->root->value << endl;
+    cout << *this->root->value << endl;
 
     displayTreeHelper(this->root, width_value += 5);
 }
@@ -223,7 +253,7 @@ void AVLTree::displayTreeHelper(TreeNode* node, int width_value) const {
 
     if (node->left != nullptr) {
 
-        cout << setfill(' ') << setw(width_value) << "L---" << node->left->value << endl;
+        cout << setfill(' ') << setw(width_value) << "L---" << *node->left->value << endl;
         
         int width_copy = width_value + 5;
 
@@ -232,11 +262,11 @@ void AVLTree::displayTreeHelper(TreeNode* node, int width_value) const {
 
     if (node->right != nullptr) {
 
-        cout << setfill(' ') << setw(width_value) << "R---" << node->right->value << endl;
+        cout << setfill(' ') << setw(width_value) << "R---" << *node->right->value << endl;
         
         int width_copy = width_value + 5;
 
         displayTreeHelper(node->right, width_copy);
     }
-}*/
+}
 

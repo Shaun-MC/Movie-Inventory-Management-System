@@ -18,7 +18,7 @@ int main() {
         tree.insert(testArr[i], testArr[i]);
     }
 
-    //tree.displayTree();
+    tree.displayTree();
 
     return 0;
 }
