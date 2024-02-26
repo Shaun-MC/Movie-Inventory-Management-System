@@ -23,20 +23,20 @@ AVLTree::~AVLTree() { // DONE
 
 // Getters 
 //template<class T>
-int AVLTree::get_height(TreeNode* currNode) {
+int AVLTree::get_height(TreeNode* currNode) { // DONE
 
     return (currNode == nullptr) ? 0 : currNode->height;
 }
 
 //template<class T>
-int AVLTree::get_balance_factor(TreeNode* currNode) {
+int AVLTree::get_balance_factor(TreeNode* currNode) { // DONE
 
-    return (currNode == nullptr) ? 0 : currNode->left->height - currNode->right->height;
+    return (currNode == nullptr) ? 0 : get_height(currNode->left) - get_height(currNode->right);
 }
 
 // Actions
 //template <class T>
-bool AVLTree::insert(int key, int val) {
+bool AVLTree::insert(int key, int val) { // DONE
 
     const int starting_node_count = this->nodeCount;
 
@@ -46,31 +46,53 @@ bool AVLTree::insert(int key, int val) {
 }
 
 //template <class T>
-AVLTree::TreeNode* AVLTree::insertHelper(TreeNode* currNode, int key, int val) {
+AVLTree::TreeNode* AVLTree::insertHelper(TreeNode* currNode, int key, int val) { // TEMPLATIZE, REFACTOR
 
     if (currNode == nullptr) {
 
         currNode = new TreeNode(key, val);
 
         ++this->nodeCount;
-
-        return currNode;
     } else if (key == currNode->key) { // Make no changes to the current tree
 
         return currNode;
     } else if (key < currNode->key) { 
 
         currNode->left = insertHelper(currNode->left, key, val);
+
     } else { // Go right
 
         currNode->right = insertHelper(currNode->right, key, val);
-    }
 
+    }
+    
+    currNode->height = 1 + max(get_height(currNode->left), get_height(currNode->right));
+
+    const int balance_factor = get_balance_factor(currNode);
+
+    if (balance_factor > 1 && key < currNode->left->key)
+        
+        leftLeftRotation(currNode);
+        
+    if (balance_factor < -1 && key > currNode->right->key)
+            
+        rightRightRotation(currNode);
+        
+    if (balance_factor > 1 && key > currNode->left->key) {
+
+        leftRightRotation(currNode);
+    }
+    
+    if (balance_factor < -1 && key < currNode->right->key) {
+
+        rightLeftRotation(currNode);
+    }
+    
     return currNode;
 }
 
 //template<class T>
-bool AVLTree::retrieve(int key, int& ret_val) const {
+bool AVLTree::retrieve(int key, int& ret_val) const { // TEMPLATIZE
 
     if (this->root == nullptr) {
 
@@ -80,7 +102,7 @@ bool AVLTree::retrieve(int key, int& ret_val) const {
     return retrieveHelper(this->root, key, ret_val);
 }
 
-bool AVLTree::retrieveHelper(TreeNode* currNode, int target_key, int& ret_val) const {
+bool AVLTree::retrieveHelper(TreeNode* currNode, int target_key, int& ret_val) const { // TEMPLATIZE
 
     // Base Cases 
     if (currNode == nullptr) { // Target not in the list
@@ -101,30 +123,54 @@ bool AVLTree::retrieveHelper(TreeNode* currNode, int target_key, int& ret_val) c
 }
 
 //template<class T>
-AVLTree::TreeNode* AVLTree::leftLeftRotation(TreeNode*& U) {
+void AVLTree::leftLeftRotation(TreeNode*& unbalanced) { // REFACTOR
 
-    return nullptr;
+    // Execute Rotation
+    TreeNode* lhs = unbalanced->left;
+    
+    unbalanced->left = lhs->right;
+    
+    lhs->right = unbalanced;
+    
+    unbalanced = lhs;
+
+    // Update Node Heights
+    unbalanced->right->height = 1 + max(get_height(unbalanced->right->left), get_height(unbalanced->right->right));
+    unbalanced->height = 1 + max(get_height(unbalanced->left), get_height(unbalanced->right));
 }
   
 //template<class T>
-AVLTree::TreeNode* AVLTree::rightRightRotation(TreeNode*& U) {
+void AVLTree::rightRightRotation(TreeNode*& unbalanced) { // REFACTOR
 
-    return nullptr;
+    TreeNode* rhs = unbalanced->right;
+    
+    unbalanced->right = rhs->left;
+    
+    rhs->left = unbalanced;
+    
+    unbalanced = rhs;
+
+    unbalanced->left->height = 1 + max(get_height(unbalanced->left->left), get_height(unbalanced->left->right));
+    unbalanced->height =  1 + max(get_height(unbalanced->left), get_height(unbalanced->right));
 }
 
 //template<class T>
-AVLTree::TreeNode* AVLTree::rightLeftRotation(TreeNode*& U) {
+void AVLTree::rightLeftRotation(TreeNode*& unbalanced) { // DONE
 
-    return nullptr;
+    leftLeftRotation(unbalanced->right);
+    
+    rightRightRotation(unbalanced);
 }
 
 //template<class T>
-AVLTree::TreeNode* AVLTree::leftRightRotation(TreeNode*& U) {
+void AVLTree::leftRightRotation(TreeNode*& unbalanced) { // DONE
 
-    return nullptr;
+    rightRightRotation(unbalanced->left);
+    
+    leftLeftRotation(unbalanced);
 }
 
-void AVLTree::clear() {
+void AVLTree::clear() { // DONE
 
     if (this->root == nullptr) { 
 
@@ -134,7 +180,7 @@ void AVLTree::clear() {
     clearHelper(this->root);
 }
 
-void AVLTree::clearHelper(TreeNode*& delete_node) {
+void AVLTree::clearHelper(TreeNode*& delete_node) { // DONE
 
     if (delete_node == nullptr) {
 
@@ -150,3 +196,47 @@ void AVLTree::clearHelper(TreeNode*& delete_node) {
 
     --this->nodeCount;
 }
+
+/*void AVLTree::displayTree() const { // Checks other function correctness
+
+    int width_value = 5;
+    
+    cout << setfill(' ') << setw(width_value) << "Root: ";
+    
+    if (this->isEmpty()) { // Gaurd clause, empty tree
+
+        return;
+    }
+
+    cout << this->root->value << endl;
+
+    displayTreeHelper(this->root, width_value += 5);
+}
+
+void AVLTree::displayTreeHelper(TreeNode* node, int width_value) const {
+
+    // Base Case
+    if (node == nullptr) {
+
+        return;
+    }
+
+    if (node->left != nullptr) {
+
+        cout << setfill(' ') << setw(width_value) << "L---" << node->left->value << endl;
+        
+        int width_copy = width_value + 5;
+
+        displayTreeHelper(node->left, width_copy);
+    }
+
+    if (node->right != nullptr) {
+
+        cout << setfill(' ') << setw(width_value) << "R---" << node->right->value << endl;
+        
+        int width_copy = width_value + 5;
+
+        displayTreeHelper(node->right, width_copy);
+    }
+}*/
+
