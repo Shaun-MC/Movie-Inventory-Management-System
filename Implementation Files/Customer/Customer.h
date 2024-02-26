@@ -37,15 +37,15 @@ class Customer {
   
   // Operator Overloads
 
-  bool operator < (const Customer& rval) const;
-  bool operator == (const Customer& rval) const;
+  bool operator<(const Customer& rval) const;
+  bool operator==(const Customer& rval) const;
 
   friend ostream& operator << (ostream& ostrm, const Customer& obj);
  
  private: 
  
   int ID;
-  string name;
+  string name; 
 
   vector<Transaction*> transaction_history;
   vector<Media*> outstandingMedia;
