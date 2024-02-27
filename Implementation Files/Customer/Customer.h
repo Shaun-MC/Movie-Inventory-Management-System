@@ -26,14 +26,14 @@ class Customer {
 
   vector<Transaction*> & getHistory() const;
   
-  vector<Media*> & getOutstanding() const;
+  vector<Stock*> & getOutstanding() const;
 
   // Actions
 
   void addHistory(Transaction* newTransaction);
 
-  bool borrowMedia(Media* newMedia);
-  bool returnMedia(Media* oldMedia);
+  bool borrowMedia(Stock* newMedia);
+  bool returnMedia(Stock* oldMedia);
   
   // Operator Overloads
 
@@ -48,7 +48,7 @@ class Customer {
   string name; 
 
   vector<Transaction*> transaction_history;
-  vector<Media*> outstandingMedia;
+  vector<Stock*> outstandingMedia;
 };
 
 #endif

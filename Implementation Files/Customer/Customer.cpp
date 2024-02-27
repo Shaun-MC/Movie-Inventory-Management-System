@@ -21,11 +21,11 @@ void Customer::setName(string first, string last){ //??
     this->name = first + " " + last;  
 }
 
-vector<Transaction *> &Customer::getHistory() const{
+vector<Transaction *>& Customer::getHistory() const{
     return transaction_history;
 }
 
-vector<Media *> &Customer::getOutstanding() const{
+vector<Stock *>& Customer::getOutstanding() const{
     return outstandingMedia;
 }
 
@@ -33,17 +33,22 @@ void Customer::addHistory(Transaction *newTransaction){
     transaction_history.push_back(newTransaction);
 }
 
-bool Customer::borrowMedia(Media *newMedia){
+bool Customer::borrowMedia(Stock *newMedia){
     outstandingMedia.push_back(newMedia);
 }
 
-bool Customer::returnMedia(Media *oldMedia){
+bool Customer::returnMedia(Stock *oldMedia){
     for(size_t i = 0; i <= outstandingMedia.size(); i++){
+        
         if(*outstandingMedia[i] == oldMedia){
+            
             delete outstandingMedia[i];
+            
             outstandingMedia[i] = outstandingMedia.back();
+            
             outstandingMedia[i].pop_back();
-            return true
+            
+            return true;
         }
     }
     return false;
@@ -54,7 +59,7 @@ bool Customer::operator<(const Customer &rval) const{
 }
 
 bool Customer::operator==(const Customer &rval) const{
-    return this-ID == rval.ID;
+    return this->ID == rval.ID;
 }
 
 ostream &operator<<(ostream &ostrm, const Customer &obj){
