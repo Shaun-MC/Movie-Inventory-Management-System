@@ -2,6 +2,7 @@
 #define MOVIEMANAGER_H
 
 #include <fstream>
+#include <sstream>
 
 #include "../Customer/CustomerList.h"
 #include "../Stock/StockCollection.h"
@@ -19,6 +20,9 @@ class MovieManager {
   void ReadTransactions(ifstream& ifile);
   
  private:
+
+  // Member Functions
+  void parseCustomerLine(string line, int& key, string& f_name, string& l_name) const;
   
   CustomerList customers;
   StockCollection stocks;

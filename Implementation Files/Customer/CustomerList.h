@@ -17,7 +17,7 @@ class CustomerList {
   bool getCustomer(int key);
 
   // Actions
-  bool insert(Customer& newNode);
+  bool insert(int key, string f_name, string l_name);
   
   bool retrieve(int key, Customer& ret);
  
