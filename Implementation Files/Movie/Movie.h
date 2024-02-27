@@ -2,6 +2,8 @@
 #define MOVIE_H
 
 #include "stock.h"
+#include<iostream>
+using namespace std;
 
 class Movie : public Media {
 
@@ -20,21 +22,19 @@ class Movie : public Media {
   int setYear(int year);
   void setDirector(string title);
 
-  virtual StockType getStockType() const = 0; //abstract function (pure function)
-  virtual MovieType getMovieType() const; 
-  
-  // Actions
-  virtual void display() const = 0; //abstract function (pure function)
+  virtual char getStockType() const = 0; //abstract function (pure function)
+  virtual char getMovieType() const; 
 
   // Operator Overloading
   friend ostream& operator << (ostream& ostrm, const Movie& obj);
  
  protected: 
   
-  MovieType movieType;
-  
+  char movieType; //changed it 
   string director;
   string title;
   int release_year;
+  virtual void display(ostream &ostrm) const = 0;
+};
 
-}
+#endif
