@@ -20,11 +20,11 @@ class Movie : public Media {
   int setYear(int year);
   void setDirector(string title);
 
-  virtual StockType getStockType() const = 0;
+  virtual StockType getStockType() const = 0; //abstract function (pure function)
   virtual MovieType getMovieType() const; 
   
   // Actions
-  virtual void display() const = 0;
+  virtual void display() const = 0; //abstract function (pure function)
 
   // Operator Overloading
   friend ostream& operator << (ostream& ostrm, const Movie& obj);
