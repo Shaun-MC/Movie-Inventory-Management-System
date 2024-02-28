@@ -1,19 +1,21 @@
-#include "CustomerList.h"
+#include "CustomerCollection.h"
 
 CustomerList::CustomerList(){
+
+    // Nothing to do
 }
 
-CustomerList::~CustomerList(){
+Customer* CustomerList::getCustomer(int key){
+    
+    return this->customers.getValue(key);
 }
 
-bool CustomerList::getCustomer(int key){
-    return false;
+bool CustomerList::insert(Customer &newCust){
+    
+    return this->customers.insertKeyValue(newCust.getID(), newCust);
 }
 
-bool CustomerList::insert(Customer &newNode){
-    return false;
-}
-
-bool CustomerList::retrieve(int key, Customer &ret){
-    return false;
+bool CustomerList::retrieve(int key, Customer*& ret){
+    
+    return this->customers.retireveValue(key, ret);
 }

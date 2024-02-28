@@ -15,7 +15,7 @@ class HashTable {
   ~HashTable();
 
   // Getters - Setters
-  const Value* getValue(const Key& key) const;
+  Value* getValue(const Key& key) const;
 
   // Actions
   bool insertKeyValue(const Key& key, const Value& val);
@@ -58,7 +58,7 @@ HashTable<Key, Value>::~HashTable() {
 
 // Getters - Setters
 template <typename Key, typename Value>
-const Value* HashTable<Key, Value>::getValue(const Key& key) const {
+Value* HashTable<Key, Value>::getValue(const Key& key) const {
 
     // Get the hash value
     const int hash = createHash(key);

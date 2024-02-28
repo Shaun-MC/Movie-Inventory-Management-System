@@ -8,8 +8,8 @@ class Return : public BorrowReturn {
  public: 
 
   // Constructors - Destructors
-  Borrow();
-  ~Borrow();
+  Return();
+  ~Return();
 
   // Actions
   bool processReturn(StockCollection& movies, CustomerCollection& customers);

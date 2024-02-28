@@ -1,8 +1,10 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
-#include "../Customer/CustomerList.h"
+#include "../Customer/CustomerCollection.h"
 #include "../Stock/StockCollection.h"
+
+#include <string>
 
 class Transaction {
 
