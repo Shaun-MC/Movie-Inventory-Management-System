@@ -1,7 +1,7 @@
 #ifndef CUSTOMERLIST_H
 #define CUSTOMERLIST_H
 
-#include "../Data Structures/AVLTree.h"
+#include "../Data Structures/HashTable.h"
 #include "Customer.h"
 
 class CustomerList {
@@ -23,7 +23,9 @@ class CustomerList {
  
  private: 
 
-  AVLTree<Customer> list;
+  //AVLTree<Customer> list;
+  
+
 };
 
 #endif
