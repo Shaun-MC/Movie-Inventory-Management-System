@@ -31,12 +31,11 @@ class Movie : public Media {
  
  protected: 
   
-  MovieType movieType;
-  
+  char movieType; //changed it 
   string director;
   string title;
   int release_year;
-
+  virtual void display(ostream &ostrm) const = 0;
 };
 
 #endif
