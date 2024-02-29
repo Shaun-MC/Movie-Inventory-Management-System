@@ -1,15 +1,15 @@
-#ifndef CUSTOMERLIST_H
-#define CUSTOMERLIST_H
+#ifndef CUSTOMERCOLLECTION_H
+#define CUSTOMERCOLLECTION_H
 
 #include "../Data Structures/HashTable.h"
 #include "Customer.h"
 
-class CustomerList {
+class CustomerCollection {
 
  public: 
 
   // Constructor - Destructor
-  CustomerList(); // Nessecary?
+  CustomerCollection(); // Nessecary?
 
   // Getters - Setters
   Customer* getCustomer(int key);
