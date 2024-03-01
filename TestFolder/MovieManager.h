@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "Customer/CustomerCollection.h"
+#include "CustomerCollection.h"
 //#include "Stock/MediaCollection.h"
 
 using namespace std;
