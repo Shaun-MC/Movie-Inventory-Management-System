@@ -18,7 +18,6 @@ void MovieManager::ReadCustomers(ifstream& customer_file) {
     while (!customer_file.eof()) {
         
         getline(customer_file, line);
-        customer_file.ignore(); // Positions stream onto the next line
 
         parseCustomerLine(line, key, name);
 
@@ -35,10 +34,10 @@ void MovieManager::parseCustomerLine(const string line, int& key, string& name) 
     parse >> key;
     parse.ignore();
 
-    parse >> f_name;
+    parse >> l_name;
     parse.ignore();
 
-    parse >> l_name;
+    parse >> f_name;
     parse.ignore();
 
     name = f_name + " " + l_name;

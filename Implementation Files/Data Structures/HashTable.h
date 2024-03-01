@@ -107,7 +107,13 @@ bool HashTable<Key, Value>::retireveValue(const Key& key, Value*& ret) const {
         return false;
     } else {
 
-        ret = new int;
+        if (ret != nullptr) {
+
+            delete ret;
+            ret = nullptr;
+        }
+
+        ret = new Value();
         *ret = *this->table[hash];
 
         return true;

@@ -9,12 +9,9 @@ Customer* CustomerCollection::getCustomer(int key){
 
 bool CustomerCollection::insert(const int ID, const string& name) {
     
-    Customer* new_cust = new Customer(ID, name);
-    int test_ID = new_cust->getID();
+    Customer new_cust = Customer(ID, name);
 
-    return this->customersCollection.insertKeyValue(test_ID, *new_cust);
-
-    delete new_cust;
+    return this->customersCollection.insertKeyValue(new_cust.getID(), new_cust);
 }
 
 bool CustomerCollection::retrieve(int key, Customer*& ret) {
