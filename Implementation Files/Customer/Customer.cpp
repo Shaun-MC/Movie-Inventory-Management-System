@@ -5,6 +5,12 @@ Customer::Customer(){
     name = " ";
 }
 
+Customer::Customer(int ID, string name) {
+
+    this->ID = ID;
+    this->name = name;
+}
+
 int Customer::getID() const{
     return this->ID;
 }
@@ -21,7 +27,7 @@ void Customer::setName(string first, string last){ //??
     this->name = first + " " + last;  
 }
 
-vector<Transaction *>& Customer::getHistory() const{
+/*vector<Transaction *>& Customer::getHistory() const{
     return transaction_history;
 }
 
@@ -52,17 +58,20 @@ bool Customer::returnMedia(Stock *oldMedia){
         }
     }
     return false;
-}
+}*/
 
 bool Customer::operator<(const Customer &rval) const{
+    
     return this->ID < rval.ID;
 }
 
 bool Customer::operator==(const Customer &rval) const{
+    
     return this->ID == rval.ID;
 }
 
 ostream &operator<<(ostream &ostrm, const Customer &obj){
+    
     ostrm << obj.getID() << " " << obj.getName() << endl;
     return ostrm;
 }

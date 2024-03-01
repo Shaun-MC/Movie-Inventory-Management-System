@@ -1,29 +1,31 @@
 #ifndef CUSTOMERCOLLECTION_H
 #define CUSTOMERCOLLECTION_H
 
+#include <string>
+
 #include "../Data Structures/HashTable.h"
 #include "Customer.h"
+
+using namespace std;
 
 class CustomerCollection {
 
  public: 
 
-  // Constructor - Destructor
-  CustomerCollection(); // Nessecary?
+  // Constructor
+  CustomerCollection(); 
 
   // Getters - Setters
   Customer* getCustomer(int key);
 
   // Actions
-  bool insert(Customer& newNode);
+  bool insert(const int ID, const string& name);
   
   bool retrieve(int key, Customer*& ret);
  
  private: 
 
-  //AVLTree<Customer> list;
   HashTable<int, Customer> customers;
-
 };
 
 #endif

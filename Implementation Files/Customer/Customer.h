@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 //#include "../Stock/Stock.h"
 //#include "../Transaction/Transaction.h"
 
@@ -17,13 +19,14 @@ class Customer {
 
   // Constructor
   Customer();
+  Customer(int ID, string name);
 
   // Getters - Setters
   int getID() const;
-  std::string getName() const;
+  string getName() const;
 
   void setID(int id);
-  void setName(std::string first, std::string last);
+  void setName(string first, string last);
 
   //vector<Transaction*> & getHistory() const;
   
@@ -46,7 +49,7 @@ class Customer {
  private: 
  
   int ID;
-  std::string name; 
+  string name; 
 
   //vector<Transaction*> transaction_history;
   //vector<Stock*> outstandingMedia;

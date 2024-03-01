@@ -18,7 +18,7 @@ class HashTable {
   Value* getValue(const Key& key) const;
 
   // Actions
-  bool insertKeyValue(const Key& key, const Value& val);
+  bool insertKeyValue(const Key key, const Value& val);
 
   bool retireveValue(const Key& key, Value*& ret) const;
  
@@ -75,7 +75,7 @@ Value* HashTable<Key, Value>::getValue(const Key& key) const {
 
 // Actions
 template <typename Key, typename Value>
-bool HashTable<Key, Value>::insertKeyValue(const Key& key, const Value& val) {
+bool HashTable<Key, Value>::insertKeyValue(const Key key, const Value& val) {
 
     // How does it handle duplicates - have to pass in val by reference to check compare values
 
