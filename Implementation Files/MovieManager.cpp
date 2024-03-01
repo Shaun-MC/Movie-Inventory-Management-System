@@ -25,6 +25,16 @@ void MovieManager::ReadCustomers(ifstream& customer_file) {
     }
 }
 
+void MovieManager::ReadMovies(ifstream& movie_list) {
+
+
+}
+
+void MovieManager::ReadTransactions(ifstream& transaction_list) {
+
+    return;
+}
+
 void MovieManager::parseCustomerLine(const string line, int& key, string& name) const {
 
     string f_name = "", l_name = "";
@@ -41,14 +51,4 @@ void MovieManager::parseCustomerLine(const string line, int& key, string& name) 
     parse.ignore();
 
     name = f_name + " " + l_name;
-}
-
-void MovieManager::ReadMovies(ifstream& movie_list) {
-
-    return;
-}
-
-void MovieManager::ReadTransactions(ifstream& transaction_list) {
-
-    return;
 }

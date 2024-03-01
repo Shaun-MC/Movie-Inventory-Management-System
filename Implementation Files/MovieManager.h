@@ -5,8 +5,8 @@
 #include <fstream>
 #include <sstream>
 
-#include "CustomerCollection.h"
-//#include "Stock/MediaCollection.h"
+#include "Customer/CustomerCollection.h"
+#include "Stock/MediaCollection.h"
 
 using namespace std;
 
@@ -28,7 +28,7 @@ class MovieManager {
   void parseCustomerLine(const string line, int& key, string& name) const;
   
   CustomerCollection* customers;
-  //MediaCollection* stocks;
+  MediaCollection* stocks;
 };
 
 #endif
