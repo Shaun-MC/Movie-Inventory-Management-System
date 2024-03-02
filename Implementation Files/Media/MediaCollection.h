@@ -20,7 +20,7 @@ class MediaCollection {
   static MediaCollection* getCollection();
   
   // Actions
-  bool insert(const Media*& insert_media);
+  bool insert(Media*& insert_media);
 
   bool retrieve(const Media*& target, Media*& ret);
  

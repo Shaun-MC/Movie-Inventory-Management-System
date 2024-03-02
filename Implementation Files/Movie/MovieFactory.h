@@ -1,23 +1,30 @@
 #ifndef MOVIEFACTORY_H
 #define MOVIEFACTORY_
 
+#include <iostream>
 #include <fstream>
+#include <sstream>
+#include <string>
 
 #include "Movie.h"
+
+using namespace std;
 
 class MovieFactory {
 
  public: 
   
-  static Movie*& createMovie(const string& movie_line);
+  static Movie* createMovie(string& movie_line);
 
  private:
 
-  Movie* createComedy(const string& movie_line);
+  static Movie* createComedy(stringstream& movie_line);
 
-  Movie* createDrama(const string& movie_line);
+  static Movie* createDrama(stringstream& movie_line);
 
-  Movie* createClassic(const string& movie_line);
+  static Movie* createClassic(stringstream& movie_line);
+
+  static void sanatizeString(string& movie_line);
 };
 
 #endif

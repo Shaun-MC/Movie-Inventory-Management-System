@@ -44,7 +44,7 @@ class Media {
 
   int stock;
 
-  MediaType media;
+  MediaType type;
 
   virtual ostream& display(ostream& ostrm) const = 0;
 };
