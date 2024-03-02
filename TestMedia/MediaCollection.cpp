@@ -16,43 +16,32 @@ MediaCollection::~MediaCollection() {
     this->clear();
 }
 
-// Getter
-MediaCollection* MediaCollection::getCollection() { // UNTESTED
-
-    if (instancePtr == nullptr) {
-
-        instancePtr = new MediaCollection();
-    } 
-
-    return instancePtr;
-}
-
 // Actions
 bool MediaCollection::insert(Media*& media) { // UNTESTED
 
-    // Assumed all movies are DVD - no checking for it
-    char insert_type = dynamic_cast<Movie*>(media)->getMovieType();
+    // Assumed all movies are DVD
+    char insert_type = dynamic_cast<const Movie*>(media)->getMovieType();
 
     switch (insert_type) {
 
-        case ('F'): 
-
-        return stock.at(insert_type).insert(media);
+        case ('C'):
+        return stock.at(insert_type).insert(*media);
         break;
 
         case ('D'):
-        return stock.at(insert_type).insert(media);
+        return stock.at(insert_type).insert(*media);
         break;
 
-        case ('C'):
-        return stock.at(insert_type).insert(media);
+        case ('F'): 
+        return stock.at(insert_type).insert(*media);
+        break;
 
         default:
         return false;
     }
 }
 
-bool MediaCollection::retrieve(const Media*& target, Media*& ret) { // UNTESTED
+bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
 
     Media* cpy_target = const_cast<Media*>(target);
     
@@ -61,15 +50,15 @@ bool MediaCollection::retrieve(const Media*& target, Media*& ret) { // UNTESTED
     switch (retrieve_type) {
 
         case 'F':
-        return stock.at(retrieve_type).retrieve(target, ret);
+        return stock.at(retrieve_type).retrieve(*target, ret);
         break;
 
         case 'D':
-        return stock.at(retrieve_type).retrieve(target, ret);
+        return stock.at(retrieve_type).retrieve(*target, ret);
         break;
 
         case 'C':
-        return stock.at(retrieve_type).retrieve(target, ret);
+        return stock.at(retrieve_type).retrieve(*target, ret);
         break;
 
         default:

@@ -34,13 +34,8 @@ bool Movie::setData(stringstream& movie_line) { // UNTESTED
 
     // Execution Order Does Not Matter - If 1 fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS
-    if (!this->getSetStock(movie_line) || this->getSetDirector(movie_line) || 
-        !this->getSetTitle(movie_line) || this->getSetYear(movie_line)) {
-
-        return false;
-    }
-
-    return true;
+    return (!this->getSetStock(movie_line) || !this->getSetDirector(movie_line) || 
+            !this->getSetTitle(movie_line)) ? false : true;
 }
 
 void Movie::setTitle(string title){
@@ -48,7 +43,7 @@ void Movie::setTitle(string title){
     this->title = title;
 }
 
-int Movie::setYear(int year){
+void Movie::setYear(int year){
     
     this->release_year = year;
 }
@@ -56,11 +51,6 @@ int Movie::setYear(int year){
 void Movie::setDirector(string f_name, string l_name){
     
     this->director = f_name + " " + l_name;
-}
-
-char Movie::getMovieType() const{
-    
-    return this->movieType;
 }
 
 //display needs to check 
@@ -71,7 +61,7 @@ ostream &operator<<(ostream &ostrm, const Movie &movie){
     return ostrm;
 }
 
-bool Movie::getSetStock(stringstream& movie_line) {
+bool Movie::getSetStock(stringstream& movie_line) { // DONE, maybe remove .ignore()
 
     int stock = 0;
 
@@ -87,7 +77,7 @@ bool Movie::getSetStock(stringstream& movie_line) {
     return true;
 }
 
-bool Movie::getSetDirector(stringstream& movie_line) {
+bool Movie::getSetDirector(stringstream& movie_line) { // DONE 
 
     string fname = "", lname = "";
 
@@ -103,6 +93,7 @@ bool Movie::getSetDirector(stringstream& movie_line) {
     return true;
 }
 
+// Bug: If the movie title is more than 1 word it only catches the first one
 bool Movie::getSetTitle(stringstream& movie_line) {
 
     string title = "";
@@ -115,6 +106,8 @@ bool Movie::getSetTitle(stringstream& movie_line) {
     movie_line.ignore();
 
     this->setTitle(title);
+
+    return true;
 }
 
 bool Movie::getSetYear(stringstream& movie_line) {
@@ -130,4 +123,6 @@ bool Movie::getSetYear(stringstream& movie_line) {
     movie_line.ignore();
 
     this->setYear(year);
+
+    return true;
 }

@@ -3,6 +3,8 @@
 // Constructor 
 Media::Media() : stock(0) {};
 
+Media::~Media() {}
+
 // Getter - Setter
 int Media::getStock() const {
 

@@ -2,7 +2,6 @@
 #define MEDIA_H
 
 #include <string>
-#include "../Movie/Movie.h"
 
 using namespace std;
 
@@ -25,7 +24,7 @@ class Media {
   // Constructor - Destructor
   Media();
 
-  virtual ~Media() = 0;
+  virtual ~Media();
 
   // Getters - Setters
   int getStock() const;
@@ -41,6 +40,7 @@ class Media {
   friend ostream& operator << (ostream& ostrm, const Media& media);
 
   virtual bool operator < (const Media& rval) const = 0;
+  virtual bool operator > (const Media& rval) const = 0;
   virtual bool operator == (const Media& rval) const = 0;
  
  protected: 

@@ -1,5 +1,5 @@
 #ifndef MOVIEFACTORY_H
-#define MOVIEFACTORY_
+#define MOVIEFACTORY_H
 
 #include <iostream>
 #include <fstream>

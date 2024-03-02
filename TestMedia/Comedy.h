@@ -11,10 +11,14 @@ class Comedy : public Movie {
   Comedy();
   ~Comedy();
 
+  // Getter
+  virtual bool setData(stringstream& movie_line);
+
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Comedy& drama);
 
   bool operator < (const Media& rval) const;
+  bool operator > (const Media& rval) const;
   bool operator == (const Media& rval) const;
 
  private: 

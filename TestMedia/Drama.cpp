@@ -12,6 +12,12 @@ Drama::Drama() {
 
 Drama::~Drama() {}
 
+// Getter
+bool Drama::setData(stringstream& movie_line) {
+
+    return (!Movie::setData(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
+}
+
 // Operator Overloads
 ostream& operator << (ostream& ostrm, const Drama& drama) {
 
@@ -24,6 +30,11 @@ bool Drama::operator < (const Media& rval) const { // UNTESTED
 
     return (this->getDirector() < dynamic_cast<const Drama& >(rval).getDirector() && 
             this->getTitle() < dynamic_cast<const Drama& >(rval).getTitle());
+}
+
+bool Drama::operator > (const Media& rval) const {
+
+    return !(*this < rval);
 }
 
 bool Drama::operator == (const Media& rval) const { // UNTESTED

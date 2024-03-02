@@ -12,6 +12,12 @@ Comedy::Comedy() {
 
 Comedy::~Comedy() {}
 
+// Getter - Setter
+bool Comedy::setData(stringstream& movie_line) {
+
+    return (!Movie::setData(movie_line) || Movie::getSetYear(movie_line)) ? false : true;
+}
+
 // Operator Overloads
 ostream& operator << (ostream& ostrm, const Comedy& comedy) { // UNTESTED
 
@@ -25,6 +31,11 @@ bool Comedy::operator < (const Media& rval) const { // UNTESTED
     // Sorting Criteria: Title & Year
     return (this->getTitle() < dynamic_cast<const Comedy& >(rval).getTitle() && 
             this->getYear() < dynamic_cast<const Comedy& >(rval).getYear());
+}
+
+bool Comedy::operator > (const Media& rval) const {
+
+    return !(*this < rval);
 }
 
 bool Comedy::operator == (const Media& rval) const { // UNTESTED

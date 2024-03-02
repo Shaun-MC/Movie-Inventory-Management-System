@@ -1,11 +1,11 @@
 #include "MovieManager.h"
 
-MovieManager::MovieManager() {
+MovieManager::MovieManager() {};
 
-    this->customers = new CustomerCollection();
-}
+    //this->customers = new CustomerCollection();
+//}
 
-void MovieManager::ReadCustomers(ifstream& customer_file) {
+/*void MovieManager::ReadCustomers(ifstream& customer_file) {
 
     if (!customer_file) {
 
@@ -23,13 +23,14 @@ void MovieManager::ReadCustomers(ifstream& customer_file) {
 
         customers->insert(key, name);
     }
-}
+}*/
 
 void MovieManager::ReadMovies(ifstream& movie_list) {
 
     if (!movie_list) {
 
         cout << "MovieManager::ReadMovies() | Input File Could Not Be Opened" << endl;
+        return;
     }
 
     // Loop is predicated on createDVDMovie() only reading 1 line
@@ -39,15 +40,17 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
 
         getline(movie_list, movie_line);
 
-        const Media* new_media = MediaFactory::createDVDMovie(movie_line);
+        Media* new_media = MediaFactory::createDVDMovie(movie_line);
 
         if (new_media == nullptr) { // Do nothing - creating the Movie failed due to bad input
 
-        } else if (!this->stocks->insert(new_media)) {  // Insertion fails because of a duplicate
+        // Not inserting elements into the trees
+        // Unhandled Use Case: 2 Classic Movies's stock get 'combined'??
+        } else if (!this->stocks.insert(new_media)) {  // Insertion fails because of a duplicate
 
             Media* dup_media = nullptr;
         
-            this->stocks->retrieve(new_media, dup_media);
+            this->stocks.retrieve(new_media, dup_media);
 
             dup_media->addStock(new_media->getStock());
 

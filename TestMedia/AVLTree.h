@@ -17,34 +17,30 @@ class AVLTree {
   ~AVLTree();
   
   // Actions
-  bool insert(const T&* val);
-  bool retrieve(const T&* target, T*& ret_val) const; 
-
+  bool insert(T& val);
+  bool retrieve(const T& target, T*& ret_val) const;
   void displayTree() const;
 
  protected: 
 
   // Memeber Data
   struct TreeNode {
-    public: 
-     
-     // Constructors - Destructor
-     TreeNode() : key(0), value(nullptr), left(nullptr), right(nullptr), height(0) {};
-     TreeNode(T val) : key(key), value(new T(val)), left(nullptr), right(nullptr), height(0) {};;
-     TreeNode(T* val) : key(key), value(new T(*val)), left(nullptr), right(nullptr), height(0) {};
+    
+    T* value;
 
-     int key;
-     int height;
-     T* value;
+    TreeNode* left;
+    TreeNode* right;
 
-     TreeNode* left;
-     TreeNode* right;
+    int height;
+
+    //TreeNode() : value(nullptr), left(nullptr), right(nullptr), height(0) {};
+    //TreeNode(T& val) : value(&val), left(nullptr), right(nullptr), height(0) {};
   };
 
  private:
   
   // Member Functions
-  void makeRotation(const int bf, const TreeNode*& curNode);
+  void makeRotation(const int bf, TreeNode*& curNode, const T& val);
   void clear();
 
   void leftLeftRotation(TreeNode*& U);
@@ -61,8 +57,8 @@ class AVLTree {
   void updateHeight(TreeNode*& curr);
 
   // Helper Functions
-  TreeNode* insertHelper(TreeNode* currNode, T* val); 
-  bool retrieveHelper(TreeNode* currNode, int target_key, T*& ret_val) const;
+  TreeNode* insertHelper(TreeNode*& currNode, T& val); 
+  bool retrieveHelper(TreeNode* currNode, const T& target, T*& ret_val) const;
 
   void clearHelper(TreeNode*& delete_node);
 
@@ -89,35 +85,35 @@ AVLTree<T>::~AVLTree() { // DONE
 
 // Actions
 template <class T>
-bool AVLTree<T>::insert(T* val) { // DONE
+bool AVLTree<T>::insert(T& val) { // DONE
 
     const int starting_node_count = this->nodeCount;
 
-    this->root = insertHelper(this->root, key, val);
+    this->root = insertHelper(this->root, val);
 
     return !(starting_node_count == this->nodeCount);
 }
 
 // Assumes that type T has an eqaulity and less than operator
 template <class T>
-typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode* currNode, T* val) { // DONE
+typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& val) { // DONE
 
     if (currNode == nullptr) {
 
-        currNode = new TreeNode(key, val);
+        //currNode = new TreeNode(val);
+        currNode = new TreeNode{&val, nullptr, nullptr};
 
         ++this->nodeCount;
-    } else if (val == currNode) { // Make no changes to the current tree
+    } else if (val == *currNode->value) { // Make no changes to the current tree
 
         return currNode;
-    } else if (val < currNode) { 
+    } else if (val < *currNode->value) { 
 
         currNode->left = insertHelper(currNode->left, val);
 
     } else { // Go right
 
         currNode->right = insertHelper(currNode->right, val);
-
     }
     
     updateHeight(currNode);
@@ -133,7 +129,7 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode* currNode, T* v
 
         default: 
 
-        makeRotation(balanace_factor, key, currNode);
+        makeRotation(balanace_factor, currNode, val);
     }
     
     return currNode;
@@ -141,52 +137,52 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode* currNode, T* v
 
 // Assumes that type T has a greater than and less than operator
 template< class T>
-void AVLTree<T>::makeRotation(const int bf, const TreeNode*& curr) { // DONE
+void AVLTree<T>::makeRotation(const int bf, TreeNode*& curr, const T& val) { // UNTESTED
 
-    if (bf > 1 && val < curr->left)
+    if (bf > 1 && val < *curr->left->value)
         
         leftLeftRotation(curr);
         
-    if (bf < -1 && val > curr->right)
+    if (bf < -1 && val > *curr->right->value)
             
         rightRightRotation(curr);
         
-    if (bf > 1 && val > curr->left) {
+    if (bf > 1 && val > *curr->left->value) {
 
         leftRightRotation(curr);
     }
     
-    if (bf < -1 && val < curr->right) {
+    if (bf < -1 && val < *curr->right->value) {
 
         rightLeftRotation(curr);
     }
 }
 
 template<class T>
-bool AVLTree<T>::retrieve(T*& ret_val) const { // DONE
+bool AVLTree<T>::retrieve(const T& target, T*& ret_val) const { // UNTESTED
 
     if (this->root == nullptr) {
 
         return false;
     }
 
-    return retrieveHelper(this->root, ret_val);
+    return retrieveHelper(this->root, target, ret_val);
 }
 
 // Assume that T has an equality and less than operator
 template<class T>
-bool AVLTree<T>::retrieveHelper(TreeNode* currNode, const T& target, T*& ret_val) const { // DONE
+bool AVLTree<T>::retrieveHelper(TreeNode* currNode, const T& target, T*& ret_val) const { // UNTESTED
 
     // Base Cases 
     if (currNode == nullptr) { // Target not in the list
 
         return false;
-    } else if (target == currNode) { 
+    } else if (target == *currNode->value) { 
 
         ret_val = currNode->value;
 
         return true;
-    } else if (target < currNode) { 
+    } else if (target < *currNode->value) { 
 
         return retrieveHelper(currNode->left, target, ret_val); 
     } else {
@@ -258,7 +254,6 @@ void AVLTree<T>::clearHelper(TreeNode*& delete_node) { // DONE
 
     clearHelper(delete_node->right); 
 
-    delete_node->~TreeNode(); // ??
     delete delete_node;
     delete_node = nullptr;
 

@@ -1,7 +1,7 @@
 #include "Classic.h"
 
 // Constructor - Destructor
-Classic::Classic() : major_actor(""), release_month(0) {
+Classic::Classic() : major_actor(""), release_date("") {
 
     this->movieType = MovieType::classic;
 
@@ -12,25 +12,15 @@ Classic::Classic() : major_actor(""), release_month(0) {
 
 Classic::~Classic() {}
 
-// Getter - Setter
-char Classic::getMovieType() const {
-
-    return this->type;
-}
-
+// Getters - Setters
 string Classic::getMajorActor() const {
 
     return this->major_actor;
 }
 
-int Classic::getReleaseMonth() const {
-
-    return this->release_month;
-}
-
 string Classic::getReleaseDate() const {
 
-    return this->release_month + " " + this->release_year;
+    return this->release_date;
 }
 
 // Assumes stream is pointing to the stock value
@@ -38,7 +28,7 @@ bool Classic::setData(stringstream& movie_line) { // UNTESTED
 
     // Execution Order doesn't matter, if 1 of them fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS
-    return (!Movie::setData(movie_line) || !this->getSetMA(movie_line) || !this->getSetMonth(movie_line));
+    return (!Movie::setData(movie_line) || !this->getSetMA(movie_line) || !this->getSetDate(movie_line)) ? false : true;
 }
 
 void Classic::setMajorActor(const string f_name, const string l_name) {
@@ -46,9 +36,9 @@ void Classic::setMajorActor(const string f_name, const string l_name) {
     this->major_actor = f_name + " " + l_name;
 }
 
-void Classic::setReleaseMonth(const int month)  {
+void Classic::setReleaseDate(const string date)  {
 
-    this->release_month = month;
+    this->release_date = date;
 }
 
 // Operator Overloads
@@ -64,6 +54,11 @@ bool Classic::operator < (const Media& rval) const { // UNTESTED
     // Sorting Criteria: Release Date & Headline Actor
     return (this->getReleaseDate() < dynamic_cast<const Classic& >(rval).getReleaseDate() && 
             this->getMajorActor() < dynamic_cast<const Classic& >(rval).getMajorActor());
+}
+
+bool Classic::operator > (const Media& rval) const {
+
+    return !(*this < rval);
 }
 
 bool Classic::operator == (const Media& rval) const { // UNTESTED
@@ -90,17 +85,23 @@ bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
     return true;
 }
 
-bool Classic::getSetMonth(stringstream& movie_line) { // UNTESTED
+bool Classic::getSetDate(stringstream& movie_line) { // UNTESTED
 
-    int month = 0;
+    int month = 0, year = 0; 
+    string date = "";
 
-    // Execution Order DOES MATTER
-    if (!(movie_line >> month) || month <= 0) {
+    // Execution Order of Conditional DOES MATTER
+    if (!(movie_line >> month >> year) || month <= 0 || year <= 0) {
 
-        // Error Condition - Invalid Month
+        // Error Condition - Invalid Month - Year
         return false;
     }
     movie_line.ignore();
+
+    date = to_string(month) + " " + to_string(year);
+
+    this->setYear(year); // same data twice
+    this->setReleaseDate(date);
 
     return true;
 }

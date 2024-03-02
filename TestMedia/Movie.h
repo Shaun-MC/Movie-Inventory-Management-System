@@ -2,7 +2,7 @@
 #define MOVIE_H
 
 #include <sstream>
-#include "../Media/Media.h"
+#include "Media.h"
 
 class Movie : public Media {
 
@@ -13,6 +13,9 @@ class Movie : public Media {
   virtual ~Movie();
 
   // Getter - Setters
+  virtual char getMediaType() const;
+  char getMovieType() const; 
+  
   string getTitle() const;
   int getYear() const;
   string getDirector() const;
@@ -20,16 +23,14 @@ class Movie : public Media {
   virtual bool setData(stringstream& movie_line);
 
   void setTitle(string title);
-  int setYear(int year);
+  void setYear(int year);
   void setDirector(string f_name, string l_name);
-
-  virtual char getMediaType() const;
-  virtual char getMovieType() const; 
 
   // Operator Overloading
   friend ostream& operator << (ostream& ostrm, const Movie& obj);
 
   virtual bool operator < (const Media& rval) const = 0;
+  virtual bool operator > (const Media& rval) const = 0;
   virtual bool operator == (const Media& rval) const = 0;
  
  protected: 
