@@ -9,7 +9,7 @@ class MovieFactory {
 
  public: 
   
-  Movie* createMovie(ifstream& movie_list);
+  static Movie*& createMovie(ifstream& movie_list);
 
  private:
 

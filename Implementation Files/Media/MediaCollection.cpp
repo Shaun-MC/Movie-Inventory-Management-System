@@ -2,8 +2,6 @@
 
 // Constructor - Destructor
 MediaCollection::MediaCollection() {
-    
-    // Should probably have a collection of moives - pull out the comedies, dramas, classics
 
     this->stock.insert( pair<char, AVLTree<Media> >(MovieType.Comedy, comedies) );
 
@@ -29,7 +27,7 @@ MediaCollection* MediaCollection::getCollection() {
 }
 
 // Actions
-bool MediaCollection::insertMedia(Media* media) {
+bool MediaCollection::insertMedia(const Media*& media) {
 
     // Assumed all movies are DVD - no checking for it
     char insert_type = dynamic_cast<Movie*>(media)->getMovieType();
@@ -38,15 +36,15 @@ bool MediaCollection::insertMedia(Media* media) {
 
         case ('F'): 
 
-        return stock.at('F').insert(media);
+        return stock.at(insert_type).insert(media);
         break;
 
         case ('D'):
-        return stock.at('D').insert(media);
+        return stock.at(insert_type).insert(media);
         break;
 
         case ('C'):
-        return stock.at('C').insert(media);
+        return stock.at(insert_type).insert(media);
 
         default:
         return false;

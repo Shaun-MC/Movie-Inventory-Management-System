@@ -4,13 +4,13 @@
 #include <fstream>
 
 #include "Media.h"
+#include "../Movie/MovieFactory.h"
 
 class MediaFactory {
 
  public: 
 
-  Media* createDVDMovie(ifstream& movie_list);
-
+  static Media*& createDVDMovie(ifstream& movie_list);
 };
 
 #endif

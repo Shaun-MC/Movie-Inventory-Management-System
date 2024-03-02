@@ -35,11 +35,11 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
     // Loop is predicated on createDVDMovie() only reading 1 line
     while (!movie_list.eof()) {
 
-        const Media* new_media = stocks->factory.createDVDMovie(movie_list);
+        const Media* new_media = MediaFactory::createDVDMovie(movie_list);
 
         if (new_media == nullptr) { // Do nothing - creating the Movie failed due to bad input
 
-        } else if (!this->stocks->insertMedia(new_media)) {  // Insertion Fails because of a duplicate
+        } else if (!this->stocks->insert(new_media)) {  // Insertion fails because of a duplicate
 
             Media* dup_media = nullptr;
         

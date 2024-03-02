@@ -17,8 +17,8 @@ class AVLTree {
   ~AVLTree();
   
   // Actions
-  bool insert(T* val);
-  bool retrieve(T*& ret_val) const; 
+  bool insert(const T&* val);
+  bool retrieve(const T&* target, T*& ret_val) const; 
 
   void displayTree() const;
 

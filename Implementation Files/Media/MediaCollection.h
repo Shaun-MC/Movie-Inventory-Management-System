@@ -20,11 +20,9 @@ class MediaCollection {
   static MediaCollection* getCollection();
   
   // Actions
-  bool insertMedia(const Media*& insert_media);
+  bool insert(const Media*& insert_media);
 
   bool retrieve(const Media*& target, Media*& ret);
-
-  MediaFactory factory;
  
  private:
 
