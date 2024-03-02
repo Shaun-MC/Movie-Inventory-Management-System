@@ -1,6 +1,6 @@
 #include "MediaFactory.h"
 
-Media*& MediaFactory::createDVDMovie(ifstream& movie_list) {
+Media*& MediaFactory::createDVDMovie(const string& movie_line) {
 
-    return MovieFactory::createMovie(movie_list);
+    return MovieFactory::createMovie(movie_line);
 }

@@ -10,7 +10,7 @@ class MediaFactory {
 
  public: 
 
-  static Media*& createDVDMovie(ifstream& movie_list);
+  static Media*& createDVDMovie(const string& movie_line);
 };
 
 #endif

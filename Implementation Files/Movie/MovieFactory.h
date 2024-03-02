@@ -9,15 +9,15 @@ class MovieFactory {
 
  public: 
   
-  static Movie*& createMovie(ifstream& movie_list);
+  static Movie*& createMovie(const string& movie_line);
 
  private:
 
-  Movie* createComedy(ifstream& movie_list);
+  Movie* createComedy(const string& movie_line);
 
-  Movie* createDrama(ifstream& movie_list);
+  Movie* createDrama(const string& movie_line);
 
-  Movie* createClassic(ifstream& movie_list);
+  Movie* createClassic(const string& movie_line);
 };
 
 #endif

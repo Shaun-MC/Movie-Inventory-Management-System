@@ -35,7 +35,11 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
     // Loop is predicated on createDVDMovie() only reading 1 line
     while (!movie_list.eof()) {
 
-        const Media* new_media = MediaFactory::createDVDMovie(movie_list);
+        string line = "";
+
+        getline(movie_list, line);
+
+        const Media* new_media = MediaFactory::createDVDMovie(line);
 
         if (new_media == nullptr) { // Do nothing - creating the Movie failed due to bad input
 
