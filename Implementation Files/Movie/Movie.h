@@ -1,7 +1,7 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 
-#include "../Stock/Media.h"
+#include "../Media/Media.h"
 
 class Movie : public Media {
 

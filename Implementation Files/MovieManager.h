@@ -6,7 +6,7 @@
 #include <sstream>
 
 #include "Customer/CustomerCollection.h"
-#include "Stock/MediaCollection.h"
+#include "Media/MediaCollection.h"
 
 using namespace std;
 
