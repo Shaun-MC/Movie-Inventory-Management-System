@@ -11,12 +11,11 @@ class History : public Transaction {
   History();
   ~History();
 
-  // Getter - Setter
+  //Setter
+  bool setHistoryData(ifstream& file);
 
   // Actions
-  void setHistoryData(...); // ??
-
-  void historyProcess(StockCollection& movies, CustomerList& customers);
+  bool historyProcess(CustomerList& customers);
 
   // Operator Overloads
 };

@@ -1,6 +1,9 @@
 #ifndef TRANSACTIONFACTORY_H
 #define TRANSACTIONFACTORY_H
 
+// 
+//NOT DONE YET WORKING ON IT 
+// 
 #include "Transaction.h"
 #include "Inventory.h"
 #include "History.h"
@@ -12,17 +15,17 @@ class TransactionFactory {
 
  public:
   
-  static Transaction* createTransaction(...);
+  static Transaction* createTransaction(ifstream &file);
 
  private:
 
-  static Transaction* createInventory(...);
+  static Transaction* createInventory(ifstream &file);
 
-  static Transaction* createHistory(...);
+  static Transaction* createHistory(ifstream &file);
 
-  static Transaction* createReturn(...);
+  static Transaction* createReturn(ifstream &file);
 
-  static Transaction* createBorrow(...);
+  static Transaction* createBorrow(ifstream &file);
 }; 
 
 #endif

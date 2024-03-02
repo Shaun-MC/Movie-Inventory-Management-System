@@ -3,6 +3,8 @@
 
 #include "BorrowReturn.h"
 
+  //need ostream?? 
+  
 class Return : public BorrowReturn {
 
  public: 
@@ -12,7 +14,7 @@ class Return : public BorrowReturn {
   ~Return();
 
   // Actions
-  bool processReturn(StockCollection& movies, CustomerCollection& customers);
+  bool processReturn(MediaCollection& movies, CustomerCollection& customers);
 
   // Operator Overloads
 };

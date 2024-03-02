@@ -3,6 +3,10 @@
 
 #include "Transaction.h"
 
+// 
+//NOT DONE YET WORKING ON IT 
+// 
+
 class BorrowReturn : public Command {
 
  public: 
@@ -16,13 +20,13 @@ class BorrowReturn : public Command {
  protected: 
   
   // Member Functions
-  void processDrama(..., Stock*& stock);
-  void processClassic(..., Stock*& stock);
-  void processComedy(..., Stock*& stock);
+  void processDrama(ifstream& moviedata, Stock*& stock);
+  void processClassic(ifstream& moviedata, Stock*& stock);
+  void processComedy(ifstream& moviedata, Stock*& stock);
 
   // Member Data
-  char movie_type;
-  string stock_type;
+  MovieType movie_type; //char to MovieType
+  MediaType stock_type; //string to  MediaType
 
   Stock* stock;
 

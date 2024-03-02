@@ -28,17 +28,19 @@ class Customer {
   void setID(int id);
   void setName(string first, string last);
 
-  //vector<Transaction*> & getHistory() const;
+  //uncomment for transaction
+  vector<Transaction*> & getHistory() const;
   
-  //vector<Stock*> & getOutstanding() const;
+  vector<Media*> & getOutstanding() const;
 
-  // Actions
+  //Actions
 
-  //void addHistory(Transaction* newTransaction);
+  void addHistory(Transaction* newTransaction);
 
-  //bool borrowMedia(Stock* newMedia);
-  //bool returnMedia(Stock* oldMedia);
-  
+  bool borrowMedia(Media* newMedia);
+  bool returnMedia(Media* oldMedia);
+  //until here
+
   // Operator Overloads
 
   bool operator<(const Customer& rval) const;
@@ -51,8 +53,10 @@ class Customer {
   int ID;
   string name; 
 
-  //vector<Transaction*> transaction_history;
-  //vector<Stock*> outstandingMedia;
+  //uncomment for transaction
+  vector<Transaction*> transaction_history;
+  vector<Media*> outstandingMedia;
+  //until here
 };
 
 #endif
