@@ -50,7 +50,7 @@ void Movie::setDirector(const string name){
 
 void Movie::setYear(const int year) {
 
-    this->director = year;
+    this->release_year = year;
 }
 
 //display needs to check 

@@ -12,11 +12,7 @@ class Drama : public Movie {
   ~Drama();
 
   // Getter - Setters
-  int getYear() const;
-
   virtual bool setData(stringstream& movie_line);
-
-  void setYear(const int year);
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Drama& drama);
@@ -28,10 +24,6 @@ class Drama : public Movie {
  private: 
 
   void display(ostream& ostrm) const;
-
-  bool getSetYear(stringstream& movie_line);
-
-  int release_year;
 };
 
 #endif 

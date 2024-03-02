@@ -24,8 +24,6 @@ class Comedy : public Movie {
  private: 
 
   virtual void display(ostream& ostrm) const;
-
-  int release_year;
 };
 
 #endif 

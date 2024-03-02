@@ -135,24 +135,20 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& 
     return currNode;
 }
 
-// Assumes that type T has a greater than and less than operator
+// Assumes that type T has a less than and greater than operator
 template< class T>
 void AVLTree<T>::makeRotation(const int bf, TreeNode*& curr, const T& val) { // UNTESTED
 
-    if (bf > 1 && val < *curr->left->value)
-        
+    if (bf > 1 && val < *curr->left->value) {
+
         leftLeftRotation(curr);
-        
-    if (bf < -1 && val > *curr->right->value)
-            
+    } else if (bf < -1 && val > *curr->right->value) {
+
         rightRightRotation(curr);
-        
-    if (bf > 1 && val > *curr->left->value) {
+    } else if (bf > 1 && val > *curr->left->value) {
 
         leftRightRotation(curr);
-    }
-    
-    if (bf < -1 && val < *curr->right->value) {
+    } else if (bf < -1 && val < *curr->right->value) {
 
         rightLeftRotation(curr);
     }
@@ -269,7 +265,7 @@ int AVLTree<T>::get_height(TreeNode* curr) const { // DONE
 template<class T>
 int AVLTree<T>::get_balance_factor(TreeNode* curr) const { // DONE
 
-    return (curr == nullptr) ? 0 : get_height(curr) - get_height(curr);
+    return (curr == nullptr) ? 0 : get_height(curr->left) - get_height(curr->right);
 }
 
 template<class T>

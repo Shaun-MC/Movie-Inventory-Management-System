@@ -29,7 +29,7 @@ bool Classic::setData(stringstream& movie_line) { // UNTESTED
     // Execution Order doesn't matter, if 1 of them fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS
     return (!Movie::setData(movie_line) || !this->getSetMA(movie_line) || 
-            !this->getSetMonth(movie_line) || Movie::getSetYear(movie_line)) ? false : true;
+            !this->getSetMonth(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
 }
 
 void Classic::setMajorActor(const string f_name, const string l_name) {
@@ -99,8 +99,7 @@ bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
 
 bool Classic::getSetMonth(stringstream& movie_line) { // UNTESTED
 
-    int month = 0; 
-    string date = "";
+    int month = 0;
 
     movie_line >> month;
 

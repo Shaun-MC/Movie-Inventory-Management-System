@@ -1,7 +1,7 @@
 #include "Drama.h"
 
 // Constructor - Destructor
-Drama::Drama() : release_year(0) {
+Drama::Drama() {
 
     this->movieType = MovieType::drama;
 
@@ -13,19 +13,9 @@ Drama::Drama() : release_year(0) {
 Drama::~Drama() {}
 
 // Getter - Setters
-int Drama::getYear() const{
-    
-    return release_year;
-}
-
 bool Drama::setData(stringstream& movie_line) {
 
     return (!Movie::setData(movie_line) || !this->getSetYear(movie_line)) ? false : true;
-}
-
-void Drama::setYear(const int year){
-    
-    this->release_year = year;
 }
 
 // Operator Overloads
@@ -65,23 +55,4 @@ bool Drama::operator == (const Media& rval) const { // UNTESTED
 void Drama::display(ostream& ostrm) const {
 
     return;
-}
-
-bool Drama::getSetYear(stringstream& movie_line) {
-
-    int year = 0;
-
-    movie_line >> year;
-
-    if (year <= 0) {
-
-        // Error Condition - Improper year 
-        return false;
-    } 
-
-    movie_line.ignore(); // New line character
-
-    this->setYear(year);
-
-    return true;
 }

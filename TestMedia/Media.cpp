@@ -1,7 +1,7 @@
 #include "Media.h"
 
 // Constructor 
-Media::Media() : stock(0) {};
+Media::Media() : stock(0), type(MediaType::dvd) {};
 
 Media::~Media() {}
 

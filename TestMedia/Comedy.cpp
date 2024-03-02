@@ -3,7 +3,7 @@
 // Constructor - Destructor
 Comedy::Comedy() : release_year(0) {
 
-    this->movieType = MovieType::drama;
+    this->movieType = MovieType::comedy;
 
     this->stock = 0;
 
