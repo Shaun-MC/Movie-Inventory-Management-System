@@ -9,6 +9,9 @@ Movie* MovieFactory::createMovie(string& movie_line) { // UNTESTED
     // Cannot support movie types being more than 1 character
     str >> movie_type;
 
+    str.ignore(); // Comma
+    str.ignore(); // Space
+
     switch (movie_type) {
 
         case 'F':

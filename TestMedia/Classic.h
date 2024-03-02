@@ -17,7 +17,7 @@ class Classic : public Movie {
 
   virtual bool setData(stringstream& movie_line);
 
-  void setMajorActor(const string name);
+  void setMajorActor(const string f_name, const string l_name);
   void setReleaseDate(const string date);
 
   // Operator Overloads

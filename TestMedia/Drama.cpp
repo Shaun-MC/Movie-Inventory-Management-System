@@ -20,7 +20,7 @@ int Drama::getYear() const{
 
 bool Drama::setData(stringstream& movie_line) {
 
-    return (!Movie::setData(movie_line) || !getSetYear(movie_line)) ? false : true;
+    return (!Movie::setData(movie_line) || !this->getSetYear(movie_line)) ? false : true;
 }
 
 void Drama::setYear(const int year){

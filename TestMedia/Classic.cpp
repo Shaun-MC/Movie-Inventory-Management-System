@@ -31,9 +31,9 @@ bool Classic::setData(stringstream& movie_line) { // UNTESTED
     return (!Movie::setData(movie_line) || !this->getSetMA(movie_line) || !this->getSetDate(movie_line)) ? false : true;
 }
 
-void Classic::setMajorActor(const string name) {
+void Classic::setMajorActor(const string f_name, const string l_name) {
 
-    this->major_actor = name;
+    this->major_actor = f_name + " " + l_name;
 }
 
 void Classic::setReleaseDate(const string date)  {
@@ -71,13 +71,13 @@ bool Classic::operator == (const Media& rval) const { // UNTESTED
 
 bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
 
-    string name;
+    string f_name = "", l_name = ""; 
 
-    getline(movie_line, name, ',');
+    movie_line >> f_name >> l_name;
     
     movie_line.ignore(); // Space
 
-    this->setMajorActor(name);
+    this->setMajorActor(f_name, l_name);
 
     return true;
 }

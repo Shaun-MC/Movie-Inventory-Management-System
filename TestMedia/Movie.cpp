@@ -77,7 +77,6 @@ bool Movie::getSetDirector(stringstream& movie_line) { // DONE
 
     getline(movie_line, name, ',');
 
-    movie_line.ignore(); // Comma
     movie_line.ignore(); // Space
 
     this->setDirector(name);
