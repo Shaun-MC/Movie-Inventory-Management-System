@@ -6,16 +6,16 @@
 
 using namespace std;
 
-struct MediaType {
+enum MediaType : char {
 
-    string DVD = "DVD";
+    dvd = 'D',
 };
 
-struct MovieType {
+enum MovieType : char {
 
-    char Comedy = 'F';
-    char Classic = 'C';
-    char Drama = 'C';
+    comedy = 'F',
+    drama = 'D',
+    classic = 'C',
 };
 
 class Media {

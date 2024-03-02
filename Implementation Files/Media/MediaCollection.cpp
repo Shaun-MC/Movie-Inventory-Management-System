@@ -27,7 +27,7 @@ MediaCollection* MediaCollection::getCollection() {
 }
 
 // Actions
-bool MediaCollection::insertMedia(const Media*& media) {
+bool MediaCollection::insert(const Media*& media) {
 
     // Assumed all movies are DVD - no checking for it
     char insert_type = dynamic_cast<Movie*>(media)->getMovieType();
