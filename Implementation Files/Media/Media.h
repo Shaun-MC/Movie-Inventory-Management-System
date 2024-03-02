@@ -25,7 +25,7 @@ class Media {
   // Constructor - Destructor
   Media();
 
-  ~Media();
+  virtual ~Media() = 0;
 
   // Getters - Setters
   int getStock() const;
@@ -38,13 +38,15 @@ class Media {
   void reduceStock(const int amount);
 
   // Operator Overloads
-
+  friend ostream& operator << (ostream& ostrm, const Media& media);
  
  protected: 
 
   int stock;
 
   MediaType media;
+
+  virtual ostream& display(ostream& ostrm) const = 0;
 };
 
 #endif
