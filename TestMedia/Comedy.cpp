@@ -13,19 +13,10 @@ Comedy::Comedy() : release_year(0) {
 Comedy::~Comedy() {}
 
 // Getter - Setter
-int Comedy::getYear() const{
-    
-    return this->release_year;
-}
 
 bool Comedy::setData(stringstream& movie_line) {
 
-    return (!Movie::setData(movie_line) || !this->getSetYear(movie_line)) ? false : true;
-}
-
-void Comedy::setYear(const int year){
-    
-    this->release_year = year;
+    return (!Movie::setData(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
 }
 
 // Operator Overloads
@@ -39,8 +30,15 @@ ostream& operator << (ostream& ostrm, const Comedy& comedy) { // UNTESTED
 bool Comedy::operator < (const Media& rval) const { // UNTESTED
 
     // Sorting Criteria: Title & Year
-    return (this->getTitle() < dynamic_cast<const Comedy& >(rval).getTitle() && 
-            this->getYear() < dynamic_cast<const Comedy& >(rval).getYear());
+    const Comedy rval_temp = dynamic_cast<const Comedy& >(rval);
+
+    // Could condence into a single return statement, less readable
+    if (this->getTitle() != rval_temp.getTitle() && this->getTitle() < rval_temp.getTitle()) {
+
+        return true;
+    }
+
+    return (this->getYear() < rval_temp.getYear());
 }
 
 bool Comedy::operator > (const Media& rval) const {
@@ -51,8 +49,10 @@ bool Comedy::operator > (const Media& rval) const {
 bool Comedy::operator == (const Media& rval) const { // UNTESTED
 
     // Sorting Criteria: Title & Year
-    return (this->getTitle() == dynamic_cast<const Comedy& >(rval).getTitle() && 
-            this->getYear() == dynamic_cast<const Comedy& >(rval).getYear());
+    const Comedy rval_temp = dynamic_cast<const Comedy& >(rval);
+
+    return (this->getTitle() == rval_temp.getTitle() && 
+            this->getYear() == rval_temp.getYear());
 }
 
 // Private Member Functions
@@ -60,23 +60,4 @@ bool Comedy::operator == (const Media& rval) const { // UNTESTED
 void Comedy::display(ostream& ostrm) const {
 
     return;
-}
-
-bool Comedy::getSetYear(stringstream& movie_line) {
-
-    int year = 0;
-
-    movie_line >> year;
-
-    if (year <= 0) {
-
-        // Error Condition - Improper year 
-        return false;
-    } 
-
-    movie_line.ignore(); // New line character
-
-    this->setYear(year);
-
-    return true;
 }

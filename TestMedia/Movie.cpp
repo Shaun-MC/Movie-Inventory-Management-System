@@ -4,6 +4,16 @@ Movie::Movie() : director(""), title(""), movieType(0) {};
 
 Movie::~Movie(){}
 
+char Movie::getMediaType() const {
+
+    return MediaType::dvd;
+}
+
+char Movie::getMovieType() const {
+
+    return this->movieType;
+}
+
 string Movie::getTitle() const{
     
     return title;
@@ -14,14 +24,9 @@ string Movie::getDirector() const{
     return director;
 }
 
-char Movie::getMediaType() const {
+int Movie::getYear() const {
 
-    return MediaType::dvd;
-}
-
-char Movie::getMovieType() const {
-
-    return this->movieType;
+    return this->release_year;
 }
 
 // Assumes stream is pointing to the stock value
@@ -41,6 +46,11 @@ void Movie::setTitle(const string title){
 void Movie::setDirector(const string name){
     
     this->director = name;
+}
+
+void Movie::setYear(const int year) {
+
+    this->director = year;
 }
 
 //display needs to check 
@@ -84,17 +94,34 @@ bool Movie::getSetDirector(stringstream& movie_line) { // DONE
     return true;
 }
 
-// Bug: If the movie title is more than 1 word it only catches the first one
-bool Movie::getSetTitle(stringstream& movie_line) {
+bool Movie::getSetTitle(stringstream& movie_line) { // DONE
 
     string title = "";
 
     getline(movie_line, title, ',');
     
-    movie_line.ignore(); // Comma
     movie_line.ignore(); // Space
 
     this->setTitle(title);
+
+    return true;
+}
+
+bool Movie::getSetYear(stringstream& movie_line) { // FINISHED
+
+    int year = 0;
+
+    movie_line >> year;
+
+    if (year <= 0) {
+
+        // Error Condition - Improper year 
+        return false;
+    } 
+
+    movie_line.ignore(); // New line character
+
+    this->setYear(year);
 
     return true;
 }

@@ -13,12 +13,12 @@ class Classic : public Movie {
 
   // Getters - Setters
   string getMajorActor() const;
-  string getReleaseDate() const;
+  int getReleaseMonth() const;
 
   virtual bool setData(stringstream& movie_line);
 
   void setMajorActor(const string f_name, const string l_name);
-  void setReleaseDate(const string date);
+  void setReleaseMonth(const int month);
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Classic& drama);
@@ -30,10 +30,10 @@ class Classic : public Movie {
  private: 
 
   string major_actor;
-  string release_date;
+  int release_month;
   
   bool getSetMA(stringstream& movie_line);
-  bool getSetDate(stringstream& movie_line);
+  bool getSetMonth(stringstream& movie_line);
 
   virtual void display(ostream& ostrm) const;
 };

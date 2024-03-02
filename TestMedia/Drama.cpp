@@ -38,8 +38,14 @@ ostream& operator << (ostream& ostrm, const Drama& drama) {
 
 bool Drama::operator < (const Media& rval) const { // UNTESTED
 
-    return (this->getDirector() < dynamic_cast<const Drama& >(rval).getDirector() && 
-            this->getTitle() < dynamic_cast<const Drama& >(rval).getTitle());
+    const Drama rval_temp = dynamic_cast<const Drama& >(rval);
+
+    if (this->getDirector() != rval_temp.getDirector() && this->getDirector() < rval_temp.getDirector()) {
+
+        return true;
+    }
+
+    return (this->getTitle() < rval_temp.getTitle());
 }
 
 bool Drama::operator > (const Media& rval) const {
@@ -49,8 +55,10 @@ bool Drama::operator > (const Media& rval) const {
 
 bool Drama::operator == (const Media& rval) const { // UNTESTED
 
-    return (this->getDirector() == dynamic_cast<const Drama& >(rval).getDirector() && 
-            this->getTitle() == dynamic_cast<const Drama& >(rval).getTitle());
+    const Drama rval_temp = dynamic_cast<const Drama& >(rval);
+
+    return (this->getDirector() == rval_temp.getDirector() && 
+            this->getTitle() == rval_temp.getTitle());
 }
 
 // Private Member Function
