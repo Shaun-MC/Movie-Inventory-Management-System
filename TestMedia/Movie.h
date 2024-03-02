@@ -17,14 +17,12 @@ class Movie : public Media {
   char getMovieType() const; 
   
   string getTitle() const;
-  int getYear() const;
   string getDirector() const;
   
   virtual bool setData(stringstream& movie_line);
 
-  void setTitle(string title);
-  void setYear(int year);
-  void setDirector(string f_name, string l_name);
+  void setTitle(const string title);
+  void setDirector(const string name);
 
   // Operator Overloading
   friend ostream& operator << (ostream& ostrm, const Movie& obj);
@@ -40,13 +38,11 @@ class Movie : public Media {
   string director;
   
   string title;
-  
-  int release_year;
 
   bool getSetStock(stringstream& movie_line);
   bool getSetDirector(stringstream& movie_line);
   bool getSetTitle(stringstream& movie_line);
-  bool getSetYear(stringstream& movie_line);
+  
 
   virtual void display(ostream& ostrm) const = 0;
 };

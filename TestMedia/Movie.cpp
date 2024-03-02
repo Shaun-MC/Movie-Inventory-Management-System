@@ -1,17 +1,12 @@
 #include "Movie.h"
 
-Movie::Movie() : director(""), title(""), release_year(0), movieType(0) {};
+Movie::Movie() : director(""), title(""), movieType(0) {};
 
 Movie::~Movie(){}
 
 string Movie::getTitle() const{
     
     return title;
-}
-
-int Movie::getYear() const{
-    
-    return release_year;
 }
 
 string Movie::getDirector() const{
@@ -38,19 +33,14 @@ bool Movie::setData(stringstream& movie_line) { // UNTESTED
             !this->getSetTitle(movie_line)) ? false : true;
 }
 
-void Movie::setTitle(string title){
+void Movie::setTitle(const string title){
     
     this->title = title;
 }
 
-void Movie::setYear(int year){
+void Movie::setDirector(const string name){
     
-    this->release_year = year;
-}
-
-void Movie::setDirector(string f_name, string l_name){
-    
-    this->director = f_name + " " + l_name;
+    this->director = name;
 }
 
 //display needs to check 
@@ -61,16 +51,20 @@ ostream &operator<<(ostream &ostrm, const Movie &movie){
     return ostrm;
 }
 
-bool Movie::getSetStock(stringstream& movie_line) { // DONE, maybe remove .ignore()
+bool Movie::getSetStock(stringstream& movie_line) { // DONE
 
     int stock = 0;
 
-    if (!(movie_line >> stock) || stock <= 0) {
+    movie_line >> stock;
+
+    if (stock <= 0) {
 
         // Error Condition - Invalid Stock amount
         return false;
     }
-    movie_line.ignore();
+
+    movie_line.ignore(); // Comma
+    movie_line.ignore(); // Space
 
     this->setStock(stock);
 
@@ -79,16 +73,14 @@ bool Movie::getSetStock(stringstream& movie_line) { // DONE, maybe remove .ignor
 
 bool Movie::getSetDirector(stringstream& movie_line) { // DONE 
 
-    string fname = "", lname = "";
+    string name = "";
 
-    if (!(movie_line >> fname >> lname)) {
+    getline(movie_line, name, ',');
 
-        // Error Condition - Something wrong w/ director name - not likely
-        return false; 
-    }
-    movie_line.ignore();
+    movie_line.ignore(); // Comma
+    movie_line.ignore(); // Space
 
-    this->setDirector(fname, lname);
+    this->setDirector(name);
 
     return true;
 }
@@ -97,32 +89,13 @@ bool Movie::getSetDirector(stringstream& movie_line) { // DONE
 bool Movie::getSetTitle(stringstream& movie_line) {
 
     string title = "";
-    
-    if (!(movie_line >> title)) {
 
-        // Error Condition - No Movie Title
-        return false;
-    }
-    movie_line.ignore();
+    getline(movie_line, title, ',');
+    
+    movie_line.ignore(); // Comma
+    movie_line.ignore(); // Space
 
     this->setTitle(title);
-
-    return true;
-}
-
-bool Movie::getSetYear(stringstream& movie_line) {
-
-    int year = 0;
-
-    // Execution Order DOES MATTER
-    if (!(movie_line >> year) || year <= 0) {
-
-        // Error Condition - Improper year 
-        return false;
-    }
-    movie_line.ignore();
-
-    this->setYear(year);
 
     return true;
 }

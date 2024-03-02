@@ -1,11 +1,11 @@
 #include "Comedy.h"
 
 // Constructor - Destructor
-Comedy::Comedy() {
+Comedy::Comedy() : release_year(0) {
 
-    this->movieType = MovieType::comedy;
+    this->movieType = MovieType::drama;
 
-    this->stock = this->release_year = 0;
+    this->stock = 0;
 
     this->title = this->director = "";
 }
@@ -13,9 +13,19 @@ Comedy::Comedy() {
 Comedy::~Comedy() {}
 
 // Getter - Setter
+int Comedy::getYear() const{
+    
+    return this->release_year;
+}
+
 bool Comedy::setData(stringstream& movie_line) {
 
-    return (!Movie::setData(movie_line) || Movie::getSetYear(movie_line)) ? false : true;
+    return (!Movie::setData(movie_line) || !getSetYear(movie_line)) ? false : true;
+}
+
+void Comedy::setYear(const int year){
+    
+    this->release_year = year;
 }
 
 // Operator Overloads
@@ -50,4 +60,23 @@ bool Comedy::operator == (const Media& rval) const { // UNTESTED
 void Comedy::display(ostream& ostrm) const {
 
     return;
+}
+
+bool Comedy::getSetYear(stringstream& movie_line) {
+
+    int year = 0;
+
+    movie_line >> year;
+
+    if (year <= 0) {
+
+        // Error Condition - Improper year 
+        return false;
+    } 
+
+    movie_line.ignore(); // New line character
+
+    this->setYear(year);
+
+    return true;
 }

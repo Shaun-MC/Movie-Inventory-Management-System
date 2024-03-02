@@ -5,7 +5,7 @@ Classic::Classic() : major_actor(""), release_date("") {
 
     this->movieType = MovieType::classic;
 
-    this->stock = this->release_year = 0;
+    this->stock = 0;
 
     this->title = this->director = "";
 }
@@ -31,9 +31,9 @@ bool Classic::setData(stringstream& movie_line) { // UNTESTED
     return (!Movie::setData(movie_line) || !this->getSetMA(movie_line) || !this->getSetDate(movie_line)) ? false : true;
 }
 
-void Classic::setMajorActor(const string f_name, const string l_name) {
+void Classic::setMajorActor(const string name) {
 
-    this->major_actor = f_name + " " + l_name;
+    this->major_actor = name;
 }
 
 void Classic::setReleaseDate(const string date)  {
@@ -71,16 +71,13 @@ bool Classic::operator == (const Media& rval) const { // UNTESTED
 
 bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
 
-    string f_name = "", l_name = "";
+    string name;
+
+    getline(movie_line, name, ',');
     
-    if (!(movie_line >> f_name >> l_name)) {
+    movie_line.ignore(); // Space
 
-        // Error Condition - Invalid Major Actor Data;
-        return false;
-    }
-    movie_line.ignore();
-
-    this->setMajorActor(f_name, l_name);
+    this->setMajorActor(name);
 
     return true;
 }
@@ -90,17 +87,17 @@ bool Classic::getSetDate(stringstream& movie_line) { // UNTESTED
     int month = 0, year = 0; 
     string date = "";
 
-    // Execution Order of Conditional DOES MATTER
-    if (!(movie_line >> month >> year) || month <= 0 || year <= 0) {
+    movie_line >> month >> year;
 
-        // Error Condition - Invalid Month - Year
+    if (month <= 0 || year <= 0) {
+
+        // Error Condition - Invalid Month / Year
         return false;
     }
-    movie_line.ignore();
+    movie_line.ignore(); // End of Line character
 
     date = to_string(month) + " " + to_string(year);
 
-    this->setYear(year); // same data twice
     this->setReleaseDate(date);
 
     return true;

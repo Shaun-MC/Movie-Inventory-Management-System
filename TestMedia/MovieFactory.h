@@ -26,8 +26,6 @@ class MovieFactory {
   static Movie* createDrama(stringstream& movie_line);
 
   static Movie* createClassic(stringstream& movie_line);
-
-  static void sanatizeString(string& movie_line);
 };
 
 #endif
