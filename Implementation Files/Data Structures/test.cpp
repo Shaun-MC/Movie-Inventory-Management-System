@@ -1,12 +1,13 @@
 #include <iomanip>
 
 #include "AVLTree.h"
+#include "HashTable.h"
 
 using namespace std;
 
 int main() {
     
-    int k3333 = 3333;
+    /*int k3333 = 3333;
     int* p1 = &k3333;
 
     int k8888 = 8888;
@@ -61,7 +62,14 @@ int main() {
     int* test_ptr = nullptr;
     tree.retrieve(3333, test_ptr);
 
-    cout << *test_ptr;
+    cout << *test_ptr;*/
+
+    HashTable<int, int> test;
+    int* ret = nullptr;
+
+    test.insertKeyValue(100, 11);
+
+    test.retireveValue(100, ret);
 
     return 0;
 }

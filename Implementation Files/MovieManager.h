@@ -1,11 +1,14 @@
 #ifndef MOVIEMANAGER_H
 #define MOVIEMANAGER_H
 
+#include <iostream>
 #include <fstream>
 #include <sstream>
 
-#include "../Customer/CustomerList.h"
-#include "../Stock/StockCollection.h"
+#include "Customer/CustomerCollection.h"
+#include "Stock/MediaCollection.h"
+
+using namespace std;
 
 class MovieManager {
 
@@ -15,19 +18,17 @@ class MovieManager {
   MovieManager();
   
   // Actions
-  void ReadCustomers(ifstream& ifile);
-  void ReadMovies(ifstream& ifile);
-  void ReadTransactions(ifstream& ifile);
+  void ReadCustomers(ifstream& customer_list);
+  void ReadMovies(ifstream& movie_list);
+  void ReadTransactions(ifstream& transaction_list);
   
  private:
 
   // Member Functions
-  void parseCustomerLine(string line, int& key, string& f_name, string& l_name) const;
+  void parseCustomerLine(const string line, int& key, string& name) const;
   
-  CustomerList customers;
-  StockCollection stocks;
-
-  // queue<TransactionList>??
+  CustomerCollection* customers;
+  MediaCollection* stocks;
 };
 
 #endif

@@ -4,6 +4,7 @@ Movie::Movie(){
     director = " ";
     title = " ";
     release_year = 0;
+    movieType = ' ';
 }
 
 Movie::~Movie(){}
@@ -32,7 +33,7 @@ void Movie::setDirector(string title){
     this->director = title;
 }
 
-MovieType Movie::getMovieType() const{
+char Movie::getMovieType() const{
     return movieType;
 }
 

@@ -1,7 +1,7 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 
-#include "stock.h"
+#include "../Stock/Media.h"
 
 class Movie : public Media {
 
@@ -20,8 +20,8 @@ class Movie : public Media {
   int setYear(int year);
   void setDirector(string title);
 
-  virtual StockType getStockType() const = 0; //abstract function (pure function)
-  virtual MovieType getMovieType() const; 
+  virtual string getMediaType() const = 0; //abstract function (pure function)
+  virtual char getMovieType() const; 
   
   // Actions
   virtual void display() const = 0; //abstract function (pure function)
@@ -31,10 +31,11 @@ class Movie : public Media {
  
  protected: 
   
-  MovieType movieType;
-  
+  char movieType; //changed it 
   string director;
   string title;
   int release_year;
+  virtual void display(ostream &ostrm) const = 0;
+};
 
-}
+#endif
