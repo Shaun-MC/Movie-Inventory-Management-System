@@ -29,16 +29,19 @@ class Media {
 
   // Getters - Setters
   int getStock() const;
-  virtual string getMediaType() const = 0;
+  virtual char getMediaType() const = 0;
 
   void setStock(const int amount);
 
   // Actions
   void addStock(const int amount);
-  void reduceStock(const int amount);
+  bool reduceStock(const int amount);
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Media& media);
+
+  virtual bool operator < (const Media& rval) const = 0;
+  virtual bool operator == (const Media& rval) const = 0;
  
  protected: 
 
@@ -46,7 +49,7 @@ class Media {
 
   MediaType type;
 
-  virtual ostream& display(ostream& ostrm) const = 0;
+  virtual void display(ostream& ostrm) const = 0;
 };
 
 #endif

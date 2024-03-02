@@ -7,6 +7,9 @@
 #include <string>
 
 #include "Movie.h"
+#include "Comedy.h"
+#include "Drama.h"
+#include "Classic.h"
 
 using namespace std;
 

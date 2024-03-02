@@ -20,13 +20,22 @@ void Media::addStock(const int amount) {
     this->stock += amount;
 }
 
-void Media::reduceStock(const int amount) {
+bool Media::reduceStock(const int amount) {
+
+    if (this->stock - amount < 0) {
+
+        // Error Conditon: Unable to reduce Stock
+        return false;
+    }
 
     this->stock -= amount;
+    return true;
 }
 
 // Operator Overloads
 ostream& operator << (ostream& ostrm, const Media& media) {
 
-    return media.display(ostrm); 
+    media.display(ostrm);
+
+    return ostrm;
 }
