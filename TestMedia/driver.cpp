@@ -17,6 +17,7 @@ int main() {
     movie_list.close();
 
     inventory.display();
+    
     //inventory.ReadTransactions(transaction_list);
     //transaction_list.close();
 
