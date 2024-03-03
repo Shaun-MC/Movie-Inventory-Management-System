@@ -7,14 +7,14 @@ BorrowReturn::~BorrowReturn()
 {
 }
 
-void BorrowReturn::processDrama(ifstream &moviedata, Stock *&stock)
+void BorrowReturn::processDrama(ifstream &moviedata, Media *&movie)
 {
 }
 
-void BorrowReturn::processClassic(ifstream &moviedata, Stock *&stock)
+void BorrowReturn::processClassic(ifstream &moviedata, Media *&movie)
 {
 }
 
-void BorrowReturn::processComedy(ifstream &moviedata, Stock *&stock)
+void BorrowReturn::processComedy(ifstream &moviedata, Media *&movie)
 {
 }

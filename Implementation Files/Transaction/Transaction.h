@@ -4,6 +4,9 @@
 #include "../Customer/CustomerCollection.h"
 #include "../Media/MediaCollection.h"
 
+#include "Inventory.h"
+
+
 #include <string>
 
 enum CommandType : char {
@@ -40,8 +43,12 @@ class Transaction {
  protected:
 
   int customerID;
-  CommandType commandType;
+  char commandType;
   string entireTransaction;
 };
+
+#include "Inventory.h"
+#include "History.h"
+#include "BorrowReturn.h"
 
 #endif

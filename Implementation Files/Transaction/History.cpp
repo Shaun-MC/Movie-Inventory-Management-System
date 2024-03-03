@@ -1,16 +1,19 @@
 #include "History.h"
 
 History::History(){
+    
     this->customerID = 0;
-    this->commandType = CommandType::History;
+    this->commandType = CommandType::history;
 }
 
 History::~History(){
 }
 
 bool History::setHistoryData(ifstream &file){
+    
     file.ignore();
     file >> this->customerID;
+    
     if(file.fail()){
         cout << "Customer ID is Invalid" << endl;
         file.clear();
@@ -22,22 +25,34 @@ bool History::setHistoryData(ifstream &file){
 }
 
 //change void to bool and removed StockCollection &movies getHistory()
-bool History::historyProcess(CustomerList &customers){
+bool History::processHistory(CustomerCollection &customers){
+    
     Customer *customerInfo;
-    if(customers.retrieve(this->getCustomerID(), customerInfo)){
-        cout << "History of " << this->getCustomerID() << " " << customerInfo->getName() << ':' << endl;
 
-        //gethistory for customer.cpp that was uncommented
-        if(customerInfo->getHistory().empty()){
-            cout << " " << "History is Empty!" << endl;
-        }else{
-            for(int i = 0; i < customerInfo->getHistory().size(); i++){
-                cout << " " << *customerInfo->getHistory().at(i) << endl;
-            }
-            return true;
+    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
+
+        // Run Time Error Condition
+        cerr << "History::historyProcess() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
+        return false;
+    }
+
+    cout << "History of " << this->getCustomerID() << " " << customerInfo->getName() << ':' << endl;
+
+    if (customerInfo->getHistory().empty()){
+        
+        // NOT an Error Condition
+        cout << " " << "History is Empty!" << endl;
+    } else {
+        
+        // TODO: Really don't want to make a new copy - look into
+        const vector<Transaction*> temp = customerInfo->getHistory();
+
+        for (Transaction* trans : temp) {
+
+            cout << " " << trans << endl;
         }
-    }else{
-        cerr << cerr << "Command, customer not found to show history:" << '\n' << "  " << this->entireTransaction << endl;
+
+        return true;
     }
 
     return false;

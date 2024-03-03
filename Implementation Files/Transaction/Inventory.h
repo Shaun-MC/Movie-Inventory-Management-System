@@ -9,11 +9,13 @@ class Inventory : public Transaction {
   
   // Constructor - Destructor
   Inventory();
-  ~Invenotory();
+  ~Inventory();
 
   // Actions 
-  void inventoryProcess(StockCollection& movies);
+  bool processInventory(MediaCollection& movies);
 
   // Operator Overloads
 
-}
+};
+
+#endif

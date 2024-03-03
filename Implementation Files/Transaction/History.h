@@ -15,7 +15,7 @@ class History : public Transaction {
   bool setHistoryData(ifstream& file);
 
   // Actions
-  bool historyProcess(CustomerList& customers);
+  bool processHistory(CustomerCollection& customers);
 
   // Operator Overloads
 };

@@ -1,20 +1,20 @@
 #include "Transaction.h"
 
 Transaction::Transaction(){
-    this->commandType = " ";
+    
+    this->commandType = 0;
     this->customerID = 0;
     this->entireTransaction = " ";
-
 }
 
 Transaction::Transaction(const Transaction &other){
+    
     this->commandType = other.commandType;
     this->customerID = other.customerID;
     this->entireTransaction = other.entireTransaction;
 }
 
-Transaction::~Transaction(){
-}
+Transaction::~Transaction(){}
 
 int Transaction::getCustomerID() const{
     return this->customerID;
@@ -32,29 +32,35 @@ void Transaction::setCommandType(char type){
     this->commandType = type;
 }
 
+void Transaction::process(MediaCollection &movies, CustomerCollection &customers){
 
-void Transaction::process(MediaCollection &movies, CustomerList &customers){
+    bool flag = false;
 
-    bool process = false;
-
-    if (this->commandType == Inventory) {
+    switch (this->commandType) {
+        
+        case 'I':
         dynamic_cast<Inventory*>(this)->processInventory(movies);
+        break;
 
-    } else if (this->commandType == Return) {
-        process = dynamic_cast<Return*>(this)->processReturn(movies, customers);
+        case 'H':
+        flag = dynamic_cast<History*>(this)->processHistory(customers);
+        break;
 
-    } else if (this->commandType == History) {
-        process = dynamic_cast<History*>(this)->processHistory(customers);
+        case 'B':
+        // flag = dynamic_cast<Borrow*>(this)->processBorrow(movies, customers); -- Class Borrow is unknown
+        break;
 
-    } else if (this->commandType == Borrow) {
-        process = dynamic_cast<Borrow*>(this)->processBorrow(movies, customers);
+        // flag = dynamic_cast<Return*>(this)->processReturn(movies, customers); -- Class Return is unknown
+        break;
 
-    } else {
-        cerr << "Command, nothing to process" << endl;
-        process = false;
+        default:
+        // Error Condition
+        cerr << "Transaction::process() | No Command To Process" << endl;
+        break;
     }
 
-    if (!process || this->commandType == History || this->commandType == Inventory) {
+    if (!process || this->commandType == CommandType::history  || this->commandType == CommandType::inventory) {
+        
         delete this;
     }
 }

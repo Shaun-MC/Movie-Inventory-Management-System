@@ -6,29 +6,39 @@ Return::Return(){
 Return::~Return(){
 }
 
-bool Return::processReturn(MediaCollection &movies, CustomerCollection &customers){
+bool Return::processReturn(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
     
-    Customer *customerInfo;
+    Customer* customerInfo = nullptr;
+    Media* mediaInfo = nullptr;
 
-    if(customerInfo.retrieve(this->getCustomerID(), customerinfo)){
-        if(this->stock != nullptr){
-            Media *mediaInfo = nullptr;
+    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
 
-            if(movies.retrive(*this->stock, mediaInfo)){
-                if(customerInfo->returnMedia(this->stock)){
-                    delete this->stock;
+        // Run Time Error Condition
+        cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;  
+        return false;
+    }
 
-                    mediaInfo->addStock(1);
+    if (this->movie == nullptr || movies.retrieve(this->movie, mediaInfo)) {
+        
+        // Run Time Error Condition
+        cerr << "Return::processReturn() | Current Transaction Does Not Have an Associated Media" << endl;
+        return false;
+    }
 
-                    mediaInfo->addHistory(this);
-                    return true;
-                }
-            }else{
-                cerr << "Command, this command doesn't contain media:" << '\n' << " " << this->entireTransaction << endl;
-            }
-        }
-    }else{
-        cerr << "Command, customer does not exist:" << '\n' << " " << this->entireTransaction << endl;
+    if (customerInfo->returnMedia(this->movie)) {
+
+        // Run Time Error Condition
+        cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " << 
+             dynamic_cast<Movie*>(this->movie)->getTitle() << endl;
+    } else {
+
+        delete this->movie;
+        this->movie = nullptr;
+
+        mediaInfo->incrementStock();
+        customerInfo->addHistory(this);
+
+        return true;
     }
 
     return false;

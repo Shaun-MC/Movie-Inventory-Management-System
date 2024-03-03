@@ -7,7 +7,7 @@
 //NOT DONE YET WORKING ON IT 
 // 
 
-class BorrowReturn : public Command {
+class BorrowReturn : public Transaction {
 
  public: 
   
@@ -20,16 +20,15 @@ class BorrowReturn : public Command {
  protected: 
   
   // Member Functions
-  void processDrama(ifstream& moviedata, Stock*& stock);
-  void processClassic(ifstream& moviedata, Stock*& stock);
-  void processComedy(ifstream& moviedata, Stock*& stock);
+  void processDrama(ifstream& moviedata, Media*& movie);
+  void processClassic(ifstream& moviedata, Media*& movie);
+  void processComedy(ifstream& moviedata, Media*& movie);
 
   // Member Data
-  MovieType movie_type; //char to MovieType
-  MediaType stock_type; //string to  MediaType
+  MovieType movie_type; // char to MovieType
+  MediaType Media_type; // char to MediaType
 
-  Stock* stock;
-
+  Media* movie;
 };
 
 #endif
