@@ -33,8 +33,7 @@ class AVLTree {
 
     int height;
 
-    //TreeNode() : value(nullptr), left(nullptr), right(nullptr), height(0) {};
-    //TreeNode(T& val) : value(&val), left(nullptr), right(nullptr), height(0) {};
+    TreeNode() : value(nullptr), left(nullptr), right(nullptr), height(0) {};
   };
 
  private:
@@ -100,8 +99,8 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& 
 
     if (currNode == nullptr) {
 
-        //currNode = new TreeNode(val);
-        currNode = new TreeNode{&val, nullptr, nullptr};
+        currNode = new TreeNode();
+        currNode->value = new T(val);
 
         ++this->nodeCount;
     } else if (val == *currNode->value) { // Make no changes to the current tree
@@ -118,7 +117,7 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& 
     
     updateHeight(currNode);
 
-    const int balanace_factor = get_balance_factor(currNode);
+    const int balanace_factor = getBalanceFactor(currNode);
 
     switch (balanace_factor) {
 
@@ -265,7 +264,7 @@ int AVLTree<T>::getHeight(TreeNode* curr) const { // DONE
 template<class T>
 int AVLTree<T>::getBalanceFactor(TreeNode* curr) const { // DONE
 
-    return (curr == nullptr) ? 0 : get_height(curr->left) - get_height(curr->right);
+    return (curr == nullptr) ? 0 : getHeight(curr->left) - getHeight(curr->right);
 }
 
 template<class T>
@@ -277,7 +276,7 @@ void AVLTree<T>::setHeight(TreeNode*& curr, int new_height) { // DONE
 template<class T>
 void AVLTree<T>::updateHeight(TreeNode*& curr) { // DONE
 
-    curr->height = 1 + max(get_height(curr->left), get_height(curr->right));
+    curr->height = 1 + max(getHeight(curr->left), getHeight(curr->right));
 }
 
 // Checks other functions correctness

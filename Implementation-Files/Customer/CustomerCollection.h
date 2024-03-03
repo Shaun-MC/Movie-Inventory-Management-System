@@ -1,9 +1,7 @@
 #ifndef CUSTOMERCOLLECTION_H
 #define CUSTOMERCOLLECTION_H
 
-#include <string>
-
-#include "../Data Structures/HashTable.h"
+#include "../Data-Structures/HashTable.h"
 #include "Customer.h"
 
 using namespace std;
@@ -29,7 +27,7 @@ class CustomerCollection {
 
   void parseCustomerLine(const string line, int& key, string& name) const;
 
-  HashTable<int, Customer> collection;
+  HashTable<int, Customer> collection; // ?? use of undeclared identifier 'Customer'
 };
 
 #endif

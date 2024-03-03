@@ -1,6 +1,9 @@
+#include <iostream>
 #include <fstream>
 
-#include "Input Files/ValidateSystemInput.h"
+using namespace std;
+
+#include "Input-Files/ValidateSystemInput.h"
 #include "MovieManager.h"
 
 int main(int args, char* argv[]) {
@@ -8,7 +11,7 @@ int main(int args, char* argv[]) {
     MovieManager inventory;
     ifstream customer_list, movie_list, transaction_list;
 
-    if(!Validate::checkfileAmount(args)) {
+    if (!Validate::checkfileAmount(args)) {
 
         cerr << "Invalid amount of files passed into the system." << endl;
 

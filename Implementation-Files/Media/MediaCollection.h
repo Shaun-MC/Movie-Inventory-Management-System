@@ -3,7 +3,7 @@
 
 #include <map>
 
-#include "../Data Structures/AVLTree.h"
+#include "../Data-Structures/AVLTree.h"
 
 #include "Media.h"
 #include "MediaFactory.h"

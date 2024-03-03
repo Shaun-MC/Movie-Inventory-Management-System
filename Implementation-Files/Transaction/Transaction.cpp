@@ -43,7 +43,7 @@ void Transaction::process(MediaCollection &movies, CustomerCollection &customers
         break;
 
         case 'H':
-        flag = dynamic_cast<History*>(this)->processHistory(customers);
+        dynamic_cast<History*>(this)->processHistory(customers);
         break;
 
         case 'B':
@@ -59,8 +59,8 @@ void Transaction::process(MediaCollection &movies, CustomerCollection &customers
         break;
     }
 
-    if (!process || this->commandType == CommandType::history  || this->commandType == CommandType::inventory) {
-        
+    if (!flag || this->commandType == CommandType::inventory || this->commandType == CommandType::history) {
+
         delete this;
     }
 }

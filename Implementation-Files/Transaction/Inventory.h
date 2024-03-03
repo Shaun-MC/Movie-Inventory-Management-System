@@ -3,7 +3,7 @@
 
 #include "Transaction.h"
 
-class Inventory : public Transaction {
+class Inventory : public Transaction { // expected class name
 
  public:
   

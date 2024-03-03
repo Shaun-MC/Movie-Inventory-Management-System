@@ -1,13 +1,10 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
 
+#include <string>
+
 #include "../Customer/CustomerCollection.h"
 #include "../Media/MediaCollection.h"
-
-#include "Inventory.h"
-
-
-#include <string>
 
 enum CommandType : char {
   

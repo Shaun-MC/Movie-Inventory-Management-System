@@ -31,4 +31,7 @@ class BorrowReturn : public Transaction {
   Media* movie;
 };
 
+#include "Borrow.h"
+#include "Return.h"
+
 #endif

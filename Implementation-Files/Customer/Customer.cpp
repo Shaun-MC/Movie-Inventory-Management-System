@@ -57,7 +57,7 @@ bool Customer::returnMedia(Media *oldMedia){ // UNTESTED
         if (*outstandingMedia[i] == *oldMedia) {
 
             delete outstandingMedia[i];
-            outstandingMedia[i] == nullptr;
+            outstandingMedia[i] = nullptr;
 
             *outstandingMedia[i] = *outstandingMedia.back();
 
@@ -71,7 +71,6 @@ bool Customer::returnMedia(Media *oldMedia){ // UNTESTED
 
     return ret;
 }
-//until here
 
 bool Customer::operator < (const Customer &rval) const {
     
