@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 
 #include "CustomerCollection.h"
 #include "MediaCollection.h"
@@ -22,14 +21,12 @@ class MovieManager {
   void ReadMovies(ifstream& movie_list);
   void ReadTransactions(ifstream& transaction_list);
 
-  void display() const;
+  void displayCustomers() const;
+  void displayMedia() const;
   
  private:
 
-  // Member Functions
-  void parseCustomerLine(const string line, int& key, string& name) const;
-  
-  CustomerCollection* customers;
+  CustomerCollection customers;
   MediaCollection stocks;
 };
 
