@@ -21,6 +21,8 @@ class MovieManager {
   //void ReadCustomers(ifstream& customer_list);
   void ReadMovies(ifstream& movie_list);
   void ReadTransactions(ifstream& transaction_list);
+
+  void display() const;
   
  private:
 

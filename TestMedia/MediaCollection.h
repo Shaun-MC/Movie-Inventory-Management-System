@@ -22,6 +22,8 @@ class MediaCollection {
   bool insert(Media*& insert_media);
 
   bool retrieve(Media*& target, Media*& ret);
+
+  void display() const;
  
  private:
 

@@ -34,6 +34,7 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
     }
 
     // Loop is predicated on createDVDMovie() only reading 1 line
+    // Current bug: dramas not being inserting the the dictionary
     while (!movie_list.eof()) {
 
         string movie_line = "";
@@ -87,4 +88,9 @@ void MovieManager::parseCustomerLine(const string line, int& key, string& name) 
     parse.ignore();
 
     name = f_name + " " + l_name;
+}
+
+void MovieManager::display() const {
+
+    this->stocks.display();
 }

@@ -1,7 +1,7 @@
 #include "Comedy.h"
 
 // Constructor - Destructor
-Comedy::Comedy() : release_year(0) {
+Comedy::Comedy() {
 
     this->movieType = MovieType::comedy;
 
@@ -56,8 +56,16 @@ bool Comedy::operator == (const Media& rval) const { // UNTESTED
 }
 
 // Private Member Functions
+string Comedy::reconstructLine() const {
+
+    string line = Movie::reconstructLine();
+
+    line += to_string(this->getYear());
+
+    return line;
+}
 
 void Comedy::display(ostream& ostrm) const {
 
-    return;
+    ostrm << this->reconstructLine();
 }

@@ -115,7 +115,17 @@ bool Classic::getSetMonth(stringstream& movie_line) { // UNTESTED
     return true;
 }
 
+string Classic::reconstructLine() const {
+
+    string line = Movie::reconstructLine();
+
+    line += this->getMajorActor() + " " + to_string(this->getReleaseMonth()) + 
+            to_string(this->getYear());
+
+    return line;
+}
+
 void Classic::display(ostream& ostrm) const {
 
-    return;
+    ostrm << this->reconstructLine();
 }

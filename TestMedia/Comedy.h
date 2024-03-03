@@ -23,6 +23,8 @@ class Comedy : public Movie {
 
  private: 
 
+  string reconstructLine() const;
+
   virtual void display(ostream& ostrm) const;
 };
 

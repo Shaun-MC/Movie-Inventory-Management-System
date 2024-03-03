@@ -70,8 +70,18 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
     }
 }
 
+void MediaCollection::display() const {
+
+    for (auto pair : this->stock) {
+
+        cout << pair.first << endl;
+        pair.second.displayTree();
+    }
+}
+
 // Unsure of nessecity
 void MediaCollection::clear() {
 
     return;
 }
+

@@ -23,6 +23,8 @@ class Drama : public Movie {
 
  private: 
 
+  string reconstructLine() const;
+
   void display(ostream& ostrm) const;
 };
 

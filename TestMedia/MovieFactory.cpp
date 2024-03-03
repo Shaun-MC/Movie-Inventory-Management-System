@@ -37,7 +37,7 @@ Movie* MovieFactory::createComedy(stringstream& movie_line) { // UNTESTED
 
     Movie* new_movie = new Comedy();
 
-    if (!new_movie->setData(movie_line)) {
+   if (!new_movie->setData(movie_line)) {
 
         delete new_movie;
         new_movie = nullptr;

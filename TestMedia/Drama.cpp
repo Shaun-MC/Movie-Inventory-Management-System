@@ -52,7 +52,16 @@ bool Drama::operator == (const Media& rval) const { // UNTESTED
 }
 
 // Private Member Function
+string Drama::reconstructLine() const {
+
+    string line = Movie::reconstructLine();
+
+    line += to_string(this->getYear());
+
+    return line;
+}
+
 void Drama::display(ostream& ostrm) const {
 
-    return;
+    ostrm << this->reconstructLine();
 }

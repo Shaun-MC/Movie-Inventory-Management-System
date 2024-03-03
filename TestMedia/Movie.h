@@ -48,6 +48,8 @@ class Movie : public Media {
   bool getSetTitle(stringstream& movie_line);
   bool getSetYear(stringstream& movie_line);
 
+  virtual string reconstructLine() const;
+
   virtual void display(ostream& ostrm) const = 0;
 };
 

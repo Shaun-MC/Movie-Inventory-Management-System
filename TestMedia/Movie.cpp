@@ -125,3 +125,11 @@ bool Movie::getSetYear(stringstream& movie_line) { // FINISHED
 
     return true;
 }
+
+string Movie::reconstructLine() const {
+
+    string line = to_string(this->getStock()) + ", " + this->getDirector() + 
+                  ", " + this->getTitle() + ", "; 
+
+    return line;
+}

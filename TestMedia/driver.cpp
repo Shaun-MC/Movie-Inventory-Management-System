@@ -16,6 +16,7 @@ int main() {
     inventory.ReadMovies(movie_list);
     movie_list.close();
 
+    inventory.display();
     //inventory.ReadTransactions(transaction_list);
     //transaction_list.close();
 

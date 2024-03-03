@@ -311,6 +311,8 @@ void AVLTree<T>::displayTreeHelper(TreeNode* node, int width_value) const {
         displayTreeHelper(node->left, width_copy);
     }
 
+    cout << endl;
+    
     if (node->right != nullptr) {
 
         cout << setfill(' ') << setw(width_value) << "R---" << *node->right->value << endl;
