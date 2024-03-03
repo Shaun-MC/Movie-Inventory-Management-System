@@ -1,25 +1,30 @@
 #include <fstream>
 
+#include "Input Files/ValidateSystemInput.h"
 #include "MovieManager.h"
 
-int main() {
-
-    ifstream customer_list("data4customers.txt");
-    ifstream movie_list("data4movies.txt");
-    //ifstream transaction_list("data4commands.txt");
+int main(int args, char* argv[]) {
 
     MovieManager inventory;
+    ifstream customer_list, movie_list, transaction_list;
 
-    inventory.ReadCustomers(customer_list);
-    customer_list.close();
+    if(!Validate::checkfileAmount(args)) {
 
-    inventory.ReadMovies(movie_list);
-    movie_list.close();
+        cerr << "Invalid amount of files passed into the system." << endl;
 
-    inventory.displayMedia();
-    
-    //inventory.ReadTransactions(transaction_list);
-    //transaction_list.close();
+    } else {
+
+        Validate::dispurseFiles(customer_list, movie_list, transaction_list, argv);
+
+        inventory.ReadCustomers(customer_list);
+        customer_list.close();
+
+        inventory.ReadMovies(movie_list);
+        movie_list.close();
+
+        // inventory.ReadTransactions(transaction_list);
+        // transaction_list.close();
+    }
 
     return 1;
 }
