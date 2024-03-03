@@ -1,12 +1,11 @@
 #include "Borrow.h"
 
-Borrow::Borrow(){
-}
+Borrow::Borrow(){}
 
-Borrow::~Borrow(){
-}
+Borrow::~Borrow(){}
 
-Borrow::processBorrow(MediaCollection &movies, CustomerList &customers){
+Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customers){
+    
     Customer *customerInfo;
 
     if(customerInfo.retrieve(this->getCustomerID(), customerinfo)){

@@ -8,15 +8,24 @@ class Drama : public Movie {
  public: 
 
   // Constructor - Destructor
-  Comedy();
-  ~Comedy();
+  Drama();
+  ~Drama();
 
-  // Getters - Setters
-  virtual MovieType getMovieType() const;
-
-  // Actions
+  // Getter - Setters
+  virtual bool setData(stringstream& movie_line);
 
   // Operator Overloads
+  friend ostream& operator << (ostream& ostrm, const Drama& drama);
+
+  bool operator < (const Media& rval) const;
+  bool operator > (const Media& rval) const;
+  bool operator == (const Media& rval) const;
+
+ private: 
+
+  string reconstructLine() const;
+
+  void display(ostream& ostrm) const;
 };
 
 #endif 

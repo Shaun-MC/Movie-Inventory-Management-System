@@ -1,33 +1,31 @@
-#ifndef STOCKCOLLECTION_H
-#define STOCKCOLELCTION_H
+#ifndef MEDIACOLLECTION_H
+#define MEDIACOLLECTION_H
 
 #include <map>
 
 #include "Media.h"
-#include "../Data Structures/AVLTree.h"
 
-// Singleton??
+#include "AVLTree.h"
+#include "MediaFactory.h"
+
+// Idea: Make it a Singleton
 class MediaCollection { 
 
  public:
   
-  // Destructor
-  ~MediaCollection();
+  // Constructor - Destructor
+  MediaCollection();
 
-  // Getter
-  static MediaCollection* getCollection();
+  ~MediaCollection();
   
   // Actions
-  bool insertMedia(Media* media);
+  bool insert(Media*& insert_media);
 
-  bool retrieve(const Media& target, Media*& ret);
+  bool retrieve(Media*& target, Media*& ret);
 
+  void display() const;
+ 
  private:
-
-  // Singleton Pattern Requirements
-  static MediaCollection* instancePtr;
-
-  MediaCollection();
 
   // Underlieing Data Structure - Dictionary - Future Iterations
   // Key: Type of Media (Only Dvd's for this proj.)
@@ -43,7 +41,5 @@ class MediaCollection {
   // Private Memeber Functions
   void clear();
 };
-
-MediaCollection* MediaCollection::instancePtr = nullptr;
 
 #endif

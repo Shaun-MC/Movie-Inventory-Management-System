@@ -1,7 +1,8 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 
-#include "../Stock/Media.h"
+#include <sstream>
+#include "Media.h"
 
 class Movie : public Media {
 
@@ -12,30 +13,44 @@ class Movie : public Media {
   virtual ~Movie();
 
   // Getter - Setters
+  virtual char getMediaType() const;
+  char getMovieType() const; 
+  
   string getTitle() const;
-  int getYear() const;
   string getDirector() const;
+  int getYear() const;
   
-  void setTitle(string title);
-  int setYear(int year);
-  void setDirector(string title);
+  virtual bool setData(stringstream& movie_line);
 
-  virtual string getMediaType() const = 0; //abstract function (pure function)
-  virtual char getMovieType() const; 
-  
-  // Actions
-  virtual void display() const = 0; //abstract function (pure function)
+  void setTitle(const string title);
+  void setDirector(const string name);
+  void setYear(const int year);
 
   // Operator Overloading
   friend ostream& operator << (ostream& ostrm, const Movie& obj);
+
+  virtual bool operator < (const Media& rval) const = 0;
+  virtual bool operator > (const Media& rval) const = 0;
+  virtual bool operator == (const Media& rval) const = 0;
  
  protected: 
   
-  char movieType; //changed it 
+  char movieType; 
+  
   string director;
+  
   string title;
+
   int release_year;
-  virtual void display(ostream &ostrm) const = 0;
+
+  bool getSetStock(stringstream& movie_line);
+  bool getSetDirector(stringstream& movie_line);
+  bool getSetTitle(stringstream& movie_line);
+  bool getSetYear(stringstream& movie_line);
+
+  virtual string reconstructLine() const;
+
+  virtual void display(ostream& ostrm) const = 0;
 };
 
 #endif
