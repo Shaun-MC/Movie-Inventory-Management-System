@@ -1,7 +1,7 @@
 #include "MovieFactory.h"
 
 // Actions
-Movie* MovieFactory::createMovie(string& movie_line) { // UNTESTED
+Movie* MovieFactory::createMovie(string& movie_line) { // DONE
 
     stringstream str(movie_line);
     char movie_type;
@@ -27,13 +27,13 @@ Movie* MovieFactory::createMovie(string& movie_line) { // UNTESTED
         break;
 
         default: 
-        cout << "MovieFactory::createMovie() | Unsupported Movie Type: " << movie_type << endl; 
+        cerr << "MovieFactory::createMovie() | Unsupported Movie Type: " << movie_type << endl; 
         return nullptr;
     }
 }
 
 // Private Member Functions
-Movie* MovieFactory::createComedy(stringstream& movie_line) { // UNTESTED
+Movie* MovieFactory::createComedy(stringstream& movie_line) { // DONE
 
     Movie* new_movie = new Comedy();
 
@@ -46,7 +46,7 @@ Movie* MovieFactory::createComedy(stringstream& movie_line) { // UNTESTED
     return new_movie;
 }
 
-Movie* MovieFactory::createDrama(stringstream& movie_line) { // UNTESTED
+Movie* MovieFactory::createDrama(stringstream& movie_line) { // DONE
 
     Movie* new_movie = new Drama();
 
@@ -59,7 +59,7 @@ Movie* MovieFactory::createDrama(stringstream& movie_line) { // UNTESTED
     return new_movie;
 }
 
-Movie* MovieFactory::createClassic(stringstream& movie_line) { // UNTESTED
+Movie* MovieFactory::createClassic(stringstream& movie_line) { // DONE
 
     Movie* new_movie = new Classic();
 
