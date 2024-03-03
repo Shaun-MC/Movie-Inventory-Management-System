@@ -1,7 +1,7 @@
 #include "Drama.h"
 
 // Constructor - Destructor
-Drama::Drama() {
+Drama::Drama() { // DONE
 
     this->movieType = MovieType::drama;
 
@@ -13,7 +13,7 @@ Drama::Drama() {
 Drama::~Drama() {}
 
 // Getter - Setters
-bool Drama::setData(stringstream& movie_line) {
+bool Drama::setData(stringstream& movie_line) { // DONE
 
     return (!Movie::setData(movie_line) || !this->getSetYear(movie_line)) ? false : true;
 }
@@ -26,7 +26,7 @@ ostream& operator << (ostream& ostrm, const Drama& drama) {
     return ostrm;
 }
 
-bool Drama::operator < (const Media& rval) const { // UNTESTED
+bool Drama::operator < (const Media& rval) const { // DONE
 
     const Drama rval_temp = dynamic_cast<const Drama& >(rval);
 
@@ -43,7 +43,7 @@ bool Drama::operator > (const Media& rval) const {
     return !(*this < rval);
 }
 
-bool Drama::operator == (const Media& rval) const { // UNTESTED
+bool Drama::operator == (const Media& rval) const { // DONE
 
     const Drama rval_temp = dynamic_cast<const Drama& >(rval);
 
@@ -52,7 +52,7 @@ bool Drama::operator == (const Media& rval) const { // UNTESTED
 }
 
 // Private Member Function
-string Drama::reconstructLine() const {
+string Drama::reconstructLine() const { // DONE
 
     string line = Movie::reconstructLine();
 

@@ -20,7 +20,7 @@ class HashTable {
   // Actions
   bool insertKeyValue(const Key key, const Value& val);
 
-  bool retireveValue(const Key& key, Value*& ret) const;
+  bool retrieveValue(const Key& key, Value*& ret) const;
  
  protected: 
 
@@ -97,7 +97,7 @@ bool HashTable<Key, Value>::insertKeyValue(const Key key, const Value& val) {
 }
 
 template <typename Key, typename Value>
-bool HashTable<Key, Value>::retireveValue(const Key& key, Value*& ret) const {
+bool HashTable<Key, Value>::retrieveValue(const Key& key, Value*& ret) const {
     
     const int hash = calcHash(key);
 

@@ -33,7 +33,7 @@ class Transaction {
   //void setEntireTransaction() const; // Unsure of parameters atm
 
   // Actions
-  virtual void process (MediaCollection& movies, CustomerList& customers);
+  virtual void process (MediaCollection& movies, CustomerCollection& customers);
 
   // Operator Overloads
  

@@ -25,7 +25,7 @@ class CustomerCollection {
  
  private: 
 
-  HashTable<int, Customer> customersCollection;
+  HashTable<int, Customer> collection;
 };
 
 #endif

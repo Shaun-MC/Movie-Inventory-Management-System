@@ -49,10 +49,10 @@ class AVLTree {
   void rightLeftRotation(TreeNode*& U);
   void leftRightRotation(TreeNode*& U);
 
-  int get_height(TreeNode* curr) const;
-  int get_balance_factor(TreeNode* curr) const;
+  int getHeight(TreeNode* curr) const;
+  int getBalanceFactor(TreeNode* curr) const;
 
-  void set_height(TreeNode*& curr, int new_height);
+  void setHeight(TreeNode*& curr, int newHeight);
   
   void updateHeight(TreeNode*& curr);
 
@@ -257,19 +257,19 @@ void AVLTree<T>::clearHelper(TreeNode*& delete_node) { // DONE
 }
 
 template<class T>
-int AVLTree<T>::get_height(TreeNode* curr) const { // DONE
+int AVLTree<T>::getHeight(TreeNode* curr) const { // DONE
 
     return (curr == nullptr) ? 0 : curr->height; 
 }
 
 template<class T>
-int AVLTree<T>::get_balance_factor(TreeNode* curr) const { // DONE
+int AVLTree<T>::getBalanceFactor(TreeNode* curr) const { // DONE
 
     return (curr == nullptr) ? 0 : get_height(curr->left) - get_height(curr->right);
 }
 
 template<class T>
-void AVLTree<T>::set_height(TreeNode*& curr, int new_height) { // DONE
+void AVLTree<T>::setHeight(TreeNode*& curr, int new_height) { // DONE
 
     curr->height = new_height;
 }

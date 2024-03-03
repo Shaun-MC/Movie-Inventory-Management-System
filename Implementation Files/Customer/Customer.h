@@ -29,22 +29,20 @@ class Customer {
   void setName(string first, string last);
 
   //uncomment for transaction
-  vector<Transaction*> & getHistory() const;
+  const vector<Transaction*> & getHistory() const;
   
-  vector<Media*> & getOutstanding() const;
+  const vector<Media*> & getOutstanding() const;
 
   //Actions
-
   void addHistory(Transaction* newTransaction);
 
   bool borrowMedia(Media* newMedia);
   bool returnMedia(Media* oldMedia);
-  //until here
 
   // Operator Overloads
 
-  bool operator<(const Customer& rval) const;
-  bool operator==(const Customer& rval) const;
+  bool operator < (const Customer& rval) const;
+  bool operator == (const Customer& rval) const;
 
   friend std::ostream& operator << (std::ostream& ostrm, const Customer& obj);
  
@@ -54,7 +52,7 @@ class Customer {
   string name; 
 
   //uncomment for transaction
-  vector<Transaction*> transaction_history;
+  vector<Transaction*> history;
   vector<Media*> outstandingMedia;
 };
 
