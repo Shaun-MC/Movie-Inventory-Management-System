@@ -137,7 +137,7 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& 
 
 // Assumes that type T has a less than and greater than operator
 template< class T>
-void AVLTree<T>::makeRotation(const int bf, TreeNode*& curr, const T& val) { // UNTESTED
+void AVLTree<T>::makeRotation(const int bf, TreeNode*& curr, const T& val) { // DONE
 
     if (bf > 1 && val < *curr->left->value) {
 
@@ -282,7 +282,7 @@ void AVLTree<T>::updateHeight(TreeNode*& curr) { // DONE
 
 // Checks other functions correctness
 template<class T>
-void AVLTree<T>::displayTree() const {
+void AVLTree<T>::displayTree() const { // DONE
 
     int width_value = 5;
     
@@ -294,7 +294,7 @@ void AVLTree<T>::displayTree() const {
 }
 
 template<class T>
-void AVLTree<T>::displayTreeHelper(TreeNode* node, int width_value) const { 
+void AVLTree<T>::displayTreeHelper(TreeNode* node, int width_value) const { // DONE 
 
     // Base Case
     if (node == nullptr) {

@@ -47,7 +47,7 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
         
             this->stocks.retrieve(new_media, dup_media);
 
-            dup_media->addStock(new_media->getStock());
+            //dup_media->addStock(new_media->getStock());
 
             // Does dup_media get cleaned up??
         }

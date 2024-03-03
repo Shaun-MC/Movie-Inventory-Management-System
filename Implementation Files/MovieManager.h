@@ -4,8 +4,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "CustomerCollection.h"
-#include "MediaCollection.h"
+#include "Customer/CustomerCollection.h"
+#include "Media/MediaCollection.h"
 
 using namespace std;
 

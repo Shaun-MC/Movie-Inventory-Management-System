@@ -3,9 +3,9 @@
 
 #include <map>
 
-#include "Media.h"
+#include "../Data Structures/AVLTree.h"
 
-#include "AVLTree.h"
+#include "Media.h"
 #include "MediaFactory.h"
 
 // Idea: Make it a Singleton

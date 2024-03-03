@@ -2,7 +2,7 @@
 #define MOVIE_H
 
 #include <sstream>
-#include "Media.h"
+#include "../Media/Media.h"
 
 class Movie : public Media {
 
