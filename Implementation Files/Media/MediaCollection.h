@@ -27,11 +27,10 @@ class MediaCollection {
  
  private:
 
-  // Underlieing Data Structure - Dictionary - Future Iterations
-  // Key: Type of Media (Only Dvd's for this proj.)
-  // Value: 
-    // Key: Type of Movie (Only Comedies, Dramas, or Classics for this proj)
-    // Value: AVLTree Storing the movies related to that type
+  // Underlieing Data Structure - Dictionary
+  // Key: Type of Movie (Only Dvd's for this proj.)
+  // Value: AVLTree Storing the movies related to that type
+
   map<char, AVLTree<Media> > stock;
   
   AVLTree<Media> comedies;

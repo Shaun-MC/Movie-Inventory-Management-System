@@ -17,7 +17,7 @@ MediaCollection::~MediaCollection() {
 }
 
 // Actions
-bool MediaCollection::insert(Media*& media) { // UNTESTED
+bool MediaCollection::insert(Media*& media) { // DONE
 
     // Assumed all movies are DVD
     char insert_type = dynamic_cast<const Movie*>(media)->getMovieType();
@@ -70,7 +70,7 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
     }
 }
 
-void MediaCollection::display() const {
+void MediaCollection::display() const { // FINE
 
     for (auto pair : this->stock) {
 
@@ -80,7 +80,7 @@ void MediaCollection::display() const {
 }
 
 // Unsure of nessecity
-void MediaCollection::clear() {
+void MediaCollection::clear() { // UNSURE
 
     return;
 }
