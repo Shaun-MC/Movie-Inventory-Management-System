@@ -22,15 +22,20 @@ void Media::addStock(const int amount) {
     this->stock += amount;
 }
 
-bool Media::reduceStock(const int amount) {
+void Media::incrementStock() {
 
-    if (this->stock - amount < 0) {
+    ++this->stock;
+}
+
+bool Media::decrementStock() {
+
+    if (this->stock - 1 < 0) {
 
         // Error Conditon: Unable to reduce Stock
         return false;
     }
 
-    this->stock -= amount;
+    --this->stock;
     return true;
 }
 

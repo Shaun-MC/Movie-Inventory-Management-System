@@ -34,7 +34,8 @@ class Media {
 
   // Actions
   void addStock(const int amount);
-  bool reduceStock(const int amount);
+  void incrementStock();
+  bool decrementStock();
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Media& media);
