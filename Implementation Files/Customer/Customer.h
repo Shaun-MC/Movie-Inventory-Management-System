@@ -7,8 +7,8 @@
 
 using namespace std;
 
-//#include "../Stock/Stock.h"
-//#include "../Transaction/Transaction.h"
+#include "../Media/Media.h"
+#include "../Transaction/Transaction.h"
 
 const int kMinID = 1000;
 const int kMaxID = 9999;
@@ -56,7 +56,6 @@ class Customer {
   //uncomment for transaction
   vector<Transaction*> transaction_history;
   vector<Media*> outstandingMedia;
-  //until here
 };
 
 #endif

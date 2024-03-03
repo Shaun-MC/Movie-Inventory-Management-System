@@ -4,7 +4,7 @@
 
 int main() {
 
-    //ifstream customer_list("data4customers.txt");
+    ifstream customer_list("data4customers.txt");
     ifstream movie_list("data4movies.txt");
     //ifstream transaction_list("data4commands.txt");
 

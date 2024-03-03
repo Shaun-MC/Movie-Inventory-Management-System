@@ -2,15 +2,16 @@
 #define TRANSACTION_H
 
 #include "../Customer/CustomerCollection.h"
-#include "../Stock/StockCollection.h"
+#include "../Media/MediaCollection.h"
 
 #include <string>
 
-struct CommandType {
-  char Borrow = 'B';
-  char Return = 'R';
-  char History = 'H';
-  char Inventory = 'I';
+enum CommandType : char {
+  
+  borrow = 'B',
+  return_ = 'R',
+  history = 'H',
+  inventory = 'I',
 };
 
 class Transaction {

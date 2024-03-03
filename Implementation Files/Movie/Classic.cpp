@@ -1,7 +1,7 @@
 #include "Classic.h"
 
 // Constructor - Destructor
-Classic::Classic() : major_actor("") {
+Classic::Classic() : major_actor("") { // DONE
 
     this->movieType = MovieType::classic;
 
@@ -13,18 +13,18 @@ Classic::Classic() : major_actor("") {
 Classic::~Classic() {}
 
 // Getters - Setters
-string Classic::getMajorActor() const {
+string Classic::getMajorActor() const { // DONE
 
     return this->major_actor;
 }
 
-int Classic::getReleaseMonth() const {
+int Classic::getReleaseMonth() const { // DONE
 
     return this->release_month;
 }
 
 // Assumes stream is pointing to the stock value
-bool Classic::setData(stringstream& movie_line) { // UNTESTED
+bool Classic::setData(stringstream& movie_line) { // DONE
 
     // Execution Order doesn't matter, if 1 of them fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS
@@ -50,7 +50,7 @@ ostream& operator << (ostream& ostrm, const Classic& classic) {
     return ostrm;
 }
 
-bool Classic::operator < (const Media& rval) const { // UNTESTED
+bool Classic::operator < (const Media& rval) const { // DONE
 
     // Sorting Criteria: Release Date & Headline Actor
     const Classic rval_temp = dynamic_cast<const Classic& >(rval);
@@ -73,7 +73,7 @@ bool Classic::operator > (const Media& rval) const {
     return !(*this < rval);
 }
 
-bool Classic::operator == (const Media& rval) const { // UNTESTED
+bool Classic::operator == (const Media& rval) const { // DONE
 
     const Classic rval_temp = dynamic_cast<const Classic& >(rval);
 
@@ -84,7 +84,7 @@ bool Classic::operator == (const Media& rval) const { // UNTESTED
 
 // Private Member Functions
 
-bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
+bool Classic::getSetMA(stringstream& movie_line) { // DONE
 
     string f_name = "", l_name = ""; 
 
@@ -97,7 +97,7 @@ bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
     return true;
 }
 
-bool Classic::getSetMonth(stringstream& movie_line) { // UNTESTED
+bool Classic::getSetMonth(stringstream& movie_line) { // DONE
 
     int month = 0;
 
@@ -115,7 +115,7 @@ bool Classic::getSetMonth(stringstream& movie_line) { // UNTESTED
     return true;
 }
 
-string Classic::reconstructLine() const {
+string Classic::reconstructLine() const { // DONE 
 
     string line = Movie::reconstructLine();
 

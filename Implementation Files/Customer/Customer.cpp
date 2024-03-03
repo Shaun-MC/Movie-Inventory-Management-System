@@ -23,16 +23,18 @@ void Customer::setID(int id){
     this->ID = id;
 }
 
-void Customer::setName(string first, string last){ //??
+void Customer::setName(string first, string last){ 
     this->name = first + " " + last;  
 }
 
 //uncomment for transaction
 vector<Transaction*>& Customer::getHistory() const{
+    
     return transaction_history;
 }
 
-vector<Media *>& Customer::getOutstanding() const{
+vector<Media*>& Customer::getOutstanding() const{
+    
     return outstandingMedia;
 }
 
@@ -47,7 +49,7 @@ bool Customer::borrowMedia(Media *newMedia){
 bool Customer::returnMedia(Media *oldMedia){
     for(size_t i = 0; i <= outstandingMedia.size(); i++){
         
-        if(*outstandingMedia[i] == oldMedia){
+        if (*outstandingMedia[i] == oldMedia){
             
             delete outstandingMedia[i];
             

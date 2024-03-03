@@ -1,7 +1,7 @@
 #include "Comedy.h"
 
 // Constructor - Destructor
-Comedy::Comedy() {
+Comedy::Comedy() { // DONE
 
     this->movieType = MovieType::comedy;
 
@@ -14,20 +14,20 @@ Comedy::~Comedy() {}
 
 // Getter - Setter
 
-bool Comedy::setData(stringstream& movie_line) {
+bool Comedy::setData(stringstream& movie_line) { // DONE
 
     return (!Movie::setData(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
 }
 
 // Operator Overloads
-ostream& operator << (ostream& ostrm, const Comedy& comedy) { // UNTESTED
+ostream& operator << (ostream& ostrm, const Comedy& comedy) { // DONE
 
     comedy.display(ostrm);
 
     return ostrm;
 }
 
-bool Comedy::operator < (const Media& rval) const { // UNTESTED
+bool Comedy::operator < (const Media& rval) const { // DONE
 
     // Sorting Criteria: Title & Year
     const Comedy rval_temp = dynamic_cast<const Comedy& >(rval);
@@ -46,7 +46,7 @@ bool Comedy::operator > (const Media& rval) const {
     return !(*this < rval);
 }
 
-bool Comedy::operator == (const Media& rval) const { // UNTESTED
+bool Comedy::operator == (const Media& rval) const { // DONE
 
     // Sorting Criteria: Title & Year
     const Comedy rval_temp = dynamic_cast<const Comedy& >(rval);
@@ -56,7 +56,7 @@ bool Comedy::operator == (const Media& rval) const { // UNTESTED
 }
 
 // Private Member Functions
-string Comedy::reconstructLine() const {
+string Comedy::reconstructLine() const { // DONE
 
     string line = Movie::reconstructLine();
 

@@ -107,7 +107,7 @@ bool Movie::getSetTitle(stringstream& movie_line) { // DONE
     return true;
 }
 
-bool Movie::getSetYear(stringstream& movie_line) { // FINISHED
+bool Movie::getSetYear(stringstream& movie_line) { // DONE
 
     int year = 0;
 
@@ -126,7 +126,7 @@ bool Movie::getSetYear(stringstream& movie_line) { // FINISHED
     return true;
 }
 
-string Movie::reconstructLine() const {
+string Movie::reconstructLine() const { // DONE
 
     string line = to_string(this->getStock()) + ", " + this->getDirector() + 
                   ", " + this->getTitle() + ", "; 
