@@ -21,7 +21,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     // Media *newMedia = nullptr
     char media_type = 0, movie_type = 0;
 
-    this->entireTransaction = this->commandType + " ";
+    this->entireTransaction = this->commandType + ' ';
 
     trans_line.ignore(); // Space
 
@@ -38,7 +38,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     
     trans_line.ignore(); // Space
 
-    this->entireTransaction += media_type + " "; 
+    this->entireTransaction += media_type + ' '; 
 
     switch(media_type){
         
@@ -57,7 +57,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
 
     dynamic_cast<Movie*>(this->movie)->setMovieType(movie_type);
 
-    this->entireTransaction += movie_type + " "; 
+    this->entireTransaction += movie_type + ' '; 
 
     switch (movie_type) {
 
@@ -142,7 +142,7 @@ void BorrowReturn::processClassic(stringstream& trans_line){ // UNTESTED
     dynamic_cast<Classic*>(this->movie)->setMajorActor(majorActor, ""); // Not sure how to break first, last name - this is fine
 
     // Add to transaction string
-	entireTransaction += to_string(month) + " " + to_string(year) + " " + majorActor;
+	entireTransaction += to_string(month) + ' ' + to_string(year) + ' ' + majorActor;
 }
 
 // If called in movie_type switch statment, movie type is not included

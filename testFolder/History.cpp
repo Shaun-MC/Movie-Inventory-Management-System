@@ -6,22 +6,7 @@ History::History(){
     this->commandType = CommandType::history;
 }
 
-History::~History(){}
-
-bool History::setHistoryData(ifstream &file){ // UNTESTED
-    
-    file.ignore();
-    file >> this->customerID;
-    
-    if(file.fail()){
-        cout << "Customer ID is Invalid" << endl;
-        file.clear();
-        file.ignore(0, '\n'); //0?
-        return false;
-    }
-
-    return true;
-}
+History::~History() {}
 
 bool History::processHistory(CustomerCollection &customers){ // UNTESTED
     

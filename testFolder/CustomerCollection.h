@@ -3,7 +3,7 @@
 
 #include <sstream>
 
-#include "../Data-Structures/HashTable.h"
+#include "HashTable.h"
 #include "Customer.h"
 
 using namespace std;

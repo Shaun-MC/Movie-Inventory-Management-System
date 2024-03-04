@@ -9,9 +9,7 @@ Inventory::~Inventory(){}
 
 bool Inventory::processInventory(MediaCollection &movies){
     
-    cout << "Inventory: " << endl;
-    
-    movies.display(); // where is display();
+    movies.display();
 
     return true;
 }

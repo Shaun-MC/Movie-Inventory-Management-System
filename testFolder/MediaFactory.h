@@ -4,7 +4,7 @@
 #include <fstream>
 
 #include "Media.h"
-#include "../Movie/MovieFactory.h"
+#include "MovieFactory.h"
 
 class MediaFactory {
 

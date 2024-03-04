@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#include "Input-Files/ValidateSystemInput.h"
+#include "ValidateSystemInput.h"
 #include "MovieManager.h"
 
 // The File/#include system currently implemented is very slow, optimize if time allows
@@ -24,10 +24,12 @@ int main(int args, char* argv[]) {
         inventory.ReadCustomers(customer_list); // FINE
         customer_list.close();
 
-        inventory.displayCustomers(); 
+        //inventory.displayCustomers(); 
 
         inventory.ReadMovies(movie_list); // FINE - The map creates copies of AVLList which it has to delete, slower than it could be
         movie_list.close();
+
+        //inventory.displayMedia();
 
         inventory.ReadTransactions(transaction_list);
         transaction_list.close();
