@@ -1,80 +1,89 @@
 #include "TransactionFactory.h"
 
-Transaction *TransactionFactory::createTransaction(ifstream &file){
-    Transaction *newTransaction = nullptr;
+Transaction* TransactionFactory::createTransaction(const string trans_line){ // DONE
+    
+    stringstream str(trans_line);
     char command;
-    file >> command;
 
-    if(file.fail()){
-        file.clear();
-        file.ignore(0, '\n');//0??
-        return nullptr;
-    }
+    // Cannot support command types being more than 1 character
+    str >> command;
+    str.ignore(); // Space
 
-    switch(command){
+    switch (command) {
+
+        case CommandType::inventory:
+        return createInventory(str);
+        break;
+
+        case CommandType::history: 
+        return createHistory(str);
+        break;
+
         case CommandType::borrow:
-        newTransaction = createBorrow(file);
+        return createBorrow(str);
         break;
-    
-    case CommandType::return_:
-        newTransaction = createReturn(file);
-        break;
-    
-    case CommandType::history:
-        newTransaction = createHistory(file);
+        
+        case CommandType::return_:
+        return createReturn(str);
         break;
 
-    case CommandType::inventory:
-        newTransaction = createInventory(file);
-        break;
-
-    default:       
-        string entireTransaction;
-        getline(file, entireTransaction, '\n');
-        cerr << "Command, invalid command type '" << command << "':"
-        << '\n' << "  " << command << entireTransaction << endl;
+        default: 
+        cerr << "TransactionFactory::createTransaction() | Invalid Transaction Command: " << command << endl;
+        return nullptr;
         break;
     }
-
-
-    return newTransaction;
-    
-    
 }
 
-Transaction *TransactionFactory::createInventory(ifstream &file){
-   Inventory* newInventory = new Inventory();
+Transaction *TransactionFactory::createInventory(stringstream& str){ // DONE
+   
+    Transaction* newInventory = new Inventory();
+
+    newInventory->setCommandType(CommandType::inventory);
+
     return newInventory;
 }
 
-Transaction *TransactionFactory::createHistory(ifstream &file){
-    History* newHistory = new History();
+Transaction *TransactionFactory::createHistory(stringstream& str){ // DONE
+    
+    Transaction* newHistory = new History();
+    
     newHistory->setCommandType(CommandType::history);
-    if (newHistory->setHistoryData(file)) {
-        return newHistory;
+    
+    if (!newHistory->setData(str)) {
+       
+        delete newHistory;
+        newHistory = nullptr;
     }
-    delete newHistory;
-    return nullptr;
+    
+    return newHistory;
 }
 
-Transaction *TransactionFactory::createReturn(ifstream &file)
+Transaction *TransactionFactory::createReturn(stringstream& str) // DONE
 {
-    Return* newReturn = new Return();
+    Transaction* newReturn = new Return();
+
     newReturn->setCommandType(CommandType::return_);
-    if (newReturn->setData(file)) {
-        return newReturn;
+    
+    if (!newReturn->setData(str)) {
+        
+        delete newReturn;
+        newReturn = nullptr;
     }
-    delete newReturn;
-    return nullptr;
+
+    return newReturn;
 }
 
-Transaction *TransactionFactory::createBorrow(ifstream &file)
+Transaction *TransactionFactory::createBorrow(stringstream& str) // DONE
 {
-    Borrow * newBorrow = new Borrow();
+    Transaction* newBorrow = new Borrow();
+    
     newBorrow->setCommandType(CommandType::borrow);
-    if (newBorrow->setData(file)) {
-        return newBorrow;
+    
+    if (!newBorrow->setData(str)) {
+        
+        delete newBorrow;
+        newBorrow = nullptr;
     }
-    delete newBorrow;
-    return nullptr;
+    
+    return newBorrow;
 }

@@ -1,6 +1,8 @@
 #ifndef TRANSACTIONFACTORY_H
 #define TRANSACTIONFACTORY_H
 
+#include <sstream>
+
 #include "Transaction.h"
 #include "Inventory.h"
 #include "History.h"
@@ -12,17 +14,17 @@ class TransactionFactory {
 
  public:
   
-  static Transaction* createTransaction(ifstream &file); //change const string trans_line to ifstream
+  static Transaction* createTransaction(const string trans_line); 
 
  private:
 
-  static Transaction *createInventory(ifstream &file);
+  static Transaction *createInventory(stringstream& trans_line);
 
-  static Transaction *createHistory(ifstream &file);
+  static Transaction *createHistory(stringstream& trans_line);
 
-  static Transaction *createReturn(ifstream &file);
+  static Transaction *createReturn(stringstream& trans_line);
 
-  static Transaction *createBorrow(ifstream &file);
+  static Transaction *createBorrow(stringstream& trans_line);
 }; 
 
 #endif

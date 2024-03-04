@@ -9,6 +9,7 @@ bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customer
     Customer *customerInfo = nullptr;
     Media* mediaInfo = nullptr;
 
+    // Customer not in CustomerCollection
     if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
 
         // Error Condition
@@ -16,6 +17,7 @@ bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customer
         return false;
     }
 
+    // Movies not in MediaCollection
     if (this->movie == nullptr || movies.retrieve(this->movie, mediaInfo)) {
 
         // Error Condition
@@ -23,12 +25,13 @@ bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customer
         return false;
     }
 
+    // Unable to remove Movie form stock
     if (!mediaInfo->decrementStock()) {
 
         // Error Condition
         cerr << "Borrow::processBorrow() | Media is Out of Stock (" << mediaInfo << ")" << endl;
 
-    } else {
+    } else { // Happy Path
 
         customerInfo->borrowMedia(this->movie);
         customerInfo->addHistory(""); // (this)
@@ -40,5 +43,3 @@ bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customer
 
     return false;
 }
-
-//need ostream??

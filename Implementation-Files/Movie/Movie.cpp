@@ -38,6 +38,11 @@ bool Movie::setData(stringstream& movie_line) { // DONE
             !this->getSetTitle(movie_line)) ? false : true;
 }
 
+bool Movie::setMovieType(const char type) {
+
+    this->movieType = type;
+}
+
 void Movie::setTitle(const string title){
     
     this->title = title;

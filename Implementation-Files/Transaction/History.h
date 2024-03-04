@@ -11,9 +11,6 @@ class History : public Transaction {
   History();
   ~History();
 
-  //Setter
-  bool setHistoryData(ifstream& file);
-
   // Actions
   bool processHistory(CustomerCollection& customers);
 

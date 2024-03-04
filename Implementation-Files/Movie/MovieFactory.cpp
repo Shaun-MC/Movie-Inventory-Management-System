@@ -15,15 +15,15 @@ Movie* MovieFactory::createMovie(string& movie_line) { // DONE
     switch (movie_type) {
 
         case 'F':
-        return MovieFactory::createComedy(str);
+        return createComedy(str);
         break;
 
         case 'D':
-        return MovieFactory::createDrama(str);
+        return createDrama(str);
         break;
 
         case 'C':
-        return MovieFactory::createClassic(str);
+        return createClassic(str);
         break;
 
         default: 

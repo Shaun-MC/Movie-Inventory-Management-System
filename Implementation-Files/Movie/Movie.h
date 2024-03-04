@@ -22,6 +22,7 @@ class Movie : public Media {
   int getYear() const;
   
   virtual bool setData(stringstream& movie_line);
+  bool setMovieType(const char type);
 
   void setTitle(const string title);
   void setDirector(const string name);

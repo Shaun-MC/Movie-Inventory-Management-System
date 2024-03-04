@@ -16,6 +16,11 @@ void Media::setStock(const int amount) {
     this->stock = amount;
 }
 
+void Media::setMediaType(const MediaType type) {
+
+    this->type = type;
+}
+
 // Actions
 void Media::addStock(const int amount) {
 

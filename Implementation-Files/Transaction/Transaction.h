@@ -28,6 +28,8 @@ class Transaction {
   char getCommandType() const;
   //string getEntireTransaction() const;
 
+  virtual bool setData(stringstream& trans_line);
+  
   void setCustomerID(int id);
   void setCommandType(char type);
   //void setEntireTransaction() const; // Unsure of parameters atm

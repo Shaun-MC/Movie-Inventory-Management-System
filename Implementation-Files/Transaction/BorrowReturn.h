@@ -12,19 +12,18 @@ class BorrowReturn : public Transaction {
   ~BorrowReturn();
 
   // Getter - Setter
-  bool setData(ifstream &file);
+  bool setData(stringstream& trans_line);
 
  protected: 
   
   // Member Functions
-  void processDrama(ifstream& moviedata, Media*& movie);
-  void processClassic(ifstream& moviedata, Media*& movie);
-  void processComedy(ifstream& moviedata, Media*& movie);
-  void processInvalid(ifstream& file, const string& customer_id, const string& name);
+  void processDrama(stringstream& trans_line);
+  void processClassic(stringstream& trans_line);
+  void processComedy(stringstream& trans_line);
+
+  void processInvalid(stringstream& trans_line);
 
   // Member Data
-  MovieType movie_type; // char to MovieType
-  MediaType Media_type; // char to MediaType
 
   Media* movie;
 };
