@@ -10,7 +10,7 @@ Customer* CustomerCollection::getCustomer(const int ID){
 }
 
 // Actions
-bool CustomerCollection::insert(const int ID, const string& name) { // UNTESTED
+bool CustomerCollection::insert(const int ID, const string& name) { // DONE
     
     Customer new_cust = Customer(ID, name);
 
@@ -22,7 +22,7 @@ bool CustomerCollection::retrieve(int key, Customer*& ret) { // UNTESTED
     return this->collection.retrieveValue(key, ret);
 }
 
-void CustomerCollection::receiveData(const string cust_line) { // UNTESTED
+void CustomerCollection::receiveData(const string cust_line) { // DONE
 
     int ID = 0;
     string name = "";
@@ -33,7 +33,7 @@ void CustomerCollection::receiveData(const string cust_line) { // UNTESTED
 }
 
 // Private Member Function
-void CustomerCollection::parseCustomerLine(const string line, int& key, string& name) const { // UNTESTED
+void CustomerCollection::parseCustomerLine(const string line, int& key, string& name) const { // DONE
 
     string f_name = "", l_name = "";
 

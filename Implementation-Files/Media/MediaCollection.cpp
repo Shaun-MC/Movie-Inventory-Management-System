@@ -1,7 +1,7 @@
 #include "MediaCollection.h"
 
 // Constructor - Destructor
-MediaCollection::MediaCollection() { // UNTESTED
+MediaCollection::MediaCollection() { // DONE
 
     // Each insert also calls the AVLTree destructor
     this->stock.insert( pair<char, AVLTree<Media> >(MovieType::comedy, comedies) ); 
@@ -67,7 +67,7 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
     }
 }
 
-void MediaCollection::display() const {
+void MediaCollection::display() const { // DONE
 
     for (auto pair : this->stock) {
 

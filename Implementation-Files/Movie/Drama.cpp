@@ -51,7 +51,7 @@ bool Drama::operator == (const Media& rval) const { // DONE
             this->getTitle() == rval_temp.getTitle());
 }
 
-// Private Member Function
+// Private Member Functions
 string Drama::reconstructLine() const { // DONE
 
     string line = Movie::reconstructLine();

@@ -30,7 +30,7 @@ int Movie::getYear() const {
 }
 
 // Assumes stream is pointing to the stock value
-bool Movie::setData(stringstream& movie_line) { // UNTESTED
+bool Movie::setData(stringstream& movie_line) { // DONE
 
     // Execution Order Does Not Matter - If 1 fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS

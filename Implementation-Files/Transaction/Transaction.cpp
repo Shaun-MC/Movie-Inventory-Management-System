@@ -32,7 +32,7 @@ void Transaction::setCommandType(char type){
     this->commandType = type;
 }
 
-void Transaction::process(MediaCollection &movies, CustomerCollection &customers){
+void Transaction::process(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
 
     bool flag = false;
 

@@ -64,7 +64,7 @@ HashTable<Key, Value>::~HashTable() {
 
 // Getters - Setters
 template <typename Key, typename Value>
-Value* HashTable<Key, Value>::getValue(const Key& key) const {
+Value* HashTable<Key, Value>::getValue(const Key& key) const { // UNTESTED
 
     // Get the hash value
     const int hash = createHash(key);
@@ -81,7 +81,7 @@ Value* HashTable<Key, Value>::getValue(const Key& key) const {
 
 // Actions
 template <typename Key, typename Value>
-bool HashTable<Key, Value>::insertKeyValue(const Key key, const Value& val) {
+bool HashTable<Key, Value>::insertKeyValue(const Key key, const Value& val) { // FINE
 
     // How does it handle duplicates - have to pass in val by reference to check compare values
 
@@ -103,7 +103,7 @@ bool HashTable<Key, Value>::insertKeyValue(const Key key, const Value& val) {
 }
 
 template <typename Key, typename Value>
-bool HashTable<Key, Value>::retrieveValue(const Key& key, Value*& ret) const {
+bool HashTable<Key, Value>::retrieveValue(const Key& key, Value*& ret) const { // UNTESTED
     
     const int hash = calcHash(key);
 
@@ -127,7 +127,7 @@ bool HashTable<Key, Value>::retrieveValue(const Key& key, Value*& ret) const {
 }
 
 template <typename Key, typename Value>
-void HashTable<Key, Value>::display() const {
+void HashTable<Key, Value>::display() const { // DONE
 
     for (Value* cust : this->table) {
 
@@ -140,7 +140,7 @@ void HashTable<Key, Value>::display() const {
 
 // Protected Member Functions
 template <typename Key, typename Value>
-int HashTable<Key, Value>::createHash(const Key& key) const {
+int HashTable<Key, Value>::createHash(const Key& key) const { // DONE
 
     const int firstHashVal = calcHash(key);
 
@@ -148,7 +148,7 @@ int HashTable<Key, Value>::createHash(const Key& key) const {
 }
 
 template <typename Key, typename Value>
-int HashTable<Key, Value>::doubleHash(const int insertion_key) const {
+int HashTable<Key, Value>::doubleHash(const int insertion_key) const { // FINE
 
     // IDEA: Implement a counter to protected against infinite loops
 
@@ -165,20 +165,20 @@ int HashTable<Key, Value>::doubleHash(const int insertion_key) const {
 }
 
 template <typename Key, typename Value>
-int HashTable<Key, Value>::calcHash(const Key& key) const {
+int HashTable<Key, Value>::calcHash(const Key& key) const { // DONE
 
     return key % kTableSize;
 }
 
 template <typename Key, typename Value>
-int HashTable<Key, Value>::calcDoubleHash(const int insertion_key) const {
+int HashTable<Key, Value>::calcDoubleHash(const int insertion_key) const { // DONE
 
     return kTableSize - (insertion_key % kTableSize);
 }
 
 // Private Memeber Functions
 template <typename Key, typename Value>
-void HashTable<Key, Value>::clear() {
+void HashTable<Key, Value>::clear() { // DONE
 
     for (int i = 0; i < kTableSize; i++) {
 

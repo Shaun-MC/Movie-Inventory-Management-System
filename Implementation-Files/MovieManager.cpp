@@ -2,7 +2,7 @@
 
 MovieManager::MovieManager() {}; // Member data intialize themsevles
 
-void MovieManager::ReadCustomers(ifstream& customer_file) {
+void MovieManager::ReadCustomers(ifstream& customer_file) { // DONE
 
     if (!customer_file) {
 
@@ -19,7 +19,7 @@ void MovieManager::ReadCustomers(ifstream& customer_file) {
     }
 }
 
-void MovieManager::ReadMovies(ifstream& movie_list) {
+void MovieManager::ReadMovies(ifstream& movie_list) { // FINE
 
     if (!movie_list) {
 
@@ -53,7 +53,7 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
     }  
 }
 
-void MovieManager::ReadTransactions(ifstream& transaction_list) {
+void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
 
     if (!transaction_list) {
 
