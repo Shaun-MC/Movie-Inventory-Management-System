@@ -4,7 +4,7 @@ Borrow::Borrow(){}
 
 Borrow::~Borrow(){}
 
-bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customers){
+bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
     
     Customer *customerInfo = nullptr;
     Media* mediaInfo = nullptr;

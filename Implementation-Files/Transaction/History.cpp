@@ -8,7 +8,7 @@ History::History(){
 
 History::~History(){}
 
-bool History::setHistoryData(ifstream &file){
+bool History::setHistoryData(ifstream &file){ // UNTESTED
     
     file.ignore();
     file >> this->customerID;
@@ -23,7 +23,7 @@ bool History::setHistoryData(ifstream &file){
     return true;
 }
 
-bool History::processHistory(CustomerCollection &customers){
+bool History::processHistory(CustomerCollection &customers){ // UNTESTED
     
     Customer *customerInfo;
 
