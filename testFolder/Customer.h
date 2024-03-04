@@ -5,9 +5,11 @@
 #include <vector>
 #include <string>
 
+#include "Media.h"
+
 using namespace std;
 
-#include "../Media/Media.h"
+
 
 const int kMinID = 1000;
 const int kMaxID = 9999;

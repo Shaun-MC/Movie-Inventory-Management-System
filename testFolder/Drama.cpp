@@ -26,16 +26,18 @@ ostream& operator << (ostream& ostrm, const Drama& drama) {
     return ostrm;
 }
 
+// Sorting Criteria: Director & Title
 bool Drama::operator < (const Media& rval) const { // DONE
 
     const Drama rval_temp = dynamic_cast<const Drama& >(rval);
 
-    if (this->getDirector() != rval_temp.getDirector() && this->getDirector() < rval_temp.getDirector()) {
+    if (this->getDirector() != rval_temp.getDirector()) {
 
-        return true;
+        return (this->getDirector() < rval_temp.getDirector());
+    } else {
+
+        return (this->getTitle() < rval_temp.getTitle());
     }
-
-    return (this->getTitle() < rval_temp.getTitle());
 }
 
 bool Drama::operator > (const Media& rval) const {
@@ -52,16 +54,17 @@ bool Drama::operator == (const Media& rval) const { // DONE
 }
 
 // Private Member Functions
-string Drama::reconstructLine() const { // DONE
+/*string Drama::reconstructLine() const { // DEPRECIATED
 
     string line = Movie::reconstructLine();
 
     line += to_string(this->getYear());
 
     return line;
-}
+}*/
 
 void Drama::display(ostream& ostrm) const {
 
-    ostrm << this->reconstructLine();
+    ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
+          << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;
 }

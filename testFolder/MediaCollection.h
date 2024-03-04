@@ -1,9 +1,9 @@
 #ifndef MEDIACOLLECTION_H
 #define MEDIACOLLECTION_H
 
-#include <map>
+#include <unordered_map>
 
-#include "../Data-Structures/AVLTree.h"
+#include "AVLTree.h"
 
 #include "Media.h"
 #include "MediaFactory.h"
@@ -24,6 +24,8 @@ class MediaCollection {
   bool retrieve(Media*& target, Media*& ret);
 
   void display() const;
+
+  //void displayTree() const; // Debugging Purposes
  
  private:
 
@@ -31,7 +33,7 @@ class MediaCollection {
   // Key: Type of Movie (Only Dvd's for this proj.)
   // Value: AVLTree Storing the movies related to that type
 
-  map<char, AVLTree<Media> > stock;
+  unordered_map<char, AVLTree<Media> > stock;
   
   AVLTree<Media> comedies;
   AVLTree<Media> dramas;

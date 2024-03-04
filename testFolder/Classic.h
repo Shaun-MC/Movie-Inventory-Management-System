@@ -35,7 +35,7 @@ class Classic : public Movie {
   bool getSetMA(stringstream& movie_line);
   bool getSetMonth(stringstream& movie_line);
 
-  virtual string reconstructLine() const;
+  //virtual string reconstructLine() const;
 
   virtual void display(ostream& ostrm) const;
 };

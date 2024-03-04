@@ -115,7 +115,7 @@ bool Classic::getSetMonth(stringstream& movie_line) { // DONE
     return true;
 }
 
-string Classic::reconstructLine() const { // DONE 
+/*string Classic::reconstructLine() const { // DEPRECIATED
 
     string line = Movie::reconstructLine();
 
@@ -123,9 +123,10 @@ string Classic::reconstructLine() const { // DONE
             to_string(this->getYear());
 
     return line;
-}
+}*/
 
 void Classic::display(ostream& ostrm) const {
 
-    ostrm << this->reconstructLine();
+    ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
+          << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;
 }

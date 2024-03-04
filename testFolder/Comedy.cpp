@@ -33,12 +33,13 @@ bool Comedy::operator < (const Media& rval) const { // DONE
     const Comedy rval_temp = dynamic_cast<const Comedy& >(rval);
 
     // Could condence into a single return statement, less readable
-    if (this->getTitle() != rval_temp.getTitle() && this->getTitle() < rval_temp.getTitle()) {
+    if (this->getTitle() != rval_temp.getTitle()) {
 
-        return true;
+        return (this->getTitle() < rval_temp.getTitle());
+    } else {
+
+        return (this->getYear() < rval_temp.getYear());
     }
-
-    return (this->getYear() < rval_temp.getYear());
 }
 
 bool Comedy::operator > (const Media& rval) const {
@@ -56,16 +57,17 @@ bool Comedy::operator == (const Media& rval) const { // DONE
 }
 
 // Private Member Functions
-string Comedy::reconstructLine() const { // DONE
+/*string Comedy::reconstructLine() const { // DEPRECIATED
 
     string line = Movie::reconstructLine();
 
     line += to_string(this->getYear());
 
     return line;
-}
+}*/
 
 void Comedy::display(ostream& ostrm) const {
 
-    ostrm << this->reconstructLine();
+    ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
+          << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;
 }
