@@ -70,7 +70,7 @@ bool Classic::operator < (const Media& rval) const { // DONE
 
 bool Classic::operator > (const Media& rval) const {
 
-    return !(*this < rval);
+    return (*this < rval || *this == rval) ? false : true;
 }
 
 bool Classic::operator == (const Media& rval) const { // DONE

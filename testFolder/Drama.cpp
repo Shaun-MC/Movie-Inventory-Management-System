@@ -42,7 +42,7 @@ bool Drama::operator < (const Media& rval) const { // DONE
 
 bool Drama::operator > (const Media& rval) const {
 
-    return !(*this < rval);
+    return (*this < rval || *this == rval) ? false : true;
 }
 
 bool Drama::operator == (const Media& rval) const { // DONE

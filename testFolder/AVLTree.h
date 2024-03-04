@@ -32,6 +32,8 @@ class AVLTree {
     TreeNode* left;
     TreeNode* right;
 
+    TreeNode* classic_movie_list; // possible idea for solving displaying classic movies problem???
+
     int height;
 
     TreeNode() : value(nullptr), left(nullptr), right(nullptr), height(0) {};
@@ -102,7 +104,7 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& 
     if (currNode == nullptr) {
 
         currNode = new TreeNode();
-        currNode->value = &val; // Cannot be deleted anywhere except in the AVLTree Destructor
+        currNode->value = &val; // Reference cannot be deleted anywhere except in the AVLTree Destructor
 
         ++this->nodeCount;
     } else if (val == *currNode->value) { // Make no changes to the current tree

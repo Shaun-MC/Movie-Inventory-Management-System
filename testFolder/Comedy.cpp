@@ -44,7 +44,7 @@ bool Comedy::operator < (const Media& rval) const { // DONE
 
 bool Comedy::operator > (const Media& rval) const {
 
-    return !(*this < rval);
+    return (*this < rval || *this == rval) ? false : true;
 }
 
 bool Comedy::operator == (const Media& rval) const { // DONE

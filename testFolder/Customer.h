@@ -9,8 +9,6 @@
 
 using namespace std;
 
-
-
 const int kMinID = 1000;
 const int kMaxID = 9999;
 
