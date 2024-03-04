@@ -8,6 +8,7 @@ using namespace std;
 enum MediaType : char {
 
     dvd = 'D',
+    DefaultMediaType = ' '
 };
 
 enum MovieType : char {
@@ -15,6 +16,7 @@ enum MovieType : char {
     comedy = 'F',
     drama = 'D',
     classic = 'C',
+    DefaultMovieType = ' '
 };
 
 class Media {

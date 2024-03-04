@@ -3,10 +3,6 @@
 
 #include "Transaction.h"
 
-// 
-//NOT DONE YET WORKING ON IT 
-// 
-
 class BorrowReturn : public Transaction {
 
  public: 
@@ -16,6 +12,7 @@ class BorrowReturn : public Transaction {
   ~BorrowReturn();
 
   // Getter - Setter
+  bool setData(ifstream &file);
 
  protected: 
   
@@ -23,6 +20,7 @@ class BorrowReturn : public Transaction {
   void processDrama(ifstream& moviedata, Media*& movie);
   void processClassic(ifstream& moviedata, Media*& movie);
   void processComedy(ifstream& moviedata, Media*& movie);
+  void processInvalid(ifstream& file, const string& customer_id, const string& name);
 
   // Member Data
   MovieType movie_type; // char to MovieType

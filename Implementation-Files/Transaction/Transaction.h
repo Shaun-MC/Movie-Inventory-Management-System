@@ -6,7 +6,7 @@
 #include "../Customer/CustomerCollection.h"
 #include "../Media/MediaCollection.h"
 
-enum CommandType : char {
+enum CommandType : char{
   
   borrow = 'B',
   return_ = 'R',
