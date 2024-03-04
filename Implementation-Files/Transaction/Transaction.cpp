@@ -47,10 +47,10 @@ void Transaction::process(MediaCollection &movies, CustomerCollection &customers
         break;
 
         case 'B':
-        // flag = dynamic_cast<Borrow*>(this)->processBorrow(movies, customers); -- Class Borrow is unknown
+        flag = dynamic_cast<Borrow*>(this)->processBorrow(movies, customers); 
         break;
 
-        // flag = dynamic_cast<Return*>(this)->processReturn(movies, customers); -- Class Return is unknown
+        flag = dynamic_cast<Return*>(this)->processReturn(movies, customers);
         break;
 
         default:
