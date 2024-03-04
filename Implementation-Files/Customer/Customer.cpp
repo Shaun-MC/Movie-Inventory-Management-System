@@ -28,7 +28,7 @@ void Customer::setName(string first, string last){
 }
 
 //uncomment for transaction
-const vector<Transaction*>& Customer::getHistory() const{ // UNTESTED
+const vector<string>& Customer::getHistory() const{ // UNTESTED
     
     return this->history;
 }
@@ -38,7 +38,7 @@ const vector<Media*>& Customer::getOutstanding() const{ // UNTESTED
     return outstandingMedia;
 }
 
-void Customer::addHistory(Transaction *newTransaction){ // UNTESTED
+void Customer::addHistory(string newTransaction){ // UNTESTED
     
     history.push_back(newTransaction);
 }

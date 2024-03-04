@@ -31,7 +31,7 @@ bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customer
     } else {
 
         customerInfo->borrowMedia(this->movie);
-        customerInfo->addHistory(this);
+        customerInfo->addHistory(""); // (this)
 
         this->movie = nullptr;
 

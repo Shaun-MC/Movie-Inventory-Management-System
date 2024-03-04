@@ -100,7 +100,7 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& 
     if (currNode == nullptr) {
 
         currNode = new TreeNode();
-        currNode->value = new T(val);
+        currNode->value = &val; // Cannot be deleted anywhere except in the AVLTree Destructor
 
         ++this->nodeCount;
     } else if (val == *currNode->value) { // Make no changes to the current tree

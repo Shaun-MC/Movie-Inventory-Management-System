@@ -7,14 +7,9 @@
             "args": [
                 "-std=c++20",
                 "-fdiagnostics-color=always",
+                "-Iinclude",
                 "-g",
-                "-g",
-                "$(find",
-                ".",
-                "-type",
-                "f",
-                "-iregex",
-                "'.*\\.cpp')",
+                "*.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

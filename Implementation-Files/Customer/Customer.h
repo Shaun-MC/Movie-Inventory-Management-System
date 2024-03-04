@@ -8,7 +8,6 @@
 using namespace std;
 
 #include "../Media/Media.h"
-#include "../Transaction/Transaction.h"
 
 const int kMinID = 1000;
 const int kMaxID = 9999;
@@ -29,12 +28,12 @@ class Customer {
   void setName(string first, string last);
 
   //uncomment for transaction
-  const vector<Transaction*> & getHistory() const;
+  const vector<string> & getHistory() const;
   
   const vector<Media*> & getOutstanding() const;
 
   //Actions
-  void addHistory(Transaction* newTransaction);
+  void addHistory(string newTransaction);
 
   bool borrowMedia(Media* newMedia);
   bool returnMedia(Media* oldMedia);
@@ -52,7 +51,7 @@ class Customer {
   string name; 
 
   //uncomment for transaction
-  vector<Transaction*> history;
+  vector<string> history; // error: expected expression
   vector<Media*> outstandingMedia;
 };
 

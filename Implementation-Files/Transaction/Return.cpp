@@ -36,7 +36,7 @@ bool Return::processReturn(MediaCollection &movies, CustomerCollection &customer
         this->movie = nullptr;
 
         mediaInfo->incrementStock();
-        customerInfo->addHistory(this);
+        customerInfo->addHistory(""); //(this) 
 
         return true;
     }
