@@ -5,7 +5,7 @@ bool Validate::checkfileAmount(const int files) {
     return files == 4;
 }
 
-void Validate::dispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]) {
+void Validate::dispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]) { // DONE
 
     for (int i = 1; i < 4; i++) {
 
@@ -32,19 +32,19 @@ void Validate::dispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, c
     }
 }
 
-int Validate::checkFile(ifstream& curr) { // UNTESTED
+int Validate::checkFile(ifstream& curr) { // DONE
 
-    int ID = 0, ret = 0;
-    char letter;
+    string firstElement = "";
+    int ret = 0;
 
-    if (curr >> ID) { // Customer File is the only one that starts w/ a digit
+    curr >> firstElement;
+
+    if (isdigit(firstElement[0])) { // Customer File is the only one that starts w/ a digit
 
         ret = 1;
     } else {
 
-        curr >> letter;
-
-        switch (letter) {
+        switch (firstElement[0]) {
 
             case 'D':
             case 'C':

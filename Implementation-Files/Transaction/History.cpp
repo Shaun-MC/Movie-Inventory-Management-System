@@ -45,9 +45,9 @@ bool History::processHistory(CustomerCollection &customers){
     } else {
         
         // TODO: Really don't want to make a new copy - look into
-        const vector<Transaction*> temp = customerInfo->getHistory();
+        const vector<string> temp = customerInfo->getHistory();
 
-        for (Transaction* trans : temp) {
+        for (string trans : temp) {
 
             cout << " " << trans << endl;
         }

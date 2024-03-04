@@ -3,8 +3,10 @@
 
 #include <string>
 
-#include "../Customer/CustomerCollection.h"
-#include "../Media/MediaCollection.h"
+//#include "../Customer/CustomerCollection.h"
+//#include "../Media/MediaCollection.h"
+#include "CustomerCollection.h"
+#include "MediaCollection.h"
 
 enum CommandType : char {
   

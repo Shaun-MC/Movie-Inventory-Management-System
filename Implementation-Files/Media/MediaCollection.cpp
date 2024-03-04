@@ -3,18 +3,15 @@
 // Constructor - Destructor
 MediaCollection::MediaCollection() { // UNTESTED
 
-    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::comedy, comedies) );
+    // Each insert also calls the AVLTree destructor
+    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::comedy, comedies) ); 
 
     this->stock.insert( pair<char, AVLTree<Media> >(MovieType::drama, dramas) );
 
     this->stock.insert( pair<char, AVLTree<Media> >(MovieType::classic, classics) );
 }
 
-// Unsure of necessity 
-MediaCollection::~MediaCollection() {
-
-    this->clear();
-}
+MediaCollection::~MediaCollection() {}
 
 // Actions
 bool MediaCollection::insert(Media*& media) { // DONE
@@ -70,18 +67,12 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
     }
 }
 
-void MediaCollection::display() const { // FINE
+void MediaCollection::display() const {
 
     for (auto pair : this->stock) {
 
         cout << pair.first << endl;
         pair.second.displayTree();
     }
-}
-
-// Unsure of nessecity
-void MediaCollection::clear() { // UNSURE
-
-    return;
 }
 

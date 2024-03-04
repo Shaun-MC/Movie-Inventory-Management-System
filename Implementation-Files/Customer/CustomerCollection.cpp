@@ -51,5 +51,10 @@ void CustomerCollection::parseCustomerLine(const string line, int& key, string& 
     name = f_name + " " + l_name;
 }
 
+void CustomerCollection::display() const {
+
+    this->collection.display();
+}
+
 
 

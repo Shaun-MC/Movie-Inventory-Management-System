@@ -35,7 +35,7 @@ class Customer {
   //Actions
   void addHistory(string newTransaction);
 
-  bool borrowMedia(Media* newMedia);
+  void borrowMedia(Media* newMedia);
   bool returnMedia(Media* oldMedia);
 
   // Operator Overloads

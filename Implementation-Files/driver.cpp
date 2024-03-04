@@ -22,13 +22,17 @@ int main(int args, char* argv[]) {
         inventory.ReadCustomers(customer_list);
         customer_list.close();
 
+        inventory.displayCustomers(); 
+
         inventory.ReadMovies(movie_list);
         movie_list.close();
+
+        inventory.displayMedia(); // Segmentation Fault
 
         // inventory.ReadTransactions(transaction_list);
         // transaction_list.close();
     }
 
-    return 1;
+    return 0;
 }
 

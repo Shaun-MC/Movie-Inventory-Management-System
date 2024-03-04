@@ -75,7 +75,7 @@ template <typename T>
 AVLTree<T>::AVLTree() : root(nullptr), nodeCount(0) {}; // DONE
 
 template <typename T>
-AVLTree<T>::~AVLTree() { // DONE
+AVLTree<T>::~AVLTree() { // DONE - Gets called with garbage
 
     this->clear();
 }
@@ -249,6 +249,7 @@ void AVLTree<T>::clearHelper(TreeNode*& delete_node) { // DONE
 
     clearHelper(delete_node->right); 
 
+    delete delete_node->value;
     delete delete_node;
     delete_node = nullptr;
 

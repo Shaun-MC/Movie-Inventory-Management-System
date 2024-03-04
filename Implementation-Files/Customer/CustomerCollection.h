@@ -1,6 +1,8 @@
 #ifndef CUSTOMERCOLLECTION_H
 #define CUSTOMERCOLLECTION_H
 
+#include <sstream>
+
 #include "../Data-Structures/HashTable.h"
 #include "Customer.h"
 
@@ -22,6 +24,8 @@ class CustomerCollection {
   bool retrieve(int key, Customer*& ret);
 
   void receiveData(const string cust_line); 
+
+  void display() const;
  
  private: 
 

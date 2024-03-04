@@ -27,8 +27,6 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
         return;
     }
 
-    // Loop is predicated on createDVDMovie() only reading 1 line
-    // Current bug: dramas not being inserting the the dictionary
     while (!movie_list.eof()) {
 
         string movie_line = "";
@@ -39,7 +37,6 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
 
         if (new_media == nullptr) { // Do nothing - creating the Movie failed due to bad input
 
-        // Not inserting elements into the trees
         // Unhandled Use Case: 2 Classic Movies's stock get 'combined'??
         } else if (!this->stocks.insert(new_media)) {  // Insertion fails because of a duplicate
 
@@ -47,7 +44,7 @@ void MovieManager::ReadMovies(ifstream& movie_list) {
         
             this->stocks.retrieve(new_media, dup_media);
 
-            //dup_media->addStock(new_media->getStock());
+            dup_media->addStock(new_media->getStock());
 
             // Does dup_media get cleaned up??
         }
@@ -60,10 +57,19 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) {
 
     if (!transaction_list) {
 
-        cout << "MovieManager::ReadTransactions() | Input File Could Not Be Opened" << endl;
+        cerr << "MovieManager::ReadTransactions() | Input File Could Not Be Opened" << endl;
     }
 
+    Transaction* trans = nullptr;
+
+    
+
     return;
+}
+
+void MovieManager::displayCustomers() const {
+
+    this->customers.display();
 }
 
 void MovieManager::displayMedia() const {

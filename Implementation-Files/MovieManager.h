@@ -6,6 +6,8 @@
 
 #include "Customer/CustomerCollection.h"
 #include "Media/MediaCollection.h"
+#include "Media/MediaFactory.h"
+#include "Transaction/TransactionFactory.h"
 
 using namespace std;
 

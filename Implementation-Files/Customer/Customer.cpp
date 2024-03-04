@@ -43,7 +43,7 @@ void Customer::addHistory(string newTransaction){ // UNTESTED
     history.push_back(newTransaction);
 }
 
-bool Customer::borrowMedia(Media *newMedia){ // UNTESTED
+void Customer::borrowMedia(Media *newMedia){ // UNTESTED
     
     outstandingMedia.push_back(newMedia);
 }

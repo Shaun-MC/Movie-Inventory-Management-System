@@ -1,9 +1,13 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
+#include <iostream>
+
+using namespace std;
+
 const int kTableSize = 41;
 
-// Used only as ints and customer* - CustomerCollection is a interface for Customers
+// Used only as ints and customer*
 template <typename Key, typename Value>
 class HashTable {
 
@@ -21,6 +25,8 @@ class HashTable {
   bool insertKeyValue(const Key key, const Value& val);
 
   bool retrieveValue(const Key& key, Value*& ret) const;
+
+  void display() const;
  
  protected: 
 
@@ -120,12 +126,21 @@ bool HashTable<Key, Value>::retrieveValue(const Key& key, Value*& ret) const {
     }
 }
 
+template <typename Key, typename Value>
+void HashTable<Key, Value>::display() const {
+
+    for (Value* cust : this->table) {
+
+        if (cust != nullptr) {
+
+            cout << *cust;
+        }
+    }
+}
+
 // Protected Member Functions
 template <typename Key, typename Value>
 int HashTable<Key, Value>::createHash(const Key& key) const {
-
-    // Will only ever be an int, just for safety
-    //int insertion_key = reinterpret_cast<int>(key);
 
     const int firstHashVal = calcHash(key);
 
