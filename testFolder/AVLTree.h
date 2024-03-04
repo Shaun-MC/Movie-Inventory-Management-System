@@ -19,7 +19,8 @@ class AVLTree {
   // Actions
   bool insert(T& val);
   bool retrieve(const T& target, T*& ret_val) const;
-  void displayTree() const;
+  //void displayTree() const;
+  void displayByLine() const;
 
  protected: 
 
@@ -62,7 +63,8 @@ class AVLTree {
   void clearHelper(TreeNode*& delete_node);
 
   // Display 
-  void displayTreeHelper(TreeNode* currNode, int width_value) const;
+  //void displayTreeHelper(TreeNode* currNode, int width_value) const;
+  void displayByLineHelper(TreeNode* currNode) const;
 
   // Member Data
   TreeNode* root;
@@ -281,7 +283,7 @@ void AVLTree<T>::updateHeight(TreeNode*& curr) { // DONE
 }
 
 // Checks other functions correctness
-template<class T>
+/*template<class T>
 void AVLTree<T>::displayTree() const { // DONE
 
     int width_value = 5;
@@ -291,9 +293,9 @@ void AVLTree<T>::displayTree() const { // DONE
     cout << *this->root->value << endl;
 
     displayTreeHelper(this->root, width_value += 5);
-}
+}*/
 
-template<class T>
+/*template<class T>
 void AVLTree<T>::displayTreeHelper(TreeNode* node, int width_value) const { // DONE 
 
     // Base Case
@@ -321,6 +323,32 @@ void AVLTree<T>::displayTreeHelper(TreeNode* node, int width_value) const { // D
 
         displayTreeHelper(node->right, width_copy);
     }
+}*/
+
+template<class T>
+void AVLTree<T>::displayByLine() const {
+
+    this->displayByLineHelper(this->root);
+
+    cout << endl;
+}
+
+// Display Comedies and Dramas in wrong order
+// Doesnt account for Classics having more than main actor director thing
+// Displays Classics in Correct Order
+template<class T>
+void AVLTree<T>::displayByLineHelper(TreeNode* currNode) const {
+
+    if (currNode == nullptr) {
+
+        return;
+    }
+
+    displayByLineHelper(currNode->left);
+
+    cout << *currNode->value << endl;
+
+    displayByLineHelper(currNode->right);
 }
 
 #endif
