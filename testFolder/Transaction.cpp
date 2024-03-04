@@ -63,7 +63,7 @@ void Transaction::process(MediaCollection &movies, CustomerCollection &customers
         break;
 
         case 'H':
-        dynamic_cast<History*>(this)->processHistory(customers);
+        flag = dynamic_cast<History*>(this)->processHistory(customers);
         break;
 
         case 'B':

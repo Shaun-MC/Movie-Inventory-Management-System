@@ -3,7 +3,7 @@
 
 #include <sstream>
 
-#include "../Media/Media.h"
+#include "Media.h"
 
 class Movie : public Media {
 
@@ -22,7 +22,7 @@ class Movie : public Media {
   int getYear() const;
   
   virtual bool setData(stringstream& movie_line);
-  bool setMovieType(const char type);
+  void setMovieType(const char type);
 
   void setTitle(const string title);
   void setDirector(const string name);
@@ -50,7 +50,7 @@ class Movie : public Media {
   bool getSetTitle(stringstream& movie_line);
   bool getSetYear(stringstream& movie_line);
 
-  virtual string reconstructLine() const;
+ //virtual string reconstructLine() const;
 
   virtual void display(ostream& ostrm) const = 0;
 };

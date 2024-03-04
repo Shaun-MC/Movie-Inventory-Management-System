@@ -38,7 +38,7 @@ bool Movie::setData(stringstream& movie_line) { // DONE
             !this->getSetTitle(movie_line)) ? false : true;
 }
 
-bool Movie::setMovieType(const char type) {
+void Movie::setMovieType(const char type) {
 
     this->movieType = type;
 }
@@ -131,10 +131,10 @@ bool Movie::getSetYear(stringstream& movie_line) { // DONE
     return true;
 }
 
-string Movie::reconstructLine() const { // DONE
+/*string Movie::reconstructLine() const { // DEPRECIATED
 
     string line = to_string(this->getStock()) + ", " + this->getDirector() + 
                   ", " + this->getTitle() + ", "; 
 
     return line;
-}
+}*/

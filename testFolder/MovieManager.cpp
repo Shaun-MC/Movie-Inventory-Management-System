@@ -13,7 +13,7 @@ void MovieManager::ReadCustomers(ifstream& customer_file) { // DONE
 
     while (!customer_file.eof()) {
         
-        getline(customer_file, line);
+        getline(customer_file, line, '\n');
 
         customers.receiveData(line);
     }
@@ -31,7 +31,7 @@ void MovieManager::ReadMovies(ifstream& movie_list) { // FINE
 
         string movie_line = "";
 
-        getline(movie_list, movie_line);
+        getline(movie_list, movie_line, '\n');
 
         Media* new_media = MediaFactory::createDVDMovie(movie_line);
 
@@ -66,7 +66,7 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
 
         string trans_line = "";
 
-        getline(transaction_list, trans_line);   
+        getline(transaction_list, trans_line, '\r');   
 
         new_trans = TransactionFactory::createTransaction(trans_line);
 
@@ -74,7 +74,6 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
 
             new_trans->process(this->stocks, this->customers);
 
-            delete new_trans;
             new_trans = nullptr;
         } 
     }
@@ -85,7 +84,7 @@ void MovieManager::displayCustomers() const {
     this->customers.display();
 }
 
-void MovieManager::displayMedia() const {
+/*void MovieManager::displayMedia() const {
 
     this->stocks.display();
-}
+}*/
