@@ -29,8 +29,8 @@ int main(int args, char* argv[]) {
         inventory.ReadMovies(movie_list); // FINE - The map creates copies of AVLList which it has to delete, slower than it could be
         movie_list.close();
 
-        // inventory.ReadTransactions(transaction_list);
-        // transaction_list.close();
+        inventory.ReadTransactions(transaction_list);
+        transaction_list.close();
     }
 
     return 0;

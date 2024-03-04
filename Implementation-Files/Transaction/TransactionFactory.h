@@ -15,7 +15,7 @@ class TransactionFactory {
 
  public:
   
-  static Transaction* createTransaction(ifstream &file);
+  static Transaction* createTransaction(const string trans_line);
 
  private:
 

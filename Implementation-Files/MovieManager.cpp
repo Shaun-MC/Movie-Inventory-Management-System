@@ -60,11 +60,24 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) {
         cerr << "MovieManager::ReadTransactions() | Input File Could Not Be Opened" << endl;
     }
 
-    Transaction* trans = nullptr;
+    Transaction* new_trans = nullptr;
 
-    
+    while (!transaction_list.eof()) {
 
-    return;
+        string trans_line = "";
+
+        getline(transaction_list, trans_line);   
+
+        new_trans = TransactionFactory::createTransaction(trans_line);
+
+        if (new_trans != nullptr) {
+
+            new_trans->process(this->stocks, this->customers);
+
+            delete new_trans;
+            new_trans = nullptr;
+        } 
+    }
 }
 
 void MovieManager::displayCustomers() const {

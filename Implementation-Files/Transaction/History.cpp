@@ -6,8 +6,7 @@ History::History(){
     this->commandType = CommandType::history;
 }
 
-History::~History(){
-}
+History::~History(){}
 
 bool History::setHistoryData(ifstream &file){
     
@@ -24,7 +23,6 @@ bool History::setHistoryData(ifstream &file){
     return true;
 }
 
-//change void to bool and removed StockCollection &movies getHistory()
 bool History::processHistory(CustomerCollection &customers){
     
     Customer *customerInfo;
@@ -43,11 +41,8 @@ bool History::processHistory(CustomerCollection &customers){
         // NOT an Error Condition
         cout << " " << "History is Empty!" << endl;
     } else {
-        
-        // TODO: Really don't want to make a new copy - look into
-        const vector<string> temp = customerInfo->getHistory();
 
-        for (string trans : temp) {
+        for (string trans : customerInfo->getHistory()) {
 
             cout << " " << trans << endl;
         }
