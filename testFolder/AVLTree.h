@@ -6,7 +6,7 @@
 
 using namespace std;
 
-template<typename T>
+template<typename T> // Just make it a Media class
 class AVLTree {
 
  public: 
@@ -107,9 +107,9 @@ typename AVLTree<T>::TreeNode* AVLTree<T>::insertHelper(TreeNode*& currNode, T& 
         currNode->value = &val; // Reference cannot be deleted anywhere except in the AVLTree Destructor
 
         ++this->nodeCount;
-    } else if (val == *currNode->value) { // Make no changes to the current tree
+    } else if (val == *currNode->value) { // Make no changes to the current tree - Do something if the same Classic Movie is already in the system
 
-        return currNode;
+        Classic test = dynamic_cast<
     } else if (val < *currNode->value) { 
 
         currNode->left = insertHelper(currNode->left, val);

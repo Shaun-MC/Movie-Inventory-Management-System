@@ -1,6 +1,7 @@
 #ifndef CLASSIC_H
 #define CLASSIC_H
 
+#include <map>
 #include "Movie.h"
 
 class Classic : public Movie {
@@ -17,8 +18,10 @@ class Classic : public Movie {
 
   virtual bool setData(stringstream& movie_line);
 
-  void setMajorActor(const string f_name, const string l_name);
   void setReleaseMonth(const int month);
+
+  // Actions
+  void InsertMajorActor(const string name, const int stock_amount);
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Classic& drama);
@@ -29,8 +32,10 @@ class Classic : public Movie {
 
  private: 
 
-  string major_actor;
   int release_month;
+
+  map<string, int> major_actors; // Insertion Keeps it sorted
+  //vector<pair <string, int> > major_actors; // Not a good name
   
   bool getSetMA(stringstream& movie_line);
   bool getSetMonth(stringstream& movie_line);

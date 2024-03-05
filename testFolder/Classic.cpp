@@ -1,7 +1,7 @@
 #include "Classic.h"
 
 // Constructor - Destructor
-Classic::Classic() : major_actor("") { // DONE
+Classic::Classic() : release_month(0) { // DONE
 
     this->movieType = MovieType::classic;
 
@@ -13,9 +13,10 @@ Classic::Classic() : major_actor("") { // DONE
 Classic::~Classic() {}
 
 // Getters - Setters
+// Returns the first major actor in the map
 string Classic::getMajorActor() const { // DONE
 
-    return this->major_actor;
+    return this->major_actors.begin()->first;
 }
 
 int Classic::getReleaseMonth() const { // DONE
@@ -32,14 +33,20 @@ bool Classic::setData(stringstream& movie_line) { // DONE
             !this->getSetMonth(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
 }
 
-void Classic::setMajorActor(const string f_name, const string l_name) {
+void Classic::InsertMajorActor(const string name, const int stock_amount) {
 
-    this->major_actor = f_name + " " + l_name;
+    this->major_actors.insert({name, stock_amount});
 }
 
 void Classic::setReleaseMonth(const int date)  {
 
     this->release_month = date;
+}
+
+// Actions
+void Classic::InsertMajorActor(const string name, const int stock_amount) {
+
+    this->major_actors.insert({name, stock_amount});
 }
 
 // Operator Overloads
@@ -77,22 +84,22 @@ bool Classic::operator == (const Media& rval) const { // DONE
 
     const Classic rval_temp = dynamic_cast<const Classic& >(rval);
 
-    return (this->getYear() == rval_temp.getYear() && 
-            this->getReleaseMonth() == rval_temp.getReleaseMonth() && 
-            this->getMajorActor() == rval_temp.getMajorActor());
+    // Able to combine movie stocks if we know they're the same movie, the date is irrelevant here
+    return (this->getDirector() == rval_temp.getDirector() && this->getTitle() == rval_temp.getTitle());
+    
+    /*return (this->getYear() == rval_temp.getYear() && 
+            this->getReleaseMonth() == rval_temp.getReleaseMonth();*/
 }
 
 // Private Member Functions
 
-bool Classic::getSetMA(stringstream& movie_line) { // DONE
+bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
 
-    string f_name = "", l_name = ""; 
+    string name = "";
 
-    movie_line >> f_name >> l_name;
-    
-    movie_line.ignore(); // Space
+    getline(movie_line, name, ' ');
 
-    this->setMajorActor(f_name, l_name);
+    this->InsertMajorActor(name, this->stock);
 
     return true;
 }
@@ -105,7 +112,7 @@ bool Classic::getSetMonth(stringstream& movie_line) { // DONE
 
     if (month <= 0) {
 
-        // Error Condition - Invalid Month / Year
+        // Error Condition - Invalid Month
         return false;
     }
     movie_line.ignore(); // Space
@@ -115,18 +122,15 @@ bool Classic::getSetMonth(stringstream& movie_line) { // DONE
     return true;
 }
 
-/*string Classic::reconstructLine() const { // DEPRECIATED
+void Classic::display(ostream& ostrm) const { // UNTESTED
 
-    string line = Movie::reconstructLine();
-
-    line += this->getMajorActor() + " " + to_string(this->getReleaseMonth()) + 
-            to_string(this->getYear());
-
-    return line;
-}*/
-
-void Classic::display(ostream& ostrm) const {
-
+    // Displays all non actor information
     ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
           << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;
+    
+    // Display the Actor Name and the stock of movie associated w/ that actor 
+    for (auto pair : this->major_actors) {
+
+        ostrm << setw(40) << pair.first << setw(20) << setfill('-') << setfill(' ') << pair.second << endl;
+    }
 }
