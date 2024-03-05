@@ -84,7 +84,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     return true;
 }
 
-void BorrowReturn::processComedy(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::processComedy(stringstream& trans_line){ // DONE
     
     // Intialize Sorting Criteria variables
     string title = ""; 
@@ -141,7 +141,7 @@ void BorrowReturn::processClassic(stringstream& trans_line){ // UNTESTED
     // Get & Set the Major Actor 
     getline(trans_line, majorActor, '\n');
 	
-    dynamic_cast<Classic*>(this->movie)->setMajorActor(majorActor, ""); // Not sure how to break first, last name - this is fine
+    dynamic_cast<Classic*>(this->movie)->InsertMajorActor(majorActor, this->movie->getStock()); 
 
     // Add to transaction string
 	entireTransaction += to_string(month) + ' ' + to_string(year) + ' ' + majorActor;

@@ -1,6 +1,7 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
+// Warning : Unable to process IntelliSense for file with same canonicalized path as existing file.
 #include <iostream>
 
 using namespace std;

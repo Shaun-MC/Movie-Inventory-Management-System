@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 
+// Warning : Unable to process IntelliSense for file with same canonicalized path as existing file.
+
 #include "CustomerCollection.h"
 #include "MediaCollection.h"
 #include "MediaFactory.h"
@@ -24,7 +26,7 @@ class MovieManager {
   void ReadTransactions(ifstream& transaction_list);
 
   void displayCustomers() const;
-  //void displayMedia() const;
+  void displayMedia() const;
   
  private:
 

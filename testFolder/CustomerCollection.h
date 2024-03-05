@@ -3,6 +3,8 @@
 
 #include <sstream>
 
+// Warning: Unable to process IntelliSense for file with same canonicalized path as existing file.
+
 #include "HashTable.h"
 #include "Customer.h"
 

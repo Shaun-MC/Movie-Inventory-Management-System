@@ -7,6 +7,7 @@ using namespace std;
 #include "MovieManager.h"
 
 // The File/#include system currently implemented is very slow, optimize if time allows
+// Warning: Unable to process IntelliSense for file with same canonicalized path as existing file
 
 int main(int args, char* argv[]) {
 

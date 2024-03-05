@@ -1,11 +1,7 @@
 #ifndef MEDIACOLLECTION_H
 #define MEDIACOLLECTION_H
 
-#include <unordered_map>
-
 #include "AVLTree.h"
-
-#include "Media.h"
 #include "MediaFactory.h"
 
 // Idea: Make it a Singleton
@@ -33,14 +29,18 @@ class MediaCollection {
   // Key: Type of Movie (Only Dvd's for this proj.)
   // Value: AVLTree Storing the movies related to that type
 
-  unordered_map<char, AVLTree<Media> > stock;
+  vector< pair<char, AVLTree> > stock;
 
-  AVLTree<Media> comedies;
-  AVLTree<Media> dramas;
-  AVLTree<Media> classics;
+  AVLTree comedies;
+  AVLTree dramas;
+  AVLTree classics;
+
+  const int kComedyIndex;
+  const int kDramaIndex;
+  const int kClassicIndex;
 
   // Private Memeber Functions
-  void clear();
+  //void clear();
 };
 
 #endif

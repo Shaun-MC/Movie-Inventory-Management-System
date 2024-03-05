@@ -19,7 +19,7 @@ void MovieManager::ReadCustomers(ifstream& customer_file) { // DONE
     }
 }
 
-void MovieManager::ReadMovies(ifstream& movie_list) { // FINE
+void MovieManager::ReadMovies(ifstream& movie_list) { // NOT DONE
 
     if (!movie_list) {
 
@@ -37,19 +37,30 @@ void MovieManager::ReadMovies(ifstream& movie_list) { // FINE
 
         if (new_media == nullptr) { // Do nothing - creating the Movie failed due to bad input
 
-        // Unhandled Use Case: 2 Classic Movies's stock get 'combined'??
-        } else if (!this->stocks.insert(new_media)) {  // Insertion fails because of a duplicate
+            continue;
+        } 
+
+        // Classic Movie / Not Classic Movie
+        // If new_media is not a Classic --> insert new_media
+            // If that insert fails, add to the stock of the inserted movie 
+            // Else new_media gets inserted (Basic Course)
+        
+        // Else - new_media is a Classic, and nothing happens if the insertion 'fails' because 
+        //        the movie will get merged, adding the stock & M.A. to the orignial movie
+
+        Classic* temp = dynamic_cast<Classic*>(new_media);
+
+        if (temp == nullptr && !this->stocks.insert(new_media)) { 
 
             Media* dup_media = nullptr;
         
             this->stocks.retrieve(new_media, dup_media);
 
             dup_media->addStock(new_media->getStock());
+        } else {
 
-            // Does dup_media get cleaned up??
+            this->stocks.insert(new_media);
         }
-
-        // Does new_media get cleaned up??
     }  
 }
 
@@ -84,7 +95,7 @@ void MovieManager::displayCustomers() const {
     this->customers.display();
 }
 
-/*void MovieManager::displayMedia() const {
+void MovieManager::displayMedia() const { // DONE
 
     this->stocks.display();
-}*/
+}
