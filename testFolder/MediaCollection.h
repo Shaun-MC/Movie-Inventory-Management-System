@@ -34,7 +34,7 @@ class MediaCollection {
   // Value: AVLTree Storing the movies related to that type
 
   unordered_map<char, AVLTree<Media> > stock;
-  
+
   AVLTree<Media> comedies;
   AVLTree<Media> dramas;
   AVLTree<Media> classics;

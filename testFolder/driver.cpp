@@ -38,3 +38,12 @@ int main(int args, char* argv[]) {
     return 0;
 }
 
+// H 1000
+// H 5000
+// H 8000
+
+// H 1000
+// H 1111
+// H 5000
+// H 8000
+// H 8888

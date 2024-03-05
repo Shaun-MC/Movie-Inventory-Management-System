@@ -1,4 +1,5 @@
 #include "MediaCollection.h"
+#include <vector>
 
 // Constructor - Destructor
 MediaCollection::MediaCollection() { // DONE
@@ -68,39 +69,78 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
 }
 
 void MediaCollection::display() const {
-
     const int kLineLength = 100;
 
-    for (auto pair : this->stock) {
+    // Copy the keys into a vector
+    std::vector<char> genres;
+    for (const auto& pair : this->stock) {
+        genres.push_back(pair.first);
+    }
+
+    // Iterate through the vector in reverse order
+    for (auto it = genres.rbegin(); it != genres.rend(); ++it) {
+        char genre = *it;
 
         cout << setfill('-') << setw(kLineLength) << '-' << endl;
         cout << setfill(' ');
 
-        switch(pair.first) {
-
+        switch (genre) {
             case 'F':
-            cout << "Comedies:" << endl;
-            break;
-
+                cout << "Comedies:" << endl;
+                break;
             case 'D':
-            cout << "Dramas:" << endl;
-            break;
-
+                cout << "Dramas:" << endl;
+                break;
             case 'C':
-            cout << "Classics:" << endl;
-            break;
-
+                cout << "Classics:" << endl;
+                break;
             // No default
         }
 
-        cout << endl;
-
-        cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) << 
+        cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) <<
             "Director" << setw(8) << "Year" << "Stock" << endl;
 
-        pair.second.displayByLine();
+        this->stock.at(genre).displayByLine();
     }
 }
+
+
+// void MediaCollection::display() const {
+
+//     const int kLineLength = 100;
+
+//     for (auto pair : this->stock) {
+
+//         cout << setfill('-') << setw(kLineLength) << '-' << endl;
+//         cout << setfill(' ');
+
+//         switch(pair.first) {
+
+//             case 'F':
+//             cout << "Comedies:" << endl;
+//             break;
+
+//             case 'D':
+//             cout << "Dramas:" << endl;
+//             break;
+
+//             case 'C':
+//             cout << "Classics:" << endl;
+//             break;
+
+//             // No default
+//         }
+
+//         cout << endl;
+
+//         cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) << 
+//             "Director" << setw(8) << "Year" << "Stock" << endl;
+
+//         pair.second.displayByLine();
+//     }
+// }
+
+
 
 /*void MediaCollection::displayTree() const { // DONE
 

@@ -43,7 +43,8 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     switch(media_type){
         
         case MediaType::dvd :
-        this->movie->setMediaType(dvd);
+            //this->movie = new Movie();
+            this->movie->setMediaType(dvd);
         break;
 
         default: 
@@ -55,13 +56,14 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     trans_line >> movie_type; // Basic Course: F, D or C 
     trans_line.ignore(); // Space
 
-    dynamic_cast<Movie*>(this->movie)->setMovieType(movie_type);
+    //dynamic_cast<Movie*>(this->movie)->setMovieType(movie_type);
 
     this->entireTransaction += movie_type + ' '; 
 
     switch (movie_type) {
 
         case MovieType::comedy :
+        //this->movie; // create new Comedy
         processComedy(trans_line);
         break;
 
