@@ -18,6 +18,15 @@ bool Drama::setData(stringstream& movie_line) { // DONE
     return (!Movie::setData(movie_line) || !this->getSetYear(movie_line)) ? false : true;
 }
 
+// Actions
+void Drama::PrintHeader() const {
+
+    cout << "Dramas: " << endl << endl;
+
+    cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) <<
+         "Director" << setw(8) << "Year" << "Stock" << endl;
+}
+
 // Operator Overloads
 ostream& operator << (ostream& ostrm, const Drama& drama) {
 
@@ -52,16 +61,6 @@ bool Drama::operator == (const Media& rval) const { // DONE
     return (this->getDirector() == rval_temp.getDirector() && 
             this->getTitle() == rval_temp.getTitle());
 }
-
-// Private Member Functions
-/*string Drama::reconstructLine() const { // DEPRECIATED
-
-    string line = Movie::reconstructLine();
-
-    line += to_string(this->getYear());
-
-    return line;
-}*/
 
 void Drama::display(ostream& ostrm) const {
 

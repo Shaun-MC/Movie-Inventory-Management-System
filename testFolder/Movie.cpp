@@ -58,14 +58,15 @@ void Movie::setYear(const int year) {
     this->release_year = year;
 }
 
-//display needs to check 
-ostream &operator<<(ostream &ostrm, const Movie &movie){ 
+// Operator Overloads
+ostream& operator<<(ostream &ostrm, const Movie &movie){ 
     
     movie.display(ostrm);
 
     return ostrm;
 }
 
+// Private Member Functions
 bool Movie::getSetStock(stringstream& movie_line) { // DONE
 
     int stock = 0;
@@ -130,11 +131,3 @@ bool Movie::getSetYear(stringstream& movie_line) { // DONE
 
     return true;
 }
-
-/*string Movie::reconstructLine() const { // DEPRECIATED
-
-    string line = to_string(this->getStock()) + ", " + this->getDirector() + 
-                  ", " + this->getTitle() + ", "; 
-
-    return line;
-}*/

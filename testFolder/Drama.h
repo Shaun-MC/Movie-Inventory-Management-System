@@ -14,6 +14,9 @@ class Drama : public Movie {
   // Getter - Setters
   virtual bool setData(stringstream& movie_line);
 
+  // Actions
+  void PrintHeader() const;
+
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Drama& drama);
 

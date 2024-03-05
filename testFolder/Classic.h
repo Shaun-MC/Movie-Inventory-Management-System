@@ -21,7 +21,11 @@ class Classic : public Movie {
   void setReleaseMonth(const int month);
 
   // Actions
+  void PrintHeader() const;
+  
   void InsertMajorActor(const string name, const int stock_amount);
+
+  void Merge(Classic* rval);
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Classic& drama);
@@ -35,12 +39,10 @@ class Classic : public Movie {
   int release_month;
 
   map<string, int> major_actors; // Insertion Keeps it sorted
-  //vector<pair <string, int> > major_actors; // Not a good name
   
   bool getSetMA(stringstream& movie_line);
   bool getSetMonth(stringstream& movie_line);
 
-  //virtual string reconstructLine() const;
 
   virtual void display(ostream& ostrm) const;
 };

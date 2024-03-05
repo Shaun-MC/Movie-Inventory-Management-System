@@ -33,20 +33,32 @@ bool Classic::setData(stringstream& movie_line) { // DONE
             !this->getSetMonth(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
 }
 
-void Classic::InsertMajorActor(const string name, const int stock_amount) {
-
-    this->major_actors.insert({name, stock_amount});
-}
-
 void Classic::setReleaseMonth(const int date)  {
 
     this->release_month = date;
 }
 
 // Actions
+void Classic::PrintHeader() const {
+
+    cout << "Classics: " << endl << endl;
+
+    cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) <<
+            "Director" << setw(8) << "Month" << setw(8) << "Year" << "Stock" << endl;
+}
+
 void Classic::InsertMajorActor(const string name, const int stock_amount) {
 
     this->major_actors.insert({name, stock_amount});
+}
+
+void Classic::Merge(Classic* rval) {
+
+    // Add the rvals major actor to this classic Movie object - name + stock total
+    this->InsertMajorActor(rval->getMajorActor(), rval->getStock());
+
+    // Add the rvals stock totle to the total stock total
+    this->addStock(rval->getStock());
 }
 
 // Operator Overloads
@@ -86,18 +98,20 @@ bool Classic::operator == (const Media& rval) const { // DONE
 
     // Able to combine movie stocks if we know they're the same movie, the date is irrelevant here
     return (this->getDirector() == rval_temp.getDirector() && this->getTitle() == rval_temp.getTitle());
-    
-    /*return (this->getYear() == rval_temp.getYear() && 
-            this->getReleaseMonth() == rval_temp.getReleaseMonth();*/
 }
 
 // Private Member Functions
 
 bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
 
+    string f_name = "", l_name = "";
     string name = "";
 
-    getline(movie_line, name, ' ');
+    movie_line >> f_name >> l_name;
+    
+    movie_line.ignore(); // Space
+
+    name = f_name + ' ' + l_name; 
 
     this->InsertMajorActor(name, this->stock);
 
@@ -125,12 +139,28 @@ bool Classic::getSetMonth(stringstream& movie_line) { // DONE
 void Classic::display(ostream& ostrm) const { // UNTESTED
 
     // Displays all non actor information
-    ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
-          << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;
+    ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle();
+    
+    ostrm << setw(25) << this->getDirector() << setw(8) << this->getReleaseMonth() << setw(8) << this->getYear(); 
+        
+    ostrm << this->getStock() << endl;
     
     // Display the Actor Name and the stock of movie associated w/ that actor 
     for (auto pair : this->major_actors) {
 
-        ostrm << setw(40) << pair.first << setw(20) << setfill('-') << setfill(' ') << pair.second << endl;
+        // Distance from the laster letter of the actors name to where the month # is placed 
+        int dist = 78 - (55 + pair.first.length());
+
+        // Postion and Print the Actors Name - DONE
+        ostrm << setw(55) << ' ' << pair.first;
+        
+        // Position and Print '-' characters for month - DONE
+        ostrm << setw(dist) << ' ' << setfill('-') << setw(2) << "" << setfill(' ');
+
+        // Position and Print '-' characters for year
+        ostrm << setw(6) << ' ' << setfill('-') << setw(4) << "" << setfill(' ');
+
+        // Position and Print stock value
+        ostrm << setw(6) << right << pair.second << endl << left;
     }
 }

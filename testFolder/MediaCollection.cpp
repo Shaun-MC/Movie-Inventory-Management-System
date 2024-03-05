@@ -2,17 +2,17 @@
 #include <vector>
 
 // Constructor - Destructor
-MediaCollection::MediaCollection() { // DONE
+MediaCollection::MediaCollection() : kComedyIndex(0), kDramaIndex(1), kClassicIndex(2)  { // DONE
 
-    // Each insert also calls the AVLTree destructor
-    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::comedy, comedies) ); 
+    // Each insert also calls the AVLTree destructor for some reason - TEST
+    this->stock.push_back(make_pair(MovieType::comedy, this->comedies));
 
-    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::drama, dramas) );
+    this->stock.push_back(make_pair(MovieType::drama, this->dramas));
 
-    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::classic, classics) );
+    this->stock.push_back(make_pair(MovieType::classic, this->classics));
 }
 
-MediaCollection::~MediaCollection() {}
+MediaCollection::~MediaCollection() {};
 
 // Actions
 bool MediaCollection::insert(Media*& media) { // DONE
@@ -22,16 +22,16 @@ bool MediaCollection::insert(Media*& media) { // DONE
 
     switch (insert_type) {
 
-        case ('C'):
-        return stock.at(insert_type).insert(*media);
+        case MovieType::comedy :
+        return stock[kComedyIndex].second.insert(media);
         break;
 
-        case ('D'):
-        return stock.at(insert_type).insert(*media);
+        case MovieType::drama :
+        return stock[kDramaIndex].second.insert(media);
         break;
 
-        case ('F'): 
-        return stock.at(insert_type).insert(*media);
+        case MovieType::classic :
+        return stock[kClassicIndex].second.insert(media); 
         break;
 
         default:
@@ -47,16 +47,16 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
 
     switch (retrieve_type) {
 
-        case 'F':
-        return stock.at(retrieve_type).retrieve(*target, ret);
+        case MovieType::comedy :
+        return stock[kComedyIndex].second.retrieve(*target, ret);
         break;
 
-        case 'D':
-        return stock.at(retrieve_type).retrieve(*target, ret);
+        case MovieType::drama :
+        return stock[kDramaIndex].second.retrieve(*target, ret);
         break;
 
-        case 'C':
-        return stock.at(retrieve_type).retrieve(*target, ret);
+        case MovieType::classic :
+        return stock[kClassicIndex].second.retrieve(*target, ret);
         break;
 
         default:
@@ -69,85 +69,30 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
 }
 
 void MediaCollection::display() const {
+    
     const int kLineLength = 100;
+    
+    for (int i = 0; i < this->stock.size(); i++) {
 
-    // Copy the keys into a vector
-    std::vector<char> genres;
-    for (const auto& pair : this->stock) {
-        genres.push_back(pair.first);
-    }
+        cout << setfill('-') << setw(kLineLength) << "" << setfill(' ') << endl;
 
-    // Iterate through the vector in reverse order
-    for (auto it = genres.rbegin(); it != genres.rend(); ++it) {
-        char genre = *it;
+        const Movie* movie = dynamic_cast<const Movie*>(stock[i].second.getRootValue()); 
 
-        cout << setfill('-') << setw(kLineLength) << '-' << endl;
-        cout << setfill(' ');
+        movie->PrintHeader();
 
-        switch (genre) {
-            case 'F':
-                cout << "Comedies:" << endl;
-                break;
-            case 'D':
-                cout << "Dramas:" << endl;
-                break;
-            case 'C':
-                cout << "Classics:" << endl;
-                break;
-            // No default
+        switch (stock[i].first) {
+
+            case MovieType::comedy :
+            stock[kComedyIndex].second.displayByLine();
+            break;
+
+            case MovieType::drama :
+            stock[kDramaIndex].second.displayByLine();
+            break;
+
+            case MovieType::classic :
+            stock[kClassicIndex].second.displayByLine();
+            break;
         }
-
-        cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) <<
-            "Director" << setw(8) << "Year" << "Stock" << endl;
-
-        this->stock.at(genre).displayByLine();
     }
 }
-
-
-// void MediaCollection::display() const {
-
-//     const int kLineLength = 100;
-
-//     for (auto pair : this->stock) {
-
-//         cout << setfill('-') << setw(kLineLength) << '-' << endl;
-//         cout << setfill(' ');
-
-//         switch(pair.first) {
-
-//             case 'F':
-//             cout << "Comedies:" << endl;
-//             break;
-
-//             case 'D':
-//             cout << "Dramas:" << endl;
-//             break;
-
-//             case 'C':
-//             cout << "Classics:" << endl;
-//             break;
-
-//             // No default
-//         }
-
-//         cout << endl;
-
-//         cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) << 
-//             "Director" << setw(8) << "Year" << "Stock" << endl;
-
-//         pair.second.displayByLine();
-//     }
-// }
-
-
-
-/*void MediaCollection::displayTree() const { // DONE
-
-    for (auto pair : this->stock) {
-
-        cout << pair.first << endl;
-        pair.second.displayTree();
-    }
-}*/
-

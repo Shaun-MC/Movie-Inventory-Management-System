@@ -14,6 +14,9 @@ class Comedy : public Movie {
   // Setter
   virtual bool setData(stringstream& movie_line);
 
+  // Actions
+  void PrintHeader() const;
+
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Comedy& drama);
 
@@ -22,8 +25,6 @@ class Comedy : public Movie {
   bool operator == (const Media& rval) const;
 
  private: 
-
-  //virtual string reconstructLine() const;
 
   virtual void display(ostream& ostrm) const;
 };

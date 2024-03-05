@@ -1,6 +1,7 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 
+#include <iostream>
 #include <sstream>
 
 #include "Media.h"
@@ -28,6 +29,9 @@ class Movie : public Media {
   void setDirector(const string name);
   void setYear(const int year);
 
+  // Actions
+  virtual void PrintHeader() const = 0;
+
   // Operator Overloading
   friend ostream& operator << (ostream& ostrm, const Movie& obj);
 
@@ -49,8 +53,6 @@ class Movie : public Media {
   bool getSetDirector(stringstream& movie_line);
   bool getSetTitle(stringstream& movie_line);
   bool getSetYear(stringstream& movie_line);
-
- //virtual string reconstructLine() const;
 
   virtual void display(ostream& ostrm) const = 0;
 };
