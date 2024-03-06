@@ -24,18 +24,22 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
     }
 
     // Movies not in MediaCollection
-    if (this->movie == nullptr || !movies.Retrieve(this->movie, mediaInfo)) {
+    if (this->movie == nullptr) {
 
         // Error Condition
         cerr << "Borrow::processBorrow() | Current Transaction Does Not Have an Associated Media" << endl;
         return false;
+    } else if (!movies.Retrieve(this->movie, mediaInfo)) {
+
+        cerr << "Borrow::processBorrow() | Could Not Retrieve " << dynamic_cast<Movie*>(this->movie)->getTitle()
+             << " From the Collection" << endl;
     }
 
     // Unable to remove Movie form stock
     if (!mediaInfo->DecrementStock()) {
 
         // Error Condition
-        cerr << "Borrow::processBorrow() | Media is Out of Stock (" << mediaInfo << ")" << endl;
+        cerr << "Borrow::processBorrow() | Media is Out of Stock (" << dynamic_cast<Movie*>(this->movie)->getTitle() << ")" << endl;
 
     } else { // Basic Course
 

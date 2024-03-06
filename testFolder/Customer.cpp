@@ -67,7 +67,7 @@ bool Customer::ReturnMedia(Media *oldMedia){ // UNTESTED
             delete outstandingMedia[i];
             outstandingMedia[i] = nullptr;
 
-            *outstandingMedia[i] = *outstandingMedia.back();
+            outstandingMedia[i] = outstandingMedia.back();
 
             outstandingMedia.pop_back();
 

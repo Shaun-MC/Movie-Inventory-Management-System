@@ -37,6 +37,8 @@ class Classic : public Movie {
  private: 
 
   // Member Functions
+  bool CompareMajorActors(const string& actor) const;
+
   bool GetSetMA(stringstream& movie_line);
   bool GetSetMonth(stringstream& movie_line);
   

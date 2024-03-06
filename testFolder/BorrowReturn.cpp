@@ -26,7 +26,7 @@ BorrowReturn::~BorrowReturn(){ // DONE
 bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     
     Media *newMedia = nullptr;
-    char media_type = 0, movie_type = 0;
+    char input_media_type = 0, input_movie_type = 0;
 
     switch (this->commandType) {
 
@@ -39,43 +39,38 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
         break;
     }
 
-    trans_line.ignore(); // Space
-
     // Reads and sets Customer ID Data 
-    if (Transaction::setData(trans_line)) {
+    if (!Transaction::setData(trans_line)) {
 
-        this->ProcessInvalid(trans_line);
+        this->ProcessInvalid(trans_line, 1);
         return false;
     }  
 
     trans_line.ignore(); // Space 
     
-    trans_line >> media_type; // Basic Course: D
+    trans_line >> input_media_type; // Basic Course: D
     
     trans_line.ignore(); // Space
 
-    switch(media_type){
+    switch(input_media_type){
         
+        this->media_type = input_media_type; // Bad practice - intentionally storing bad data
+
         case MediaType::dvd :
-        this->media_type = dvd;
         break;
 
         default: 
-        ProcessInvalid(trans_line);
+        ProcessInvalid(trans_line, 2); // Invalid Media 
         return false;
         break;
     }
 
-    trans_line >> movie_type; // Basic Course: F, D or C 
+    trans_line >> input_movie_type; // Basic Course: F, D or C 
     trans_line.ignore(); // Space
 
-    switch (movie_type) {
+    switch (input_movie_type) {
 
         case MovieType::comedy :
-        ProcessComedy(trans_line, newMedia);
-        break;
-
-        case MovieType::classic :
         ProcessComedy(trans_line, newMedia);
         break;
 
@@ -83,8 +78,13 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
         ProcessDrama(trans_line, newMedia);
         break;
 
+        case MovieType::classic :
+        ProcessClassic(trans_line, newMedia);
+        break;
+
         default: 
-        ProcessInvalid(trans_line);
+        this->movie_type = input_movie_type; // Bad Practice - intentionally storing bad data, rename / redeisgn if time allows
+        ProcessInvalid(trans_line, 3); // Invalid Movie Type
         return false;
         break;
     }
@@ -110,7 +110,7 @@ void BorrowReturn::ProcessComedy(stringstream& trans_line, Media*& newMedia){ //
     getline(trans_line, title, ',');
     trans_line.ignore(); // Space
     
-    dynamic_cast<Comedy*>(newMedia)->setTitle(title);
+    dynamic_cast<Comedy*>(newMedia)->setTitle(title); // Sets the Director instead
 
     // Get & Set the Movies Release Year
     trans_line >> year;
@@ -133,10 +133,9 @@ void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ // 
     trans_line.ignore(); // Space
 
     dynamic_cast<Drama*>(newMedia)->setDirector(director);
-    trans_line.ignore(); // Space
 
 	// Get & Set the Movies Title
-	getline(trans_line, title, '\n');
+	getline(trans_line, title, ',');
     dynamic_cast<Drama*>(newMedia)->setTitle(title);
 
 	// Add to transaction string
@@ -146,7 +145,7 @@ void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ // 
 void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ // UNTESTED
     
     this->movie_type = MovieType::classic;
-    newMedia = new Drama();
+    newMedia = new Classic();
 
     // Intialize Sorting Criteria variables
     int month = 0, year = 0; 
@@ -163,22 +162,31 @@ void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ /
     // Get & Set the Major Actor 
     getline(trans_line, majorActor, '\n');
 	
-    dynamic_cast<Classic*>(newMedia)->InsertMajorActor(majorActor, this->movie->getStock()); 
+    dynamic_cast<Classic*>(newMedia)->InsertMajorActor(majorActor, 1); 
 
     // Add to transaction string
-	this->transactionLog += ' ' + dynamic_cast<Classic*>(newMedia)->getTitle();
+	//this->transactionLog += ' ' + dynamic_cast<Classic*>(newMedia)->getTitle(); // Doesn't Have a Title Hear
 }
 
 // If called in movie_type switch statment, movie type is not included
 // If called from setData conditional, cust_id not included
-void BorrowReturn::ProcessInvalid(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessInvalid(stringstream& trans_line, const int flag){ // UNTESTED
     
-    string temp = "";
+    //string temp = "";
+    switch(flag) {
 
-    // Get the rest of trans_line
-	getline(trans_line, temp, '\n');
-	
-    this->transactionLog += temp;
+        case 1: 
+        cerr << "BorrowReturn::ProcessInvalid() | Invalid Customer ID: " << this->getCustomerID() << endl;
+        break;
 
-	cerr << "BorrowReturn::ProcessInvalid() | Invalid Command: " << this->transactionLog << endl;
+        case 2: 
+        cerr << "BorrowReturn::ProcessInvalid() | Invalid Media Type: " << this->media_type << endl;
+        break;
+
+        case 3:
+        cerr << "BorrowReturn::ProcessInvalid() | Invalid Movie Type: " << this->movie_type << endl;
+        break;
+
+        // No default
+    }
 }

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-const int kTableSize = 101;
+const int kTableSize = 103;
 
 class HashTable {
 

@@ -11,7 +11,7 @@ using namespace std;
 //          ??Duplicate Includes??
 
 // Current Errors: 
-    // Way to many transaction error statements
+    // Way to many transaction error statements - 'Customer 0 Does Not Exist'
     // Doesn't update the stock amounts for borrowed and retuned (Dramas and Classics only)
     // Certain customers don't have a history - some customers have too many history logs
     // Doesn't run the last History command (H 8888)

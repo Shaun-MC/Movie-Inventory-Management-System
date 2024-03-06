@@ -106,13 +106,37 @@ bool Classic::operator == (const Media& rval) const { // DONE
 
     const Classic rval_temp = dynamic_cast<const Classic& >(rval);
 
-    // Able to combine movie stocks if we know they're the same movie, the date is irrelevant here
-    return (this->getDirector() == rval_temp.getDirector() && this->getTitle() == rval_temp.getTitle());
+    if (this->getDirector() == "" && this->getTitle() == "" && 
+        (this->getYear() == rval_temp.getYear() && 
+        this->getReleaseMonth() == rval_temp.getReleaseMonth() && 
+        this->CompareMajorActors(rval_temp.getMajorActor()))) {
+
+            return true;
+    } else {
+
+        // Able to combine movie stocks if we know they're the same movie, the date is irrelevant here
+        return (this->getDirector() == rval_temp.getDirector() &&
+                this->getTitle() == rval_temp.getTitle());
+
+    }
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool Classic::CompareMajorActors(const string& name) const {
+
+    for (pair<string, int> element : this->major_actors) {
+
+        if (name == element.first) {
+
+            return true;
+        }
+    }
+    
+    return true;
+}
+
 bool Classic::GetSetMA(stringstream& movie_line) { // DONE
 
     string f_name = "", l_name = "";

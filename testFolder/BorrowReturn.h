@@ -21,12 +21,12 @@ class BorrowReturn : public Transaction {
   void ProcessClassic(stringstream& trans_line, Media*& newMedia);
   void ProcessComedy(stringstream& trans_line, Media*& newMedia);
 
-  void ProcessInvalid(stringstream& trans_line);
+  void ProcessInvalid(stringstream& trans_line, const int flag);
 
   // Member Data
-  MediaType media_type;
-  MovieType movie_type;
-  
+  char media_type;
+  char movie_type;
+
   Media* movie;
 
 };

@@ -41,10 +41,12 @@ bool Transaction::setData(stringstream& trans_line) {
     if (ID < kMinID || ID > kMaxID) {
 
         flag = false;
-    } else {
+    } /*else {
 
-        this->setCustomerID(ID);
-    }
+       this->setCustomerID(ID);
+    }*/
+
+    this->setCustomerID(ID); // Bad practice - intentionally storing bad data
 
     return flag;
 }
@@ -66,18 +68,19 @@ void Transaction::Process(MediaCollection &movies, CustomerCollection &customers
 
     switch (this->commandType) {
         
-        case 'I':
+        case CommandType::inventory :
         dynamic_cast<Inventory*>(this)->ProcessInventory(movies);
         break;
 
-        case 'H':
+        case CommandType::history :
         flag = dynamic_cast<History*>(this)->ProcessHistory(customers);
         break;
 
-        case 'B':
+        case CommandType::borrow :
         flag = dynamic_cast<Borrow*>(this)->ProcessBorrow(movies, customers); 
         break;
 
+        case CommandType::return_ :
         flag = dynamic_cast<Return*>(this)->ProcessReturn(movies, customers);
         break;
 
