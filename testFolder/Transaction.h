@@ -18,7 +18,7 @@ class Transaction {
 
  public: 
   
-  // Constructors 
+  // Constructors - Destructor 
   Transaction();
   Transaction(const Transaction &other);
   ~Transaction();
@@ -26,16 +26,14 @@ class Transaction {
   // Getters - Setters
   int getCustomerID() const;
   char getCommandType() const;
-  //string getEntireTransaction() const;
 
   virtual bool setData(stringstream& trans_line);
   
   void setCustomerID(int id);
   void setCommandType(char type);
-  //void setEntireTransaction() const; // Unsure of parameters atm
 
   // Actions
-  virtual void process (MediaCollection& movies, CustomerCollection& customers);
+  virtual void Process (MediaCollection& movies, CustomerCollection& customers);
 
   // Operator Overloads
  
@@ -44,6 +42,7 @@ class Transaction {
   int customerID;
   char commandType;
   string entireTransaction;
+  
 };
 
 #include "Inventory.h"

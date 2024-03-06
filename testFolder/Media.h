@@ -38,9 +38,9 @@ class Media {
   void setMediaType(const MediaType type);
 
   // Actions
-  void addStock(const int amount);
-  void incrementStock();
-  bool decrementStock();
+  void AddStock(const int amount);
+  void IncrementStock();
+  bool DecrementStock();
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Media& media);
@@ -51,11 +51,14 @@ class Media {
  
  protected: 
 
+  // Member Function
+  virtual void Display(ostream& ostrm) const = 0;
+  
+  // Member Data
   int stock;
 
   MediaType type;
 
-  virtual void display(ostream& ostrm) const = 0;
 };
 
 #endif

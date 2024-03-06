@@ -19,14 +19,15 @@ class MovieManager {
 
   // Constructor
   MovieManager();
+  ~MovieManager();
   
   // Actions
   void ReadCustomers(ifstream& customer_list);
   void ReadMovies(ifstream& movie_list);
   void ReadTransactions(ifstream& transaction_list);
 
-  void displayCustomers() const;
-  void displayMedia() const;
+  void DisplayCustomers() const;
+  void DisplayMedia() const;
   
  private:
 

@@ -1,9 +1,15 @@
 #include "Movie.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Movie::Movie() : director(""), title(""), movieType(0) {};
 
 Movie::~Movie(){}
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Getters - Setters
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 char Movie::getMediaType() const {
 
     return MediaType::dvd;
@@ -34,8 +40,8 @@ bool Movie::setData(stringstream& movie_line) { // DONE
 
     // Execution Order Does Not Matter - If 1 fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS
-    return (!this->getSetStock(movie_line) || !this->getSetDirector(movie_line) || 
-            !this->getSetTitle(movie_line)) ? false : true;
+    return (!this->GetSetStock(movie_line) || !this->GetSetDirector(movie_line) || 
+            !this->GetSetTitle(movie_line)) ? false : true;
 }
 
 void Movie::setMovieType(const char type) {
@@ -58,16 +64,20 @@ void Movie::setYear(const int year) {
     this->release_year = year;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Operator Overloads
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ostream& operator<<(ostream &ostrm, const Movie &movie){ 
     
-    movie.display(ostrm);
+    movie.Display(ostrm);
 
     return ostrm;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
-bool Movie::getSetStock(stringstream& movie_line) { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool Movie::GetSetStock(stringstream& movie_line) { // DONE
 
     int stock = 0;
 
@@ -87,7 +97,7 @@ bool Movie::getSetStock(stringstream& movie_line) { // DONE
     return true;
 }
 
-bool Movie::getSetDirector(stringstream& movie_line) { // DONE 
+bool Movie::GetSetDirector(stringstream& movie_line) { // DONE 
 
     string name = "";
 
@@ -100,7 +110,7 @@ bool Movie::getSetDirector(stringstream& movie_line) { // DONE
     return true;
 }
 
-bool Movie::getSetTitle(stringstream& movie_line) { // DONE
+bool Movie::GetSetTitle(stringstream& movie_line) { // DONE
 
     string title = "";
 
@@ -113,7 +123,7 @@ bool Movie::getSetTitle(stringstream& movie_line) { // DONE
     return true;
 }
 
-bool Movie::getSetYear(stringstream& movie_line) { // DONE
+bool Movie::GetSetYear(stringstream& movie_line) { // DONE
 
     int year = 0;
 

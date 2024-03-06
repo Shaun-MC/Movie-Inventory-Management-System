@@ -1,6 +1,8 @@
 #include "Drama.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Drama::Drama() { // DONE
 
     this->movieType = MovieType::drama;
@@ -12,13 +14,17 @@ Drama::Drama() { // DONE
 
 Drama::~Drama() {}
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getter - Setters
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 bool Drama::setData(stringstream& movie_line) { // DONE
 
-    return (!Movie::setData(movie_line) || !this->getSetYear(movie_line)) ? false : true;
+    return (!Movie::setData(movie_line) || !this->GetSetYear(movie_line)) ? false : true;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void Drama::PrintHeader() const {
 
     cout << "Dramas: " << endl << endl;
@@ -27,10 +33,12 @@ void Drama::PrintHeader() const {
          "Director" << setw(8) << "Year" << "Stock" << endl;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Operator Overloads
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ostream& operator << (ostream& ostrm, const Drama& drama) {
 
-    drama.display(ostrm);
+    drama.Display(ostrm);
 
     return ostrm;
 }
@@ -62,7 +70,10 @@ bool Drama::operator == (const Media& rval) const { // DONE
             this->getTitle() == rval_temp.getTitle());
 }
 
-void Drama::display(ostream& ostrm) const {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Private Member Functions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void Drama::Display(ostream& ostrm) const {
 
     ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
           << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;

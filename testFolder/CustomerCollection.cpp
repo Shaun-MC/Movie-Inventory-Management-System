@@ -1,39 +1,52 @@
 #include "CustomerCollection.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Constructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 CustomerCollection::CustomerCollection() {}
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getter
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Customer* CustomerCollection::getCustomer(const int ID){
     
     return this->collection.getValue(ID);
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
-bool CustomerCollection::insert(const int ID, const string& name) { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool CustomerCollection::Insert(const int ID, const string& name) { // DONE
     
     Customer new_cust = Customer(ID, name);
 
     return this->collection.insertKeyValue(new_cust.getID(), new_cust);
 }
 
-bool CustomerCollection::retrieve(int key, Customer*& ret) { // UNTESTED
+bool CustomerCollection::Retrieve(int key, Customer*& ret) { // UNTESTED
     
     return this->collection.retrieveValue(key, ret);
 }
 
-void CustomerCollection::receiveData(const string cust_line) { // DONE
+void CustomerCollection::ReceiveData(const string cust_line) { // DONE
 
     int ID = 0;
     string name = "";
 
-    this->parseCustomerLine(cust_line, ID, name);
+    this->ParseCustomerLine(cust_line, ID, name);
 
-    this->insert(ID, name);
+    this->Insert(ID, name);
 }
 
+void CustomerCollection::Display() const {
+
+    this->collection.display();
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Function
-void CustomerCollection::parseCustomerLine(const string line, int& key, string& name) const { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void CustomerCollection::ParseCustomerLine(const string line, int& key, string& name) const { // DONE
 
     string f_name = "", l_name = "";
 
@@ -49,11 +62,6 @@ void CustomerCollection::parseCustomerLine(const string line, int& key, string& 
     parse.ignore();
 
     name = f_name + " " + l_name;
-}
-
-void CustomerCollection::display() const {
-
-    this->collection.display();
 }
 
 

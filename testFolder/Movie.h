@@ -40,6 +40,14 @@ class Movie : public Media {
   virtual bool operator == (const Media& rval) const = 0;
  
  protected: 
+
+  // Member Functions
+  bool GetSetStock(stringstream& movie_line);
+  bool GetSetDirector(stringstream& movie_line);
+  bool GetSetTitle(stringstream& movie_line);
+  bool GetSetYear(stringstream& movie_line);
+
+  virtual void Display(ostream& ostrm) const = 0;
   
   char movieType; 
   
@@ -48,13 +56,6 @@ class Movie : public Media {
   string title;
 
   int release_year;
-
-  bool getSetStock(stringstream& movie_line);
-  bool getSetDirector(stringstream& movie_line);
-  bool getSetTitle(stringstream& movie_line);
-  bool getSetYear(stringstream& movie_line);
-
-  virtual void display(ostream& ostrm) const = 0;
 };
 
 #endif

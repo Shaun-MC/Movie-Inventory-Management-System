@@ -1,5 +1,8 @@
 #include "Transaction.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructors - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Transaction::Transaction(){
     
     this->commandType = 0;
@@ -16,6 +19,9 @@ Transaction::Transaction(const Transaction &other){
 
 Transaction::~Transaction(){}
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Getters - Setters
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int Transaction::getCustomerID() const{
     return this->customerID;
 }
@@ -52,25 +58,28 @@ void Transaction::setCommandType(char type){
     this->commandType = type;
 }
 
-void Transaction::process(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void Transaction::Process(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
 
     bool flag = false;
 
     switch (this->commandType) {
         
         case 'I':
-        dynamic_cast<Inventory*>(this)->processInventory(movies);
+        dynamic_cast<Inventory*>(this)->ProcessInventory(movies);
         break;
 
         case 'H':
-        flag = dynamic_cast<History*>(this)->processHistory(customers);
+        flag = dynamic_cast<History*>(this)->ProcessHistory(customers);
         break;
 
         case 'B':
-        flag = dynamic_cast<Borrow*>(this)->processBorrow(movies, customers); 
+        flag = dynamic_cast<Borrow*>(this)->ProcessBorrow(movies, customers); 
         break;
 
-        flag = dynamic_cast<Return*>(this)->processReturn(movies, customers);
+        flag = dynamic_cast<Return*>(this)->ProcessReturn(movies, customers);
         break;
 
         default:

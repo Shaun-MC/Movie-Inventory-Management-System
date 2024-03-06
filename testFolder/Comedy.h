@@ -25,8 +25,9 @@ class Comedy : public Movie {
   bool operator == (const Media& rval) const;
 
  private: 
-
-  virtual void display(ostream& ostrm) const;
+ 
+  // Member Function
+  virtual void Display(ostream& ostrm) const;
 };
 
 #endif 

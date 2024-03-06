@@ -17,15 +17,15 @@ class MovieFactory {
 
  public: 
   
-  static Movie* createMovie(string& movie_line);
+  static Movie* CreateMovie(string& movie_line);
 
  private:
 
-  static Movie* createComedy(stringstream& movie_line);
+  static Movie* CreateComedy(stringstream& movie_line);
 
-  static Movie* createDrama(stringstream& movie_line);
+  static Movie* CreateDrama(stringstream& movie_line);
 
-  static Movie* createClassic(stringstream& movie_line);
+  static Movie* CreateClassic(stringstream& movie_line);
 };
 
 #endif

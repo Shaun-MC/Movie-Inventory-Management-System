@@ -4,7 +4,8 @@
 #include "AVLTree.h"
 #include "MediaFactory.h"
 
-// Idea: Make it a Singleton
+#include <vector>
+
 class MediaCollection { 
 
  public:
@@ -15,14 +16,12 @@ class MediaCollection {
   ~MediaCollection();
   
   // Actions
-  bool insert(Media*& insert_media);
+  bool Insert(Media*& insert_media);
 
-  bool retrieve(Media*& target, Media*& ret);
+  bool Retrieve(Media*& target, Media*& ret);
 
-  void display() const;
+  void Display() const;
 
-  //void displayTree() const; // Debugging Purposes
- 
  private:
 
   // Underlieing Data Structure - Dictionary
@@ -38,9 +37,6 @@ class MediaCollection {
   const int kComedyIndex;
   const int kDramaIndex;
   const int kClassicIndex;
-
-  // Private Memeber Functions
-  //void clear();
 };
 
 #endif

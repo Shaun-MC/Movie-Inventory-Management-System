@@ -1,7 +1,15 @@
 #include "MovieManager.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MovieManager::MovieManager() {}; // Member data intialize themsevles
 
+MovieManager::~MovieManager() {}; // Member data destruct themselves
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void MovieManager::ReadCustomers(ifstream& customer_file) { // DONE
 
     if (!customer_file) {
@@ -90,12 +98,12 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
     }
 }
 
-void MovieManager::displayCustomers() const {
+void MovieManager::DisplayCustomers() const {
 
-    this->customers.display();
+    this->customers.Display();
 }
 
-void MovieManager::displayMedia() const { // DONE
+void MovieManager::DisplayMedia() const { // DONE
 
-    this->stocks.display();
+    this->stocks.Display();
 }

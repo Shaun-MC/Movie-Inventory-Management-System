@@ -26,9 +26,8 @@ class Drama : public Movie {
 
  private: 
 
-  //string reconstructLine() const;
-
-  void display(ostream& ostrm) const;
+  // Member Functions
+  void Display(ostream& ostrm) const;
 };
 
 #endif 

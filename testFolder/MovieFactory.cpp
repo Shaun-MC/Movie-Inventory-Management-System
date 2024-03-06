@@ -1,7 +1,9 @@
 #include "MovieFactory.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
-Movie* MovieFactory::createMovie(string& movie_line) { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Movie* MovieFactory::CreateMovie(string& movie_line) { // DONE
 
     stringstream str(movie_line);
     char movie_type;
@@ -15,15 +17,15 @@ Movie* MovieFactory::createMovie(string& movie_line) { // DONE
     switch (movie_type) {
 
         case 'F':
-        return createComedy(str);
+        return CreateComedy(str);
         break;
 
         case 'D':
-        return createDrama(str);
+        return CreateDrama(str);
         break;
 
         case 'C':
-        return createClassic(str);
+        return CreateClassic(str);
         break;
 
         default: 
@@ -32,8 +34,10 @@ Movie* MovieFactory::createMovie(string& movie_line) { // DONE
     }
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
-Movie* MovieFactory::createComedy(stringstream& movie_line) { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Movie* MovieFactory::CreateComedy(stringstream& movie_line) { // DONE
 
     Movie* new_movie = new Comedy();
 
@@ -46,7 +50,7 @@ Movie* MovieFactory::createComedy(stringstream& movie_line) { // DONE
     return new_movie;
 }
 
-Movie* MovieFactory::createDrama(stringstream& movie_line) { // DONE
+Movie* MovieFactory::CreateDrama(stringstream& movie_line) { // DONE
 
     Movie* new_movie = new Drama();
 
@@ -59,7 +63,7 @@ Movie* MovieFactory::createDrama(stringstream& movie_line) { // DONE
     return new_movie;
 }
 
-Movie* MovieFactory::createClassic(stringstream& movie_line) { // DONE
+Movie* MovieFactory::CreateClassic(stringstream& movie_line) { // DONE
 
     Movie* new_movie = new Classic();
 

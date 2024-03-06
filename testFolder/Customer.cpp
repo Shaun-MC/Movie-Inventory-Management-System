@@ -1,5 +1,8 @@
 #include "Customer.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructors
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Customer::Customer(){
     ID = 0;
     name = " ";
@@ -11,6 +14,9 @@ Customer::Customer(int ID, string name) {
     this->name = name;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Getters - Setters
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int Customer::getID() const{
     return this->ID;
 }
@@ -27,7 +33,6 @@ void Customer::setName(string first, string last){
     this->name = first + " " + last;  
 }
 
-//uncomment for transaction
 const vector<string>& Customer::getHistory() const{ // UNTESTED
     
     return this->history;
@@ -38,17 +43,20 @@ const vector<Media*>& Customer::getOutstanding() const{ // UNTESTED
     return outstandingMedia;
 }
 
-void Customer::addHistory(string newTransaction){ // UNTESTED
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void Customer::AddHistory(string newTransaction){ // UNTESTED
     
     history.push_back(newTransaction);
 }
 
-void Customer::borrowMedia(Media *newMedia){ // UNTESTED
+void Customer::BorrowMedia(Media *newMedia){ // UNTESTED
     
     outstandingMedia.push_back(newMedia);
 }
 
-bool Customer::returnMedia(Media *oldMedia){ // UNTESTED
+bool Customer::ReturnMedia(Media *oldMedia){ // UNTESTED
     
     bool ret = false;
 
@@ -72,6 +80,9 @@ bool Customer::returnMedia(Media *oldMedia){ // UNTESTED
     return ret;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Operator Overloads
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 bool Customer::operator < (const Customer &rval) const {
     
     return this->ID < rval.ID;
@@ -82,7 +93,7 @@ bool Customer::operator == (const Customer &rval) const {
     return this->ID == rval.ID;
 }
 
-ostream &operator<<(ostream &ostrm, const Customer &obj){
+ostream& operator << (ostream &ostrm, const Customer &obj){
     
     ostrm << obj.getID() << " " << obj.getName() << endl;
     

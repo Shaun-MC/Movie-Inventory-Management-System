@@ -1,5 +1,8 @@
 #include "BorrowReturn.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 BorrowReturn::BorrowReturn(){ // DONE
     
     this->customerID = 0;
@@ -14,6 +17,10 @@ BorrowReturn::~BorrowReturn(){ // DONE
 		this->movie = nullptr;
 	}
 }
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Getter - Setter
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Uses early returns for boolean return
 bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
@@ -56,8 +63,6 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     trans_line >> movie_type; // Basic Course: F, D or C 
     trans_line.ignore(); // Space
 
-    //dynamic_cast<Movie*>(this->movie)->setMovieType(movie_type);
-
     this->entireTransaction += movie_type + ' '; 
 
     switch (movie_type) {
@@ -84,6 +89,9 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     return true;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Private Member Functions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void BorrowReturn::processComedy(stringstream& trans_line){ // DONE
     
     // Intialize Sorting Criteria variables

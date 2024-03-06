@@ -1,5 +1,8 @@
 #include "History.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 History::History(){
     
     this->customerID = 0;
@@ -8,11 +11,14 @@ History::History(){
 
 History::~History() {}
 
-bool History::processHistory(CustomerCollection &customers){ // UNTESTED
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool History::ProcessHistory(CustomerCollection &customers){ // UNTESTED
     
     Customer *customerInfo;
 
-    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
+    if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
 
         // Run Time Error Condition
         cerr << "History::historyProcess() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
@@ -37,5 +43,3 @@ bool History::processHistory(CustomerCollection &customers){ // UNTESTED
 
     return false;
 }
-
-//need ostream?? 

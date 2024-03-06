@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
 
 #include "Media.h"
 
@@ -16,7 +15,7 @@ class Customer {
 
  public: 
 
-  // Constructor
+  // Constructors
   Customer();
   Customer(int ID, string name);
 
@@ -27,19 +26,17 @@ class Customer {
   void setID(int id);
   void setName(string first, string last);
 
-  //uncomment for transaction
   const vector<string> & getHistory() const;
   
   const vector<Media*> & getOutstanding() const;
 
-  //Actions
-  void addHistory(string newTransaction);
+  // Actions
+  void AddHistory(string newTransaction);
 
-  void borrowMedia(Media* newMedia);
-  bool returnMedia(Media* oldMedia);
+  void BorrowMedia(Media* newMedia);
+  bool ReturnMedia(Media* oldMedia);
 
   // Operator Overloads
-
   bool operator < (const Customer& rval) const;
   bool operator == (const Customer& rval) const;
 
@@ -50,8 +47,7 @@ class Customer {
   int ID;
   string name; 
 
-  //uncomment for transaction
-  vector<string> history; // error: expected expression
+  vector<string> history; 
   vector<Media*> outstandingMedia;
 };
 

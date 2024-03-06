@@ -9,16 +9,17 @@ using namespace std;
 
 class Validate {
  public:
+
   // Function are checking the correct amount of files (4)
-  static bool checkfileAmount(const int files);
+  static bool CheckfileAmount(const int files);
 
   // Opens each of the files based on the a contents of the first character
-  static void dispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]);
+  static void DispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]);
 
  private:
   
   // Helper Function
-  static int checkFile(ifstream& curr);
+  static int CheckFile(ifstream& curr);
 };
 
 #endif

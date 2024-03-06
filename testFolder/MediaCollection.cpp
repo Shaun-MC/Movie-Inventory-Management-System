@@ -1,10 +1,11 @@
 #include "MediaCollection.h"
-#include <vector>
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MediaCollection::MediaCollection() : kComedyIndex(0), kDramaIndex(1), kClassicIndex(2)  { // DONE
 
-    // Each insert also calls the AVLTree destructor for some reason - TEST
+    // Each Insert also calls the AVLTree destructor for some reason - TEST
     this->stock.push_back(make_pair(MovieType::comedy, this->comedies));
 
     this->stock.push_back(make_pair(MovieType::drama, this->dramas));
@@ -14,8 +15,10 @@ MediaCollection::MediaCollection() : kComedyIndex(0), kDramaIndex(1), kClassicIn
 
 MediaCollection::~MediaCollection() {};
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
-bool MediaCollection::insert(Media*& media) { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool MediaCollection::Insert(Media*& media) { // DONE
 
     // Assumed all movies are DVD
     char insert_type = dynamic_cast<const Movie*>(media)->getMovieType();
@@ -23,15 +26,15 @@ bool MediaCollection::insert(Media*& media) { // DONE
     switch (insert_type) {
 
         case MovieType::comedy :
-        return stock[kComedyIndex].second.insert(media);
+        return stock[kComedyIndex].second.Insert(media);
         break;
 
         case MovieType::drama :
-        return stock[kDramaIndex].second.insert(media);
+        return stock[kDramaIndex].second.Insert(media);
         break;
 
         case MovieType::classic :
-        return stock[kClassicIndex].second.insert(media); 
+        return stock[kClassicIndex].second.Insert(media); 
         break;
 
         default:
@@ -39,7 +42,7 @@ bool MediaCollection::insert(Media*& media) { // DONE
     }
 }
 
-bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
+bool MediaCollection::Retrieve(Media*& target, Media*& ret) { // UNTESTED
 
     Media* cpy_target = const_cast<Media*>(target);
     
@@ -48,27 +51,27 @@ bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
     switch (retrieve_type) {
 
         case MovieType::comedy :
-        return stock[kComedyIndex].second.retrieve(*target, ret);
+        return stock[kComedyIndex].second.Retrieve(*target, ret);
         break;
 
         case MovieType::drama :
-        return stock[kDramaIndex].second.retrieve(*target, ret);
+        return stock[kDramaIndex].second.Retrieve(*target, ret);
         break;
 
         case MovieType::classic :
-        return stock[kClassicIndex].second.retrieve(*target, ret);
+        return stock[kClassicIndex].second.Retrieve(*target, ret);
         break;
 
         default:
         
-        cout << "MediaCollection::retrieve() | Unsupported Movie Type " << retrieve_type << endl;
+        cout << "MediaCollection::Retrieve() | Unsupported Movie Type " << retrieve_type << endl;
         ret = nullptr;
         
         return false;
     }
 }
 
-void MediaCollection::display() const {
+void MediaCollection::Display() const {
     
     const int kLineLength = 100;
     
@@ -83,15 +86,15 @@ void MediaCollection::display() const {
         switch (stock[i].first) {
 
             case MovieType::comedy :
-            stock[kComedyIndex].second.displayByLine();
+            stock[kComedyIndex].second.DisplayByLine();
             break;
 
             case MovieType::drama :
-            stock[kDramaIndex].second.displayByLine();
+            stock[kDramaIndex].second.DisplayByLine();
             break;
 
             case MovieType::classic :
-            stock[kClassicIndex].second.displayByLine();
+            stock[kClassicIndex].second.DisplayByLine();
             break;
         }
     }

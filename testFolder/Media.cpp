@@ -1,11 +1,15 @@
 #include "Media.h"
 
-// Constructor 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 Media::Media() : stock(0), type(MediaType::dvd) {};
 
 Media::~Media() {}
 
-// Getter - Setter
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Getter - Setters
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int Media::getStock() const {
 
     return this->stock;
@@ -21,18 +25,20 @@ void Media::setMediaType(const MediaType type) {
     this->type = type;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
-void Media::addStock(const int amount) {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void Media::AddStock(const int amount) {
 
     this->stock += amount;
 }
 
-void Media::incrementStock() {
+void Media::IncrementStock() {
 
     ++this->stock;
 }
 
-bool Media::decrementStock() { // DONE
+bool Media::DecrementStock() { // DONE
 
     if (this->stock - 1 < 0) {
 
@@ -44,10 +50,12 @@ bool Media::decrementStock() { // DONE
     return true;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Operator Overloads
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ostream& operator << (ostream& ostrm, const Media& media) {
 
-    media.display(ostrm);
+    media.Display(ostrm);
 
     return ostrm;
 }

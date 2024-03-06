@@ -1,5 +1,8 @@
 #include "Inventory.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Inventory::Inventory(){
     
     this->commandType = CommandType::inventory;
@@ -7,11 +10,13 @@ Inventory::Inventory(){
 
 Inventory::~Inventory(){}
 
-bool Inventory::processInventory(MediaCollection &movies){
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool Inventory::ProcessInventory(MediaCollection &movies){
     
-    movies.display();
+    movies.Display();
 
     return true;
 }
-
-//Need the ostream??

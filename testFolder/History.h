@@ -12,7 +12,7 @@ class History : public Transaction {
   ~History();
 
   // Actions
-  bool processHistory(CustomerCollection& customers);
+  bool ProcessHistory(CustomerCollection& customers);
 
   // Operator Overloads
 };

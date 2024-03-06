@@ -14,17 +14,17 @@ class TransactionFactory {
 
  public:
   
-  static Transaction* createTransaction(const string trans_line); 
+  static Transaction* CreateTransaction(const string trans_line); 
 
  private:
 
-  static Transaction *createInventory(stringstream& trans_line);
+  static Transaction *CreateInventory(stringstream& trans_line);
 
-  static Transaction *createHistory(stringstream& trans_line);
+  static Transaction *CreateHistory(stringstream& trans_line);
 
-  static Transaction *createReturn(stringstream& trans_line);
+  static Transaction *CreateReturn(stringstream& trans_line);
 
-  static Transaction *createBorrow(stringstream& trans_line);
+  static Transaction *CreateBorrow(stringstream& trans_line);
 }; 
 
 #endif

@@ -1,6 +1,8 @@
 #include "Comedy.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Comedy::Comedy() { // DONE
 
     this->movieType = MovieType::comedy;
@@ -12,14 +14,18 @@ Comedy::Comedy() { // DONE
 
 Comedy::~Comedy() {}
 
-// Getter - Setter
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Setter
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 bool Comedy::setData(stringstream& movie_line) { // DONE
 
-    return (!Movie::setData(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
+    return (!Movie::setData(movie_line) || !Movie::GetSetYear(movie_line)) ? false : true;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void Comedy::PrintHeader() const {
 
     cout << "Comedies: " << endl << endl;
@@ -28,10 +34,12 @@ void Comedy::PrintHeader() const {
          "Director" << setw(8) << "Year" << "Stock" << endl;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Operator Overloads
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ostream& operator << (ostream& ostrm, const Comedy& comedy) { // DONE
 
-    comedy.display(ostrm);
+    comedy.Display(ostrm);
 
     return ostrm;
 }
@@ -65,7 +73,10 @@ bool Comedy::operator == (const Media& rval) const { // DONE
             this->getYear() == rval_temp.getYear());
 }
 
-void Comedy::display(ostream& ostrm) const {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Private Memeber Functions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void Comedy::Display(ostream& ostrm) const {
 
     ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
           << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;

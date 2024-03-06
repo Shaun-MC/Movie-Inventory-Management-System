@@ -3,10 +3,10 @@
 
 #include <sstream>
 
-// Warning: Unable to process IntelliSense for file with same canonicalized path as existing file.
-
 #include "HashTable.h"
 #include "Customer.h"
+
+// Warning: Unable to process IntelliSense for file with same canonicalized path as existing file.
 
 using namespace std;
 
@@ -21,19 +21,21 @@ class CustomerCollection {
   Customer* getCustomer(int key);
 
   // Actions
-  bool insert(const int ID, const string& name);
+  bool Insert(const int ID, const string& name);
   
-  bool retrieve(int key, Customer*& ret);
+  bool Retrieve(int key, Customer*& ret);
 
-  void receiveData(const string cust_line); 
+  void ReceiveData(const string cust_line); 
 
-  void display() const;
+  void Display() const;
  
  private: 
 
-  void parseCustomerLine(const string line, int& key, string& name) const;
+  // Member Function
+  void ParseCustomerLine(const string line, int& key, string& name) const;
 
-  HashTable<int, Customer> collection; // ?? use of undeclared identifier 'Customer'
+  // Member Data
+  HashTable<int, Customer> collection;
 };
 
 #endif

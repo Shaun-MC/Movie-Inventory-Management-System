@@ -3,7 +3,7 @@
 
 #include "Transaction.h"
 
-class Inventory : public Transaction { // expected class name
+class Inventory : public Transaction {
 
  public:
   
@@ -12,10 +12,7 @@ class Inventory : public Transaction { // expected class name
   ~Inventory();
 
   // Actions 
-  bool processInventory(MediaCollection& movies);
-
-  // Operator Overloads
-
+  bool ProcessInventory(MediaCollection& movies);
 };
 
 #endif

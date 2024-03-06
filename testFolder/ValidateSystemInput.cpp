@@ -1,17 +1,17 @@
 #include "ValidateSystemInput.h"
 
-bool Validate::checkfileAmount(const int files) {
+bool Validate::CheckfileAmount(const int files) {
 
     return files == 4;
 }
 
-void Validate::dispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]) { // DONE
+void Validate::DispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]) { // DONE
 
     for (int i = 1; i < 4; i++) {
 
         ifstream temp(file_names[i]);
         
-        const int file_type = checkFile(temp);
+        const int file_type = CheckFile(temp);
 
         temp.close();
 
@@ -32,7 +32,7 @@ void Validate::dispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, c
     }
 }
 
-int Validate::checkFile(ifstream& curr) { // DONE
+int Validate::CheckFile(ifstream& curr) { // DONE
 
     string firstElement = "";
     int ret = 0;

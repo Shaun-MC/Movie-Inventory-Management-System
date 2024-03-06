@@ -1,13 +1,20 @@
 #include "AVLTree.h"
 
+// -----------------------------------------------------------------------------------------------
 // TreeNode
+// -----------------------------------------------------------------------------------------------
 
-// Constructors - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor?
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 AVLTree::TreeNode::TreeNode() : value(nullptr), left(nullptr), right(nullptr), height(0) {}
 
 AVLTree::TreeNode::TreeNode(Media& val) : value(&val), left(nullptr), right(nullptr), height(0) {};
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getters - Setter
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int AVLTree::TreeNode::getHeight() const {
 
     const TreeNode* ptr = this;
@@ -27,19 +34,26 @@ void AVLTree::TreeNode::setHeight(const int amount) {
     this->height = amount;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void AVLTree::TreeNode::UpdateHeight() {
 
     this->height = 1 + max(this->left->getHeight(), this->right->getHeight());
 }
 
+// -----------------------------------------------------------------------------------------------
 // AVLTree
+// -----------------------------------------------------------------------------------------------
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Constructors - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 AVLTree::AVLTree() : root(nullptr), nodeCount(0) {}; 
 
 AVLTree::~AVLTree() { // DONE - Gets called with garbage sometimes
 
-    this->clear();
+    this->Clear();
 }
 
 /*AVLTree::AVLTree(const AVLTree& rval) : root(nullptr), nodeCount(0) {
@@ -54,10 +68,10 @@ AVLTree::~AVLTree() { // DONE - Gets called with garbage sometimes
 
     else if (rval.getNodeCount() == 0) {
 
-        this->clear();
+        this->Clear();
     } else {
 
-        this->clear();
+        this->Clear();
 
         // ...
     }
@@ -95,7 +109,9 @@ bool AVLTree::equalityHelper(const TreeNode* lval_curr, const TreeNode* rval_cur
     }
 }*/
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getters
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const Media* AVLTree::getRootValue() const {
 
     return this->root->value;
@@ -106,17 +122,19 @@ int AVLTree::getNodeCount() const {
     return this->nodeCount;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
-bool AVLTree::insert(Media*& val) { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool AVLTree::Insert(Media*& val) { // DONE
 
     const int starting_node_count = this->nodeCount;
 
-    this->root = insertHelper(this->root, val);
+    this->root = InsertHelper(this->root, val);
 
     return !(starting_node_count == this->nodeCount);
 }
 
-AVLTree::TreeNode* AVLTree::insertHelper(TreeNode*& currNode, Media*& val) { // DONE
+AVLTree::TreeNode* AVLTree::InsertHelper(TreeNode*& currNode, Media*& val) { // DONE
 
     if (currNode == nullptr) {
 
@@ -146,11 +164,11 @@ AVLTree::TreeNode* AVLTree::insertHelper(TreeNode*& currNode, Media*& val) { // 
 
     } else if (*val < *currNode->value) { 
 
-        currNode->left = insertHelper(currNode->left, val);
+        currNode->left = InsertHelper(currNode->left, val);
 
     } else { // Go right
 
-        currNode->right = insertHelper(currNode->right, val);
+        currNode->right = InsertHelper(currNode->right, val);
     }
     
     currNode->UpdateHeight();
@@ -166,41 +184,23 @@ AVLTree::TreeNode* AVLTree::insertHelper(TreeNode*& currNode, Media*& val) { // 
 
         default: 
 
-        makeRotation(balanace_factor, currNode, val);
+        MakeRotation(balanace_factor, currNode, val);
     }
     
     return currNode;
 }
 
-void AVLTree::makeRotation(const int bf, TreeNode*& curr, Media*& val) { // DONE
-
-    if (bf > 1 && *val < *curr->left->value) {
-
-        leftLeftRotation(curr);
-    } else if (bf < -1 && *val > *curr->right->value) {
-
-        rightRightRotation(curr);
-    } else if (bf > 1 && *val > *curr->left->value) {
-
-        leftRightRotation(curr);
-    } else if (bf < -1 && *val < *curr->right->value) {
-
-        rightLeftRotation(curr);
-    }
-}
-
-bool AVLTree::retrieve(const Media& target, Media*& ret_val) const { // UNTESTED
+bool AVLTree::Retrieve(const Media& target, Media*& ret_val) const { // UNTESTED
 
     if (this->root == nullptr) {
 
         return false;
     }
 
-    return retrieveHelper(this->root, target, ret_val);
+    return RetrieveHelper(this->root, target, ret_val);
 }
 
-// Assume that T has an equality and less than operator
-bool AVLTree::retrieveHelper(TreeNode* currNode, const Media& target, Media*& ret_val) const { // UNTESTED
+bool AVLTree::RetrieveHelper(TreeNode* currNode, const Media& target, Media*& ret_val) const { // UNTESTED
 
     // Base Cases 
     if (currNode == nullptr) { // Target not in the list
@@ -213,14 +213,83 @@ bool AVLTree::retrieveHelper(TreeNode* currNode, const Media& target, Media*& re
         return true;
     } else if (target < *currNode->value) { 
 
-        return retrieveHelper(currNode->left, target, ret_val); 
+        return RetrieveHelper(currNode->left, target, ret_val); 
     } else {
 
-        return retrieveHelper(currNode->right, target, ret_val);
+        return RetrieveHelper(currNode->right, target, ret_val);
     }
 }
 
-void AVLTree::leftLeftRotation(TreeNode*& unbalanced) { // DONE
+void AVLTree::DisplayByLine() const {
+
+    this->DisplayByLineHelper(this->root);
+
+    cout << endl;
+}
+
+void AVLTree::DisplayByLineHelper(TreeNode* currNode) const {
+
+    if (currNode == nullptr) {
+
+        return;
+    }
+
+    DisplayByLineHelper(currNode->left);
+
+    cout << *currNode->value << endl;
+
+    DisplayByLineHelper(currNode->right);
+}
+
+void AVLTree::Clear() { // DONE
+
+    if (this->root == nullptr) { 
+
+        return;
+    }
+
+    ClearHelper(this->root);
+}
+
+void AVLTree::ClearHelper(TreeNode*& delete_node) { // DONE
+
+    if (delete_node == nullptr) {
+
+        return;
+    }
+
+    ClearHelper(delete_node->left); 
+
+    ClearHelper(delete_node->right); 
+
+    delete delete_node->value;
+    delete delete_node;
+    delete_node = nullptr;
+
+    --this->nodeCount;
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Private Member Functions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void AVLTree::MakeRotation(const int bf, TreeNode*& curr, Media*& val) { // DONE
+
+    if (bf > 1 && *val < *curr->left->value) {
+
+        LeftLeftRotation(curr);
+    } else if (bf < -1 && *val > *curr->right->value) {
+
+        RightRightRotation(curr);
+    } else if (bf > 1 && *val > *curr->left->value) {
+
+        LeftRightRotation(curr);
+    } else if (bf < -1 && *val < *curr->right->value) {
+
+        RightLeftRotation(curr);
+    }
+}
+
+void AVLTree::LeftLeftRotation(TreeNode*& unbalanced) { // DONE
 
     TreeNode* lhs = unbalanced->left;
     unbalanced->left = lhs->right;
@@ -231,7 +300,7 @@ void AVLTree::leftLeftRotation(TreeNode*& unbalanced) { // DONE
     unbalanced->UpdateHeight();
 }
   
-void AVLTree::rightRightRotation(TreeNode*& unbalanced) { // DONE
+void AVLTree::RightRightRotation(TreeNode*& unbalanced) { // DONE
 
     TreeNode* rhs = unbalanced->right;
     unbalanced->right = rhs->left;
@@ -242,65 +311,16 @@ void AVLTree::rightRightRotation(TreeNode*& unbalanced) { // DONE
     unbalanced->UpdateHeight();
 }
 
-void AVLTree::rightLeftRotation(TreeNode*& unbalanced) { // DONE
+void AVLTree::RightLeftRotation(TreeNode*& unbalanced) { // DONE
 
-    leftLeftRotation(unbalanced->right);
+    LeftLeftRotation(unbalanced->right);
     
-    rightRightRotation(unbalanced);
+    RightRightRotation(unbalanced);
 }
 
-void AVLTree::leftRightRotation(TreeNode*& unbalanced) { // DONE
+void AVLTree::LeftRightRotation(TreeNode*& unbalanced) { // DONE
 
-    rightRightRotation(unbalanced->left);
+    RightRightRotation(unbalanced->left);
     
-    leftLeftRotation(unbalanced);
-}
-
-void AVLTree::clear() { // DONE
-
-    if (this->root == nullptr) { 
-
-        return;
-    }
-
-    clearHelper(this->root);
-}
-
-void AVLTree::clearHelper(TreeNode*& delete_node) { // DONE
-
-    if (delete_node == nullptr) {
-
-        return;
-    }
-
-    clearHelper(delete_node->left); 
-
-    clearHelper(delete_node->right); 
-
-    delete delete_node->value;
-    delete delete_node;
-    delete_node = nullptr;
-
-    --this->nodeCount;
-}
-
-void AVLTree::displayByLine() const {
-
-    this->displayByLineHelper(this->root);
-
-    cout << endl;
-}
-
-void AVLTree::displayByLineHelper(TreeNode* currNode) const {
-
-    if (currNode == nullptr) {
-
-        return;
-    }
-
-    displayByLineHelper(currNode->left);
-
-    cout << *currNode->value << endl;
-
-    displayByLineHelper(currNode->right);
+    LeftLeftRotation(unbalanced);
 }

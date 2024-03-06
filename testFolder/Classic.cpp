@@ -1,6 +1,8 @@
 #include "Classic.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Classic::Classic() : release_month(0) { // DONE
 
     this->movieType = MovieType::classic;
@@ -12,7 +14,9 @@ Classic::Classic() : release_month(0) { // DONE
 
 Classic::~Classic() {}
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getters - Setters
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Returns the first major actor in the map
 string Classic::getMajorActor() const { // DONE
 
@@ -29,8 +33,8 @@ bool Classic::setData(stringstream& movie_line) { // DONE
 
     // Execution Order doesn't matter, if 1 of them fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS
-    return (!Movie::setData(movie_line) || !this->getSetMA(movie_line) || 
-            !this->getSetMonth(movie_line) || !Movie::getSetYear(movie_line)) ? false : true;
+    return (!Movie::setData(movie_line) || !this->GetSetDirector(movie_line) || 
+            !this->GetSetMonth(movie_line) || !Movie::GetSetYear(movie_line)) ? false : true;
 }
 
 void Classic::setReleaseMonth(const int date)  {
@@ -38,7 +42,9 @@ void Classic::setReleaseMonth(const int date)  {
     this->release_month = date;
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void Classic::PrintHeader() const {
 
     cout << "Classics: " << endl << endl;
@@ -58,13 +64,15 @@ void Classic::Merge(Classic* rval) {
     this->InsertMajorActor(rval->getMajorActor(), rval->getStock());
 
     // Add the rvals stock totle to the total stock total
-    this->addStock(rval->getStock());
+    this->AddStock(rval->getStock());
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Operator Overloads
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ostream& operator << (ostream& ostrm, const Classic& classic) {
 
-    classic.display(ostrm);
+    classic.Display(ostrm);
 
     return ostrm;
 }
@@ -100,9 +108,10 @@ bool Classic::operator == (const Media& rval) const { // DONE
     return (this->getDirector() == rval_temp.getDirector() && this->getTitle() == rval_temp.getTitle());
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
-
-bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool Classic::GetSetMA(stringstream& movie_line) { // DONE
 
     string f_name = "", l_name = "";
     string name = "";
@@ -118,7 +127,7 @@ bool Classic::getSetMA(stringstream& movie_line) { // UNTESTED
     return true;
 }
 
-bool Classic::getSetMonth(stringstream& movie_line) { // DONE
+bool Classic::GetSetMonth(stringstream& movie_line) { // DONE
 
     int month = 0;
 
@@ -136,7 +145,7 @@ bool Classic::getSetMonth(stringstream& movie_line) { // DONE
     return true;
 }
 
-void Classic::display(ostream& ostrm) const { // UNTESTED
+void Classic::Display(ostream& ostrm) const { // DONE
 
     // Displays all non actor information
     ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle();

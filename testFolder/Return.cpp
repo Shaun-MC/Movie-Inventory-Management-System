@@ -1,31 +1,35 @@
 #include "Return.h"
 
-Return::Return(){
-}
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Return::Return() {};
 
-Return::~Return(){
-}
+Return::~Return() {};
 
-bool Return::processReturn(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
     
     Customer* customerInfo = nullptr;
     Media* mediaInfo = nullptr;
 
-    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
+    if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
 
         // Run Time Error Condition
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;  
         return false;
     }
 
-    if (this->movie == nullptr || movies.retrieve(this->movie, mediaInfo)) {
+    if (this->movie == nullptr || movies.Retrieve(this->movie, mediaInfo)) {
         
         // Run Time Error Condition
         cerr << "Return::processReturn() | Current Transaction Does Not Have an Associated Media" << endl;
         return false;
     }
 
-    if (customerInfo->returnMedia(this->movie)) {
+    if (customerInfo->ReturnMedia(this->movie)) {
 
         // Run Time Error Condition
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " << 
@@ -35,13 +39,11 @@ bool Return::processReturn(MediaCollection &movies, CustomerCollection &customer
         delete this->movie;
         this->movie = nullptr;
 
-        mediaInfo->incrementStock();
-        customerInfo->addHistory(""); //(this) 
+        mediaInfo->IncrementStock();
+        customerInfo->AddHistory(this->entireTransaction);
 
         return true;
     }
 
     return false;
 }
-
-//need to add ostream?? 

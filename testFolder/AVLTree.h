@@ -23,11 +23,11 @@ class AVLTree {
   const Media* getRootValue() const;
 
   // Actions
-  bool insert(Media*& val);
+  bool Insert(Media*& val);
   
-  bool retrieve(const Media& target, Media*& ret_val) const;
+  bool Retrieve(const Media& target, Media*& ret_val) const;
   
-  void displayByLine() const;
+  void DisplayByLine() const;
 
   // Operator Overloads
   //AVLTree& operator = (const AVLTree& rval); 
@@ -69,24 +69,24 @@ class AVLTree {
   int getNodeCount() const;
 
   // Helper Functions
-  TreeNode* insertHelper(TreeNode*& currNode, Media*& val); 
-  bool retrieveHelper(TreeNode* currNode, const Media& target, Media*& ret_val) const;
+  TreeNode* InsertHelper(TreeNode*& currNode, Media*& val); 
+  bool RetrieveHelper(TreeNode* currNode, const Media& target, Media*& ret_val) const;
 
-  void clearHelper(TreeNode*& delete_node);
+  void ClearHelper(TreeNode*& delete_node);
 
   //bool equalityHelper(const TreeNode* lval_curr, const TreeNode* rval_curr) const;
 
-  void displayByLineHelper(TreeNode* currNode) const;
+  void DisplayByLineHelper(TreeNode* currNode) const;
 
   // Member Functions
-  void makeRotation(const int bf, TreeNode*& curNode, Media*& val);
-  void clear();
+  void Clear();
+  void MakeRotation(const int bf, TreeNode*& curNode, Media*& val);
 
-  void leftLeftRotation(TreeNode*& U);
-  void rightRightRotation(TreeNode*& U);
+  void LeftLeftRotation(TreeNode*& U);
+  void RightRightRotation(TreeNode*& U);
 
-  void rightLeftRotation(TreeNode*& U);
-  void leftRightRotation(TreeNode*& U);
+  void RightLeftRotation(TreeNode*& U);
+  void LeftRightRotation(TreeNode*& U);
 
   // Member Data
   TreeNode* root;

@@ -36,15 +36,16 @@ class Classic : public Movie {
 
  private: 
 
+  // Member Functions
+  bool GetSetMA(stringstream& movie_line);
+  bool GetSetMonth(stringstream& movie_line);
+  
+  virtual void Display(ostream& ostrm) const;
+
+  // Member Data
   int release_month;
 
   map<string, int> major_actors; // Insertion Keeps it sorted
-  
-  bool getSetMA(stringstream& movie_line);
-  bool getSetMonth(stringstream& movie_line);
-
-
-  virtual void display(ostream& ostrm) const;
 };
 
 #endif 

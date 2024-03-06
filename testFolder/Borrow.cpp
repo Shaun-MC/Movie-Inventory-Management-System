@@ -1,16 +1,22 @@
 #include "Borrow.h"
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor - Destructor
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Borrow::Borrow(){}
 
 Borrow::~Borrow(){}
 
-bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
     
     Customer *customerInfo = nullptr;
     Media* mediaInfo = nullptr;
 
     // Customer not in CustomerCollection
-    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
+    if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
 
         // Error Condition
         cerr << "Borrow::processBorrow() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
@@ -18,7 +24,7 @@ bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customer
     }
 
     // Movies not in MediaCollection
-    if (this->movie == nullptr || movies.retrieve(this->movie, mediaInfo)) {
+    if (this->movie == nullptr || movies.Retrieve(this->movie, mediaInfo)) {
 
         // Error Condition
         cerr << "Borrow::processBorrow() | Current Transaction Does Not Have an Associated Media" << endl;
@@ -26,15 +32,15 @@ bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customer
     }
 
     // Unable to remove Movie form stock
-    if (!mediaInfo->decrementStock()) {
+    if (!mediaInfo->DecrementStock()) {
 
         // Error Condition
         cerr << "Borrow::processBorrow() | Media is Out of Stock (" << mediaInfo << ")" << endl;
 
-    } else { // Happy Path
+    } else { // Basic Course
 
-        customerInfo->borrowMedia(this->movie);
-        customerInfo->addHistory(""); // (this)
+        customerInfo->BorrowMedia(this->movie);
+        customerInfo->AddHistory(this->entireTransaction);
 
         this->movie = nullptr;
 

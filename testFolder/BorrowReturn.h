@@ -17,15 +17,15 @@ class BorrowReturn : public Transaction {
  protected: 
   
   // Member Functions
-  void processDrama(stringstream& trans_line);
-  void processClassic(stringstream& trans_line);
-  void processComedy(stringstream& trans_line);
+  void ProcessDrama(stringstream& trans_line);
+  void ProcessClassic(stringstream& trans_line);
+  void ProcessComedy(stringstream& trans_line);
 
-  void processInvalid(stringstream& trans_line);
+  void ProcessInvalid(stringstream& trans_line);
 
   // Member Data
-
   Media* movie;
+
 };
 
 #include "Borrow.h"

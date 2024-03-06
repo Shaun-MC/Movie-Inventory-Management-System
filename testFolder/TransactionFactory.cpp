@@ -1,6 +1,9 @@
 #include "TransactionFactory.h"
 
-Transaction* TransactionFactory::createTransaction(const string trans_line){ // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Actions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // DONE
     
     stringstream str(trans_line);
     char command;
@@ -12,29 +15,32 @@ Transaction* TransactionFactory::createTransaction(const string trans_line){ // 
     switch (command) {
 
         case CommandType::inventory:
-        return createInventory(str);
+        return CreateInventory(str);
         break;
 
         case CommandType::history: 
-        return createHistory(str);
+        return CreateHistory(str);
         break;
 
         case CommandType::borrow:
-        return createBorrow(str);
+        return CreateBorrow(str);
         break;
         
         case CommandType::return_:
-        return createReturn(str);
+        return CreateReturn(str);
         break;
 
         default: 
-        cerr << "TransactionFactory::createTransaction() | Invalid Transaction Command: " << command << endl;
+        cerr << "TransactionFactory::CreateTransaction() | Invalid Transaction Command: " << command << endl;
         return nullptr;
         break;
     }
 }
 
-Transaction *TransactionFactory::createInventory(stringstream& str){ // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Private Member Functions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Transaction *TransactionFactory::CreateInventory(stringstream& str){ // DONE
    
     Transaction* newInventory = new Inventory();
 
@@ -43,7 +49,7 @@ Transaction *TransactionFactory::createInventory(stringstream& str){ // DONE
     return newInventory;
 }
 
-Transaction *TransactionFactory::createHistory(stringstream& str){ // DONE
+Transaction *TransactionFactory::CreateHistory(stringstream& str){ // DONE
     
     Transaction* newHistory = new History();
     
@@ -58,7 +64,7 @@ Transaction *TransactionFactory::createHistory(stringstream& str){ // DONE
     return newHistory;
 }
 
-Transaction *TransactionFactory::createReturn(stringstream& str) // DONE
+Transaction *TransactionFactory::CreateReturn(stringstream& str) // DONE
 {
     Transaction* newReturn = new Return();
 
@@ -73,7 +79,7 @@ Transaction *TransactionFactory::createReturn(stringstream& str) // DONE
     return newReturn;
 }
 
-Transaction *TransactionFactory::createBorrow(stringstream& str) // DONE
+Transaction *TransactionFactory::CreateBorrow(stringstream& str) // DONE
 {
     Transaction* newBorrow = new Borrow();
     

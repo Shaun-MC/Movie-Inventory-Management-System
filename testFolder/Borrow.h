@@ -12,9 +12,7 @@ class Borrow : public BorrowReturn {
   ~Borrow();
 
   // Actions
-  bool processBorrow(MediaCollection &movies, CustomerCollection& customers);
-
-  // Operator Overloads 
+  bool ProcessBorrow(MediaCollection &movies, CustomerCollection& customers);
 };
 
 #endif
