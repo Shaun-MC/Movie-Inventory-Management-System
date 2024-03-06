@@ -5,8 +5,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Transaction::Transaction(){
     
-    this->commandType = 0;
-    this->customerID = 0;
+    this->commandType = this->customerID = 0;
     this->entireTransaction = " ";
 }
 
@@ -39,7 +38,7 @@ bool Transaction::setData(stringstream& trans_line) {
     
     trans_line >> ID;
 
-    if (ID <= kMinID || ID >= kMaxID) {
+    if (ID < kMinID || ID > kMaxID) {
 
         flag = false;
     } else {

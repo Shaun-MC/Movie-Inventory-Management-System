@@ -61,7 +61,8 @@ bool HashTable::RetrieveValue(const int key, Customer*& ret) const { // UNTESTED
     
     const int hash = CalcHash(key);
 
-    if (hash < 0 || hash >= kTableSize || 
+    if (hash < 0 || 
+        hash >= kTableSize || 
         this->table[hash] == nullptr) {
 
         return false;
@@ -73,8 +74,7 @@ bool HashTable::RetrieveValue(const int key, Customer*& ret) const { // UNTESTED
             ret = nullptr;
         }
 
-        ret = new Customer();
-        *ret = *this->table[hash];
+        ret = this->table[hash];
 
         return true;
     }

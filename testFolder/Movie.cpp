@@ -40,8 +40,10 @@ bool Movie::setData(stringstream& movie_line) { // DONE
 
     // Execution Order Does Not Matter - If 1 fails, they all fail
     // RESEARCH BETTER WAY TO DO THIS
-    return (!this->GetSetStock(movie_line) || !this->GetSetDirector(movie_line) || 
-            !this->GetSetTitle(movie_line)) ? false : true;
+    return (!this->GetSetStock(movie_line) || 
+            !this->GetSetDirector(movie_line) || 
+            !this->GetSetTitle(movie_line)
+            ) ? false : true;
 }
 
 void Movie::setMovieType(const char type) {

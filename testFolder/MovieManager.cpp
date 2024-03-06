@@ -85,7 +85,8 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
 
         string trans_line = "";
 
-        getline(transaction_list, trans_line, '\r');   
+        getline(transaction_list, trans_line, '\r');
+        transaction_list.ignore(); // '\n' that doesn't get caught by the getline for somereason 
 
         new_trans = TransactionFactory::CreateTransaction(trans_line);
 

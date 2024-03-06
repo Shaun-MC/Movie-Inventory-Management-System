@@ -33,16 +33,13 @@ class Transaction {
   void setCommandType(char type);
 
   // Actions
-  virtual void Process (MediaCollection& movies, CustomerCollection& customers);
-
-  // Operator Overloads
- 
+  virtual void Process(MediaCollection& movies, CustomerCollection& customers);
+  
  protected:
 
   int customerID;
   char commandType;
   string entireTransaction;
-  
 };
 
 #include "Inventory.h"

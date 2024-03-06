@@ -16,12 +16,12 @@ History::~History() {}
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 bool History::ProcessHistory(CustomerCollection &customers){ // UNTESTED
     
-    Customer *customerInfo;
+    Customer *customerInfo = nullptr;
 
     if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
 
         // Run Time Error Condition
-        cerr << "History::historyProcess() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
+        cerr << "History::ProcessHistory | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
         return false;
     }
 
@@ -30,7 +30,7 @@ bool History::ProcessHistory(CustomerCollection &customers){ // UNTESTED
     if (customerInfo->getHistory().empty()){
         
         // NOT an Error Condition
-        cout << " " << "History is Empty!" << endl;
+        cout << "History is Empty!" << endl;
     } else {
 
         for (string trans : customerInfo->getHistory()) {

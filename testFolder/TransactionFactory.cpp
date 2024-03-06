@@ -6,7 +6,7 @@
 Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // DONE
     
     stringstream str(trans_line);
-    char command;
+    char command = 0;
 
     // Cannot support command types being more than 1 character
     str >> command;

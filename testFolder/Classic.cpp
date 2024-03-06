@@ -31,10 +31,12 @@ int Classic::getReleaseMonth() const { // DONE
 // Assumes stream is pointing to the stock value
 bool Classic::setData(stringstream& movie_line) { // DONE
 
-    // Execution Order doesn't matter, if 1 of them fails, they all fail
-    // RESEARCH BETTER WAY TO DO THIS
-    return (!Movie::setData(movie_line) || !this->GetSetDirector(movie_line) || 
-            !this->GetSetMonth(movie_line) || !Movie::GetSetYear(movie_line)) ? false : true;
+    // Execution Order only matters for the first function
+    return (!Movie::setData(movie_line) ||
+            (!this->GetSetMA(movie_line) ||
+            !this->GetSetMonth(movie_line) || 
+            !Movie::GetSetYear(movie_line))
+           ) ? false : true;
 }
 
 void Classic::setReleaseMonth(const int date)  {
