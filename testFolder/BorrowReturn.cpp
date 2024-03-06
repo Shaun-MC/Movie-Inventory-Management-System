@@ -50,7 +50,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     switch(media_type){
         
         case MediaType::dvd :
-            this->movie = new Movie();
+        
             this->movie->setMediaType(dvd);
         break;
 
