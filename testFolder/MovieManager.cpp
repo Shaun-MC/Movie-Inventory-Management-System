@@ -23,7 +23,7 @@ void MovieManager::ReadCustomers(ifstream& customer_file) { // DONE
         
         getline(customer_file, line, '\n');
 
-        customers.receiveData(line);
+        customers.ReceiveData(line);
     }
 }
 
@@ -41,7 +41,7 @@ void MovieManager::ReadMovies(ifstream& movie_list) { // NOT DONE
 
         getline(movie_list, movie_line, '\n');
 
-        Media* new_media = MediaFactory::createDVDMovie(movie_line);
+        Media* new_media = MediaFactory::CreateDVDMovie(movie_line);
 
         if (new_media == nullptr) { // Do nothing - creating the Movie failed due to bad input
 
@@ -58,16 +58,16 @@ void MovieManager::ReadMovies(ifstream& movie_list) { // NOT DONE
 
         Classic* temp = dynamic_cast<Classic*>(new_media);
 
-        if (temp == nullptr && !this->stocks.insert(new_media)) { 
+        if (temp == nullptr && !this->stocks.Insert(new_media)) { 
 
             Media* dup_media = nullptr;
         
-            this->stocks.retrieve(new_media, dup_media);
+            this->stocks.Retrieve(new_media, dup_media);
 
-            dup_media->addStock(new_media->getStock());
+            dup_media->AddStock(new_media->getStock());
         } else {
 
-            this->stocks.insert(new_media);
+            this->stocks.Insert(new_media);
         }
     }  
 }
@@ -87,11 +87,11 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
 
         getline(transaction_list, trans_line, '\r');   
 
-        new_trans = TransactionFactory::createTransaction(trans_line);
+        new_trans = TransactionFactory::CreateTransaction(trans_line);
 
         if (new_trans != nullptr) {
 
-            new_trans->process(this->stocks, this->customers);
+            new_trans->Process(this->stocks, this->customers);
 
             new_trans = nullptr;
         } 

@@ -20,12 +20,12 @@ bool CustomerCollection::Insert(const int ID, const string& name) { // DONE
     
     Customer new_cust = Customer(ID, name);
 
-    return this->collection.insertKeyValue(new_cust.getID(), new_cust);
+    return this->collection.InsertKeyValue(new_cust.getID(), new_cust);
 }
 
 bool CustomerCollection::Retrieve(int key, Customer*& ret) { // UNTESTED
     
-    return this->collection.retrieveValue(key, ret);
+    return this->collection.RetrieveValue(key, ret);
 }
 
 void CustomerCollection::ReceiveData(const string cust_line) { // DONE
@@ -40,7 +40,7 @@ void CustomerCollection::ReceiveData(const string cust_line) { // DONE
 
 void CustomerCollection::Display() const {
 
-    this->collection.display();
+    this->collection.Display();
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

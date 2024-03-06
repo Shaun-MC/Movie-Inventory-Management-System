@@ -35,7 +35,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     // Reads and sets Customer ID Data 
     if (Transaction::setData(trans_line)) {
 
-        this->processInvalid(trans_line);
+        this->ProcessInvalid(trans_line);
         return false;
     }  
 
@@ -55,7 +55,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
         break;
 
         default: 
-        processInvalid(trans_line);
+        ProcessInvalid(trans_line);
         return false;
         break;
     }
@@ -69,19 +69,19 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
 
         case MovieType::comedy :
         //this->movie; // create new Comedy
-        processComedy(trans_line);
+        ProcessComedy(trans_line);
         break;
 
         case MovieType::classic :
-        processComedy(trans_line);
+        ProcessComedy(trans_line);
         break;
 
         case MovieType::drama :
-        processDrama(trans_line);
+        ProcessDrama(trans_line);
         break;
 
         default: 
-        processInvalid(trans_line);
+        ProcessInvalid(trans_line);
         return false;
         break;
     }
@@ -92,7 +92,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void BorrowReturn::processComedy(stringstream& trans_line){ // DONE
+void BorrowReturn::ProcessComedy(stringstream& trans_line){ // DONE
     
     // Intialize Sorting Criteria variables
     string title = ""; 
@@ -112,7 +112,7 @@ void BorrowReturn::processComedy(stringstream& trans_line){ // DONE
     entireTransaction += title + ", " + to_string(year);
 }
 
-void BorrowReturn::processDrama(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessDrama(stringstream& trans_line){ // UNTESTED
 
     // Intialize Sorting Criteria variables
     string title = "", director = "";
@@ -132,7 +132,7 @@ void BorrowReturn::processDrama(stringstream& trans_line){ // UNTESTED
 	entireTransaction += director + ", " + title + ", ";
 }
 
-void BorrowReturn::processClassic(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessClassic(stringstream& trans_line){ // UNTESTED
     
     // Intialize Sorting Criteria variables
     int month = 0, year = 0; 
@@ -157,7 +157,7 @@ void BorrowReturn::processClassic(stringstream& trans_line){ // UNTESTED
 
 // If called in movie_type switch statment, movie type is not included
 // If called from setData conditional, cust_id not included
-void BorrowReturn::processInvalid(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessInvalid(stringstream& trans_line){ // UNTESTED
     
     string temp = "";
 
@@ -166,5 +166,5 @@ void BorrowReturn::processInvalid(stringstream& trans_line){ // UNTESTED
 	
     this->entireTransaction += temp;
 
-	cerr << "BorrowReturn::processInvalid() | Invalid Command: " << this->entireTransaction << endl;
+	cerr << "BorrowReturn::ProcessInvalid() | Invalid Command: " << this->entireTransaction << endl;
 }

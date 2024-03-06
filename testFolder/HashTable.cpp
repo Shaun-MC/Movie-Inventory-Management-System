@@ -101,6 +101,11 @@ int HashTable::CreateHash(const int key) const { // DONE
     return (this->table[firstHashVal] == nullptr) ? firstHashVal : DoubleHash(key);
 }
 
+int HashTable::CalcHash(const int key) const {
+
+    return key % kTableSize;
+}
+
 int HashTable::CalcDoubleHash(const int insertion_key) const { // DONE
 
     return kTableSize - (insertion_key % kTableSize);

@@ -10,7 +10,7 @@ class MediaFactory {
 
  public: 
 
-  static Media* createDVDMovie(string& movie_line);
+  static Media* CreateDVDMovie(string& movie_line);
 };
 
 #endif

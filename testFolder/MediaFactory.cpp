@@ -1,6 +1,6 @@
 #include "MediaFactory.h"
 
-Media* MediaFactory::createDVDMovie(string& movie_line) { // DONE
+Media* MediaFactory::CreateDVDMovie(string& movie_line) { // DONE
 
     return MovieFactory::CreateMovie(movie_line);
 }

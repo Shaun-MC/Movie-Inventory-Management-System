@@ -4,7 +4,6 @@
 #include <sstream>
 
 #include "HashTable.h"
-#include "Customer.h"
 
 // Warning: Unable to process IntelliSense for file with same canonicalized path as existing file.
 
@@ -35,7 +34,7 @@ class CustomerCollection {
   void ParseCustomerLine(const string line, int& key, string& name) const;
 
   // Member Data
-  HashTable<int, Customer> collection;
+  HashTable collection;
 };
 
 #endif

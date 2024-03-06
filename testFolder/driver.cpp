@@ -14,13 +14,13 @@ int main(int args, char* argv[]) {
     MovieManager inventory;
     ifstream customer_list, movie_list, transaction_list;
 
-    if (!Validate::checkfileAmount(args)) {
+    if (!Validate::CheckfileAmount(args)) {
 
         cerr << "Invalid amount of files passed into the system." << endl;
 
     } else {
 
-        Validate::dispurseFiles(customer_list, movie_list, transaction_list, argv);
+        Validate::DispurseFiles(customer_list, movie_list, transaction_list, argv);
 
         inventory.ReadCustomers(customer_list); // FINE
         customer_list.close();
