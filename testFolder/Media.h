@@ -35,7 +35,7 @@ class Media {
 
   void setStock(const int amount);
 
-  void setMediaType(const char type);
+  void setMediaType(const MediaType type);
 
   // Actions
   void AddStock(const int amount);

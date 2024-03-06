@@ -25,7 +25,7 @@ bool History::ProcessHistory(CustomerCollection &customers){ // UNTESTED
         return false;
     }
 
-    cout << "History of " << this->getCustomerID() << " " << customerInfo->getName() << ':' << endl;
+    cout << "History of " << customerInfo->getName() << ':' << endl;
 
     if (customerInfo->getHistory().empty()){
         
