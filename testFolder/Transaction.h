@@ -39,7 +39,7 @@ class Transaction {
 
   int customerID;
   char commandType;
-  string entireTransaction;
+  string transactionLog;
 };
 
 #include "Inventory.h"

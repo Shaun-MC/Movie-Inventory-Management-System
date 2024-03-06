@@ -27,18 +27,17 @@ bool History::ProcessHistory(CustomerCollection &customers){ // UNTESTED
 
     cout << "History of " << customerInfo->getName() << ':' << endl;
 
-    if (customerInfo->getHistory().empty()){
+    if (!customerInfo->getHistory().empty()){
         
-        // NOT an Error Condition
-        cout << "History is Empty!" << endl;
-    } else {
-
-        for (string trans : customerInfo->getHistory()) {
+         for (string trans : customerInfo->getHistory()) {
 
             cout << " " << trans << endl;
         }
 
         return true;
+    } else {
+
+        cout << endl;
     }
 
     return false;

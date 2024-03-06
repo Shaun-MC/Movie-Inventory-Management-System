@@ -24,7 +24,7 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
     }
 
     // Movies not in MediaCollection
-    if (this->movie == nullptr || movies.Retrieve(this->movie, mediaInfo)) {
+    if (this->movie == nullptr || !movies.Retrieve(this->movie, mediaInfo)) {
 
         // Error Condition
         cerr << "Borrow::processBorrow() | Current Transaction Does Not Have an Associated Media" << endl;
@@ -40,7 +40,7 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
     } else { // Basic Course
 
         customerInfo->BorrowMedia(this->movie);
-        customerInfo->AddHistory(this->entireTransaction);
+        customerInfo->AddHistory(this->transactionLog);
 
         this->movie = nullptr;
 

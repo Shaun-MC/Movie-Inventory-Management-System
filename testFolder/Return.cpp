@@ -22,7 +22,7 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
         return false;
     }
 
-    if (this->movie == nullptr || movies.Retrieve(this->movie, mediaInfo)) {
+    if (this->movie == nullptr || !movies.Retrieve(this->movie, mediaInfo)) {
         
         // Run Time Error Condition
         cerr << "Return::processReturn() | Current Transaction Does Not Have an Associated Media" << endl;
@@ -40,7 +40,7 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
         this->movie = nullptr;
 
         mediaInfo->IncrementStock();
-        customerInfo->AddHistory(this->entireTransaction);
+        customerInfo->AddHistory(this->transactionLog);
 
         return true;
     }

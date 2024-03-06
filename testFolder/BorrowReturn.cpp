@@ -25,10 +25,19 @@ BorrowReturn::~BorrowReturn(){ // DONE
 // Uses early returns for boolean return
 bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     
-    // Media *newMedia = nullptr
+    Media *newMedia = nullptr;
     char media_type = 0, movie_type = 0;
 
-    this->entireTransaction = this->commandType + ' ';
+    switch (this->commandType) {
+
+        case CommandType::borrow : 
+        this->transactionLog += "Borrowed";
+        break;
+
+        case CommandType::return_ :
+        this->transactionLog += "Returned";
+        break;
+    }
 
     trans_line.ignore(); // Space
 
@@ -45,13 +54,10 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     
     trans_line.ignore(); // Space
 
-    this->entireTransaction += media_type + ' '; 
-
     switch(media_type){
         
         case MediaType::dvd :
-            this->movie = new Movie();
-            this->movie->setMediaType(dvd);
+        this->media_type = dvd;
         break;
 
         default: 
@@ -63,21 +69,18 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     trans_line >> movie_type; // Basic Course: F, D or C 
     trans_line.ignore(); // Space
 
-    this->entireTransaction += movie_type + ' '; 
-
     switch (movie_type) {
 
         case MovieType::comedy :
-        //this->movie; // create new Comedy
-        ProcessComedy(trans_line);
+        ProcessComedy(trans_line, newMedia);
         break;
 
         case MovieType::classic :
-        ProcessComedy(trans_line);
+        ProcessComedy(trans_line, newMedia);
         break;
 
         case MovieType::drama :
-        ProcessDrama(trans_line);
+        ProcessDrama(trans_line, newMedia);
         break;
 
         default: 
@@ -85,6 +88,8 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
         return false;
         break;
     }
+
+    this->movie = newMedia;
     
     return true;
 }
@@ -92,9 +97,12 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void BorrowReturn::ProcessComedy(stringstream& trans_line){ // DONE
+void BorrowReturn::ProcessComedy(stringstream& trans_line, Media*& newMedia){ // DONE
     
-    // Intialize Sorting Criteria variables
+    this->movie_type = MovieType::comedy;
+    newMedia = new Comedy();
+
+    // Intialize Sorting Criteria variables    
     string title = ""; 
     int year = 0;
 
@@ -102,17 +110,20 @@ void BorrowReturn::ProcessComedy(stringstream& trans_line){ // DONE
     getline(trans_line, title, ',');
     trans_line.ignore(); // Space
     
-    dynamic_cast<Movie*>(this->movie)->setTitle(title);
+    dynamic_cast<Comedy*>(newMedia)->setTitle(title);
 
     // Get & Set the Movies Release Year
     trans_line >> year;
-    dynamic_cast<Movie*>(this->movie)->setYear(year);
+    dynamic_cast<Comedy*>(newMedia)->setYear(year);
 
     // Add to transaction string
-    entireTransaction += title + ", " + to_string(year);
+    this->transactionLog += ' ' + dynamic_cast<Comedy*>(newMedia)->getTitle();
 }
 
-void BorrowReturn::ProcessDrama(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ // UNTESTED
+
+    this->movie_type = MovieType::drama;
+    newMedia = new Drama();
 
     // Intialize Sorting Criteria variables
     string title = "", director = "";
@@ -121,38 +132,41 @@ void BorrowReturn::ProcessDrama(stringstream& trans_line){ // UNTESTED
     getline(trans_line, director, ',');
     trans_line.ignore(); // Space
 
-    dynamic_cast<Movie*>(this->movie)->setDirector(director);
+    dynamic_cast<Drama*>(newMedia)->setDirector(director);
     trans_line.ignore(); // Space
 
 	// Get & Set the Movies Title
 	getline(trans_line, title, '\n');
-    dynamic_cast<Movie*>(this->movie)->setTitle(title);
+    dynamic_cast<Drama*>(newMedia)->setTitle(title);
 
 	// Add to transaction string
-	entireTransaction += director + ", " + title + ", ";
+	this->transactionLog += ' ' + dynamic_cast<Drama*>(newMedia)->getTitle();
 }
 
-void BorrowReturn::ProcessClassic(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ // UNTESTED
     
+    this->movie_type = MovieType::classic;
+    newMedia = new Drama();
+
     // Intialize Sorting Criteria variables
     int month = 0, year = 0; 
     string majorActor = "";
 
     // Get & Set the Release Month and Release Year 
-    trans_line >> month >> year; // Need to Error Check??
+    trans_line >> month >> year; // Doesn't Error Check
 	
-    dynamic_cast<Classic*>(this->movie)->setReleaseMonth(month);
-    dynamic_cast<Movie*>(this->movie)->setYear(year);
+    dynamic_cast<Classic*>(newMedia)->setReleaseMonth(month);
+    dynamic_cast<Classic*>(newMedia)->setYear(year);
 
 	trans_line.ignore(); // Space
 
     // Get & Set the Major Actor 
     getline(trans_line, majorActor, '\n');
 	
-    dynamic_cast<Classic*>(this->movie)->InsertMajorActor(majorActor, this->movie->getStock()); 
+    dynamic_cast<Classic*>(newMedia)->InsertMajorActor(majorActor, this->movie->getStock()); 
 
     // Add to transaction string
-	entireTransaction += to_string(month) + ' ' + to_string(year) + ' ' + majorActor;
+	this->transactionLog += ' ' + dynamic_cast<Classic*>(newMedia)->getTitle();
 }
 
 // If called in movie_type switch statment, movie type is not included
@@ -164,7 +178,7 @@ void BorrowReturn::ProcessInvalid(stringstream& trans_line){ // UNTESTED
     // Get the rest of trans_line
 	getline(trans_line, temp, '\n');
 	
-    this->entireTransaction += temp;
+    this->transactionLog += temp;
 
-	cerr << "BorrowReturn::ProcessInvalid() | Invalid Command: " << this->entireTransaction << endl;
+	cerr << "BorrowReturn::ProcessInvalid() | Invalid Command: " << this->transactionLog << endl;
 }

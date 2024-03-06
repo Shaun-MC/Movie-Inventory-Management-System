@@ -44,9 +44,9 @@ bool MediaCollection::Insert(Media*& media) { // DONE
 
 bool MediaCollection::Retrieve(Media*& target, Media*& ret) { // UNTESTED
 
-    Media* cpy_target = const_cast<Media*>(target);
+    //Media* cpy_target = const_cast<Media*>(target);
     
-    char retrieve_type = dynamic_cast<Movie*>(cpy_target)->getMovieType();
+    char retrieve_type = dynamic_cast<const Movie*>(target)->getMovieType();
 
     switch (retrieve_type) {
 

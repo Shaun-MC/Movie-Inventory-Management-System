@@ -17,13 +17,16 @@ class BorrowReturn : public Transaction {
  protected: 
   
   // Member Functions
-  void ProcessDrama(stringstream& trans_line);
-  void ProcessClassic(stringstream& trans_line);
-  void ProcessComedy(stringstream& trans_line);
+  void ProcessDrama(stringstream& trans_line, Media*& newMedia);
+  void ProcessClassic(stringstream& trans_line, Media*& newMedia);
+  void ProcessComedy(stringstream& trans_line, Media*& newMedia);
 
   void ProcessInvalid(stringstream& trans_line);
 
   // Member Data
+  MediaType media_type;
+  MovieType movie_type;
+  
   Media* movie;
 
 };

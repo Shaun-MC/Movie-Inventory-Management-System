@@ -7,7 +7,14 @@ using namespace std;
 #include "MovieManager.h"
 
 // The File/#include system currently implemented is very slow, optimize if time allows
-// Warning: Unable to process IntelliSense for file with same canonicalized path as existing file
+// Warning: Unable to process IntelliSense for file with same canonicalized path as existing file - Error across multiple files 
+//          ??Duplicate Includes??
+
+// Current Errors: 
+    // Way to many transaction error statements
+    // Doesn't update the stock amounts for borrowed and retuned (Dramas and Classics only)
+    // Certain customers don't have a history - some customers have too many history logs
+    // Doesn't run the last History command (H 8888)
 
 int main(int args, char* argv[]) {
 

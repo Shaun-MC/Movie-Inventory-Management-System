@@ -6,14 +6,14 @@
 Transaction::Transaction(){
     
     this->commandType = this->customerID = 0;
-    this->entireTransaction = " ";
+    this->transactionLog = " ";
 }
 
 Transaction::Transaction(const Transaction &other){
     
     this->commandType = other.commandType;
     this->customerID = other.customerID;
-    this->entireTransaction = other.entireTransaction;
+    this->transactionLog = other.transactionLog;
 }
 
 Transaction::~Transaction(){}
