@@ -69,6 +69,32 @@ void Classic::Merge(Classic* rval) {
     this->AddStock(rval->getStock());
 }
 
+
+// Assumes the actor name exists 
+void Classic::IncrementStock(const string actor_name) {
+
+    if (this->major_actors.find(actor_name) != this->major_actors.end()) {
+
+        ++this->stock;
+        ++this->major_actors.at(actor_name);
+    }
+}
+
+// Assumes the actor name exists 
+bool Classic::DecrementStock(const string actor_name) {
+
+    if (this->major_actors.find(actor_name) != this->major_actors.end() && 
+        this->major_actors.at(actor_name) - 1 >= 0) {
+
+        --this->stock;
+        --this->major_actors.at(actor_name);
+
+        return true;
+    }
+
+    return false;
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Operator Overloads
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

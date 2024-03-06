@@ -33,22 +33,43 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
 
         cerr << "Borrow::processBorrow() | Could Not Retrieve " << dynamic_cast<Movie*>(this->movie)->getTitle()
              << " From the Collection" << endl;
-    } else {
+    } else { // NOT GOOD DESIGN / STRUCTURE
 
-        // Unable to remove Movie form stock
-        if (!mediaInfo->DecrementStock()) {
+        bool flag = false;
 
-        // Error Condition
-        cerr << "Borrow::processBorrow() | Media is Out of Stock (" << dynamic_cast<Movie*>(mediaInfo)->getTitle() << ")" << endl;
+        if (this->movie_type == MovieType::classic) {
 
-        } else { // Basic Course
+            Classic* temp = dynamic_cast<Classic*>(mediaInfo);
 
+            if (!temp->DecrementStock(temp->getMajorActor())) {
+                
+                flag = true;
+            }
+        } else {
+            
+            // Unable to remove Movie form stock
+            if (!mediaInfo->DecrementStock()) {
+
+                flag = true;
+            }
+        }
+
+        if (flag == true) {
+
+            // Error Condition
+            cerr << "Borrow::processBorrow() | Media is Out of Stock (" 
+             << dynamic_cast<Movie*>(mediaInfo)->getTitle() << ")" << endl;
+
+        } else {
+            
+            // Basic Course
             customerInfo->BorrowMedia(this->movie);
             customerInfo->AddHistory(this->transactionLog);
 
             this->movie = nullptr;
 
             return true;
+
         }
     }
 

@@ -26,6 +26,9 @@ class Classic : public Movie {
   void InsertMajorActor(const string name, const int stock_amount);
 
   void Merge(Classic* rval);
+  
+  void IncrementStock(const string actor_name);
+  bool DecrementStock(const string actor_name);
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Classic& drama);
