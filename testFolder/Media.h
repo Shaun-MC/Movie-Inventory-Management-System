@@ -57,8 +57,7 @@ class Media {
   // Member Data
   int stock;
 
-  MediaType type;
-
+  char type;
 };
 
 #endif
