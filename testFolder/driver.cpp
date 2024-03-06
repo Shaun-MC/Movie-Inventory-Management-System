@@ -7,14 +7,13 @@ using namespace std;
 #include "MovieManager.h"
 
 // The File/#include system currently implemented is very slow, optimize if time allows
+
 // Warning: Unable to process IntelliSense for file with same canonicalized path as existing file - Error across multiple files 
 //          ??Duplicate Includes??
 
 // Current Errors: 
-    // Way to many transaction error statements - 'Customer 0 Does Not Exist'
-    // Doesn't update the stock amounts for borrowed and retuned (Dramas and Classics only)
-    // Certain customers don't have a history - some customers have too many history logs
-    // Doesn't run the last History command (H 8888)
+    // Doesn't update the stock amounts for individual Major Actors - Classics
+    // Classic Movies don't have a title in their returns or borrows
 
 int main(int args, char* argv[]) {
 

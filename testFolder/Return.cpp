@@ -29,11 +29,11 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
         return false;
     }
 
-    if (customerInfo->ReturnMedia(this->movie)) {
+    if (!customerInfo->ReturnMedia(mediaInfo)) {
 
         // Run Time Error Condition
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " << 
-             dynamic_cast<Movie*>(this->movie)->getTitle() << endl;
+             dynamic_cast<Movie*>(mediaInfo)->getTitle() << endl;
     } else {
 
         delete this->movie;
