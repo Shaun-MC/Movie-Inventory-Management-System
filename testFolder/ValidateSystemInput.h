@@ -14,7 +14,7 @@ class Validate {
   static bool CheckfileAmount(const int files);
 
   // Opens each of the files based on the a contents of the first character
-  static void DispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]);
+  static void DispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]); // Large Memory Leak
 
  private:
   

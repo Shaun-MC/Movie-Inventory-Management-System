@@ -49,6 +49,7 @@ bool HashTable::InsertKeyValue(const int key, const Customer& val) { // FINE
         return false;
     } else { // Viable locations - point the table ptr to the val
 
+        // 1 | 12 of these doesn't get deleted 
         this->table[hash] = new Customer(val); // int obj cannot be deleted before the pointer is, lose the reference
         
         ++this->curr_size;

@@ -112,9 +112,9 @@ bool AVLTree::equalityHelper(const TreeNode* lval_curr, const TreeNode* rval_cur
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getters
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const Media* AVLTree::getRootValue() const {
+Media* AVLTree::getRootValue() const {
 
-    return this->root->value;
+    return (this->root == nullptr) ? nullptr : this->root->value;
 }
 
 int AVLTree::getNodeCount() const {

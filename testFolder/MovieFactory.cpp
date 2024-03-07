@@ -6,7 +6,7 @@
 Movie* MovieFactory::CreateMovie(string& movie_line) { // DONE
 
     stringstream str(movie_line);
-    char movie_type;
+    char movie_type = 0;
 
     // Cannot support movie types being more than 1 character
     str >> movie_type;
@@ -29,8 +29,7 @@ Movie* MovieFactory::CreateMovie(string& movie_line) { // DONE
         break;
 
         default: 
-            cerr << "Error: " << movie_type << " Invaild Genre. Try Again." << endl;
-            //cerr << "MovieFactory::createMovie() | Unsupported Movie Type: " << movie_type << endl; 
+        cerr << "Error: " << movie_type << " Invaild Genre. Try Again." << endl;
         return nullptr;
     }
 }

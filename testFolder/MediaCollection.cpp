@@ -5,12 +5,13 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MediaCollection::MediaCollection() : kComedyIndex(0), kDramaIndex(1), kClassicIndex(2)  { // DONE
 
+    // Small Memory Leak?
     // Each Insert also calls the AVLTree destructor for some reason - TEST
-    this->stock.push_back(make_pair(MovieType::comedy, this->comedies));
+    this->stock.push_back({MovieType::comedy, this->comedies});
 
-    this->stock.push_back(make_pair(MovieType::drama, this->dramas));
+    this->stock.push_back({MovieType::drama, this->dramas});
 
-    this->stock.push_back(make_pair(MovieType::classic, this->classics));
+    this->stock.push_back({MovieType::classic, this->classics});
 }
 
 MediaCollection::~MediaCollection() {};
@@ -77,9 +78,10 @@ void MediaCollection::Display() const {
     
     for (int i = 0; i < this->stock.size(); i++) {
 
-        cout << setfill('-') << setw(kLineLength) << "" << setfill(' ') << endl;
+        // Thorwing a memory leak?????
+        cout << setfill('-') << setw(kLineLength) << " " << setfill(' ') << endl;
 
-        const Movie* movie = dynamic_cast<const Movie*>(stock[i].second.getRootValue()); 
+        Movie* movie = dynamic_cast<Movie*>(stock[i].second.getRootValue()); 
 
         movie->PrintHeader();
 

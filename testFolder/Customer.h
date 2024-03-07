@@ -18,6 +18,9 @@ class Customer {
   // Constructors
   Customer();
   Customer(int ID, string name);
+  Customer(const Customer& rval);
+
+  ~Customer();
 
   // Getters - Setters
   int getID() const;

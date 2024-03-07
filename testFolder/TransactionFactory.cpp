@@ -31,9 +31,7 @@ Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // 
         break;
 
         default: 
-            cerr << "ERROR: " << command << " Invalid Transaction Type. Try Again." << endl;
-
-        //cerr << "TransactionFactory::CreateTransaction() | Invalid Transaction Command: " << << endl;
+        cerr << "ERROR: " << command << " Invalid Transaction Type. Try Again." << endl;
         return nullptr;
         break;
     }
@@ -42,8 +40,9 @@ Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Transaction *TransactionFactory::CreateInventory(stringstream& str){ // DONE
-   
+Transaction* TransactionFactory::CreateInventory(stringstream& str){ // DONE
+    
+    // Doesn't always get deleted
     Transaction* newInventory = new Inventory();
 
     newInventory->setCommandType(CommandType::inventory);
@@ -51,7 +50,7 @@ Transaction *TransactionFactory::CreateInventory(stringstream& str){ // DONE
     return newInventory;
 }
 
-Transaction *TransactionFactory::CreateHistory(stringstream& str){ // DONE
+Transaction* TransactionFactory::CreateHistory(stringstream& str){ // DONE
     
     Transaction* newHistory = new History();
     
@@ -66,7 +65,7 @@ Transaction *TransactionFactory::CreateHistory(stringstream& str){ // DONE
     return newHistory;
 }
 
-Transaction *TransactionFactory::CreateReturn(stringstream& str) // DONE
+Transaction* TransactionFactory::CreateReturn(stringstream& str) // DONE
 {
     Transaction* newReturn = new Return();
 

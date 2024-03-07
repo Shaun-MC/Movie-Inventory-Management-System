@@ -20,7 +20,7 @@ class AVLTree {
   ~AVLTree();
   
   // Getter
-  const Media* getRootValue() const;
+  Media* getRootValue() const;
 
   // Actions
   bool Insert(Media*& val);

@@ -4,8 +4,20 @@
 // Constructors
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Customer::Customer(){
+    
     ID = 0;
     name = " ";
+}
+
+Customer::~Customer() { // No changes in memory leak
+
+    for (int i = this->outstandingMedia.size() - 1; i >= 0; i++) {
+
+        delete this->outstandingMedia[i];
+        this->outstandingMedia[i] = nullptr;
+
+        this->outstandingMedia.pop_back();
+    }
 }
 
 Customer::Customer(int ID, string name) {
@@ -14,6 +26,14 @@ Customer::Customer(int ID, string name) {
     this->name = name;
 }
 
+Customer::Customer(const Customer& rval) {
+
+    this->ID = rval.ID;
+    this->name = name;
+
+    this->history = rval.history;
+    this->outstandingMedia = rval.outstandingMedia; // Don't know if it'll be a deep copy
+}
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getters - Setters
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

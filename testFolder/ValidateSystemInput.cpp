@@ -5,8 +5,10 @@ bool Validate::CheckfileAmount(const int files) {
     return files == 4;
 }
 
+// Large Memory Leak - ifstream, Memory Leak
+// Small memory leak, f.open()
 void Validate::DispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]) { // DONE
-
+    
     for (int i = 1; i < 4; i++) {
 
         ifstream temp(file_names[i]);
