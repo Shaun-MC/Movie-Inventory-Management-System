@@ -25,14 +25,19 @@ bool History::ProcessHistory(CustomerCollection &customers){ // UNTESTED
         return false;
     }
 
-    cout << "History of " << customerInfo->getName() << ':' << endl;
+    cout << endl << "History of " << customerInfo->getName() << ':' << endl;
 
     if (!customerInfo->getHistory().empty()){
-        
-         for (string trans : customerInfo->getHistory()) {
 
-            cout << " " << trans << endl;
+        const auto& history = customerInfo->getHistory();
+        for (auto it = history.rbegin(); it != history.rend(); ++it) {
+            cout << " " << *it << endl;
         }
+        
+        //  for (string trans : customerInfo->getHistory()) {
+
+        //     cout << " " << trans << endl;
+        // }
 
         return true;
     } else {

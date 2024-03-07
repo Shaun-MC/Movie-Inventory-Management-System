@@ -29,7 +29,8 @@ Movie* MovieFactory::CreateMovie(string& movie_line) { // DONE
         break;
 
         default: 
-        cerr << "MovieFactory::createMovie() | Unsupported Movie Type: " << movie_type << endl; 
+            cerr << "Error: " << movie_type << " Invaild Genre. Try Again." << endl;
+            //cerr << "MovieFactory::createMovie() | Unsupported Movie Type: " << movie_type << endl; 
         return nullptr;
     }
 }

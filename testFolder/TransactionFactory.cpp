@@ -31,7 +31,9 @@ Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // 
         break;
 
         default: 
-        cerr << "TransactionFactory::CreateTransaction() | Invalid Transaction Command: " << command << endl;
+            cerr << "ERROR: " << command << " Invalid Transaction Type. Try Again." << endl;
+
+        //cerr << "TransactionFactory::CreateTransaction() | Invalid Transaction Command: " << << endl;
         return nullptr;
         break;
     }

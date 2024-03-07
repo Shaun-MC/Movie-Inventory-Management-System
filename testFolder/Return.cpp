@@ -41,10 +41,13 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
 
             Classic* temp = dynamic_cast<Classic*>(mediaInfo);
 
+            this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
+
             temp->IncrementStock(dynamic_cast<Classic*>(this->movie)->getMajorActor());
            
         } else {
-            
+            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
+            this->transactionLog += " by " + temp->getDirector();
             mediaInfo->IncrementStock();
         } 
     }

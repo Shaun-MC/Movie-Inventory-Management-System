@@ -19,7 +19,8 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
     if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
 
         // Error Condition
-        cerr << "Borrow::processBorrow() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
+        cerr << "ERROR: Borrow Transaction Failed -- Customer " << this->getCustomerID() << " does not exist" << endl;
+        //cerr << "Borrow::processBorrow() | Customer " <<  << " Does Not Exist" << endl;
         return false;
     }
 
@@ -27,12 +28,14 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
     if (this->movie == nullptr) {
 
         // Error Condition
-        cerr << "Borrow::processBorrow() | Current Transaction Does Not Have an Associated Media" << endl;
+        cerr << "ERROR: Borrow::processBorrow() | Current Transaction Does Not Have an Associated Media" << endl;
         return false;
     } else if (!movies.Retrieve(this->movie, mediaInfo)) { // 
 
-        cerr << "Borrow::processBorrow() | Could Not Retrieve " << dynamic_cast<Movie*>(this->movie)->getTitle()
-             << " From the Collection" << endl;
+        cerr << "ERROR: Borrow Transaction Failed -- Movie does not Exist in the Inventory" << endl;
+
+        // cerr << "Borrow::processBorrow() | Could Not Retrieve " << dynamic_cast<Movie*>(this->movie)->getTitle()
+        //      << " From the Collection" << endl;
     } else { // NOT GOOD DESIGN / STRUCTURE
 
         bool flag = false;
@@ -40,16 +43,20 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
         if (this->movie_type == MovieType::classic) {
 
             Classic* temp = dynamic_cast<Classic*>(mediaInfo);
-
+ 
+            this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
+            
             if (!temp->DecrementStock(temp->getMajorActor())) {
                 
                 flag = true;
             }
         } else {
+            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
+            this->transactionLog += " by " + temp->getDirector();
             
             // Unable to remove Movie form stock
             if (!mediaInfo->DecrementStock()) {
-
+               
                 flag = true;
             }
         }
@@ -57,13 +64,15 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
         if (flag == true) {
 
             // Error Condition
-            cerr << "Borrow::processBorrow() | Media is Out of Stock (" 
-             << dynamic_cast<Movie*>(mediaInfo)->getTitle() << ")" << endl;
+            cerr << "ERROR: Borrow Transaction Failed -- Not enough in the Stock" << endl;
+            // cerr << "Borrow::processBorrow() | Media is Out of Stock (" 
+            //  << dynamic_cast<Movie*>(mediaInfo)->getTitle() << ")" << endl;
 
         } else {
             
             // Basic Course
             customerInfo->BorrowMedia(this->movie);
+            
             customerInfo->AddHistory(this->transactionLog);
 
             this->movie = nullptr;

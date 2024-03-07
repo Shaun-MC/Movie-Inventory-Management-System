@@ -176,15 +176,18 @@ void BorrowReturn::ProcessInvalid(stringstream& trans_line, const int flag){ // 
     switch(flag) {
 
         case 1: 
-        cerr << "BorrowReturn::ProcessInvalid() | Invalid Customer ID: " << this->getCustomerID() << endl;
+            cerr << "Error: " << this->getCustomerID() << " Invalid Customer ID. Try Again." << endl;
+            //cerr << "BorrowReturn::ProcessInvalid() | Invalid Customer ID: " << this->getCustomerID() << endl;
         break;
 
         case 2: 
-        cerr << "BorrowReturn::ProcessInvalid() | Invalid Media Type: " << this->media_type << endl;
+            cerr << "Error: " << this->media_type << " Invalid Media Type. Try Again." << endl;
+            //cerr << "BorrowReturn::ProcessInvalid() | Invalid Media Type: " << this->media_type << endl;
         break;
 
         case 3:
-        cerr << "BorrowReturn::ProcessInvalid() | Invalid Movie Type: " << this->movie_type << endl;
+            cerr << "Error: " << this->movie_type << " Invalid Genre. Try Again." << endl;
+            //cerr << "BorrowReturn::ProcessInvalid() | Invalid Movie Type: " << this->movie_type << endl;
         break;
 
         // No default
