@@ -13,8 +13,6 @@ class History : public Transaction {
 
   // Actions
   bool ProcessHistory(CustomerCollection& customers);
-
-  // Operator Overloads
 };
 
 #endif

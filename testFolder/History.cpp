@@ -21,29 +21,23 @@ bool History::ProcessHistory(CustomerCollection &customers){ // UNTESTED
     if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
 
         // Run Time Error Condition
-        cerr << "History::ProcessHistory | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
+        cerr << "History::ProcessHistory() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
         return false;
     }
 
     cout << endl << "History of " << customerInfo->getName() << ':' << endl;
 
-    if (!customerInfo->getHistory().empty()){
-
-        const auto& history = customerInfo->getHistory();
-        for (auto it = history.rbegin(); it != history.rend(); ++it) {
-            cout << " " << *it << endl;
-        }
-        
-        //  for (string trans : customerInfo->getHistory()) {
-
-        //     cout << " " << trans << endl;
-        // }
-
-        return true;
-    } else {
+    if (customerInfo->getHistory().empty()){
 
         cout << endl;
-    }
+    } 
 
-    return false;
+    const vector<string> cust_history = customerInfo->getHistory(); // Making a copy is unnessecary but fine for now
+
+    for (int i = cust_history.size() - 1; i >= 0; i--) {
+
+        cout << cust_history[i] << endl;
+    }
+    
+    return true;
 }

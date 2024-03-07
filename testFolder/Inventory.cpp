@@ -14,9 +14,7 @@ Inventory::~Inventory(){}
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bool Inventory::ProcessInventory(MediaCollection &movies){
+void Inventory::ProcessInventory(MediaCollection &movies){
     
     movies.Display();
-
-    return true;
 }

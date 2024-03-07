@@ -11,7 +11,7 @@ Customer::Customer(){
 
 Customer::~Customer() { // No changes in memory leak
 
-    for (int i = this->outstandingMedia.size() - 1; i >= 0; i++) {
+    for (int i = this->outstandingMedia.size() - 1; i >= 0; i--) {
 
         delete this->outstandingMedia[i];
         this->outstandingMedia[i] = nullptr;
@@ -29,7 +29,7 @@ Customer::Customer(int ID, string name) {
 Customer::Customer(const Customer& rval) {
 
     this->ID = rval.ID;
-    this->name = name;
+    this->name = rval.name;
 
     this->history = rval.history;
     this->outstandingMedia = rval.outstandingMedia; // Don't know if it'll be a deep copy

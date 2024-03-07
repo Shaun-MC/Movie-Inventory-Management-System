@@ -22,7 +22,7 @@ MediaCollection::~MediaCollection() {};
 bool MediaCollection::Insert(Media*& media) { // DONE
 
     // Assumed all movies are DVD
-    char insert_type = dynamic_cast<const Movie*>(media)->getMovieType();
+    char insert_type = static_cast<Movie*>(media)->getMovieType();
 
     switch (insert_type) {
 
@@ -44,10 +44,8 @@ bool MediaCollection::Insert(Media*& media) { // DONE
 }
 
 bool MediaCollection::Retrieve(Media*& target, Media*& ret) { // UNTESTED
-
-    //Media* cpy_target = const_cast<Media*>(target);
     
-    char retrieve_type = dynamic_cast<const Movie*>(target)->getMovieType();
+    char retrieve_type = static_cast<const Movie*>(target)->getMovieType();
 
     switch (retrieve_type) {
 
@@ -81,7 +79,7 @@ void MediaCollection::Display() const {
         // Thorwing a memory leak?????
         cout << setfill('-') << setw(kLineLength) << " " << setfill(' ') << endl;
 
-        Movie* movie = dynamic_cast<Movie*>(stock[i].second.getRootValue()); 
+        Movie* movie = static_cast<Movie*>(stock[i].second.getRootValue()); 
 
         movie->PrintHeader();
 

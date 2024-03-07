@@ -12,7 +12,7 @@ class Inventory : public Transaction {
   ~Inventory();
 
   // Actions 
-  bool ProcessInventory(MediaCollection& movies);
+  void ProcessInventory(MediaCollection& movies);
 };
 
 #endif
