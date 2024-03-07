@@ -222,6 +222,6 @@ void Classic::Display(ostream& ostrm) const { // DONE
         ostrm << setw(6) << ' ' << setfill('-') << setw(4) << "" << setfill(' ');
 
         // Position and Print stock value
-        ostrm << setw(6) << right << pair.second << endl << left;
+        ostrm << setw(4) << ' ' << pair.second << endl << left;
     }
 }
