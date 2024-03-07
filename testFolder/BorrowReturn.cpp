@@ -53,13 +53,13 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
     trans_line.ignore(); // Space
 
     switch(input_media_type){
-        
-        this->media_type = input_media_type; // Bad practice - intentionally storing bad data
 
         case MediaType::dvd :
+        this->media_type = MediaType::dvd;
         break;
 
         default: 
+        this->media_type = input_media_type;
         ProcessInvalid(trans_line, 2); // Invalid Media 
         return false;
         break;

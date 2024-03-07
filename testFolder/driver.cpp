@@ -12,8 +12,7 @@ using namespace std;
 //          ??Duplicate Includes??
 
 // Current Errors: 
-    // Doesn't update the stock amounts for individual Major Actors - Classics
-    // Classic Movies don't have a title in their returns or borrows
+
 
 int main(int args, char* argv[]) {
 
