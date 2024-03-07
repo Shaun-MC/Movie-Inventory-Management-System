@@ -32,21 +32,21 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
     if (!customerInfo->ReturnMedia(mediaInfo)) {
 
         // Run Time Error Condition
-        cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " << 
-             dynamic_cast<Movie*>(mediaInfo)->getTitle() << endl;
+        cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " 
+             << static_cast<Movie*>(mediaInfo)->getTitle() << endl;
 
     } else { // Basic Course
 
         if (this->movie_type == MovieType::classic) {
 
-            Classic* temp = dynamic_cast<Classic*>(mediaInfo);
+            Classic* temp = static_cast<Classic*>(mediaInfo);
 
             this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
 
-            temp->IncrementStock(dynamic_cast<Classic*>(this->movie)->getMajorActor());
+            temp->IncrementStock(static_cast<Classic*>(this->movie)->getMajorActor());
            
         } else {
-            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
+            Movie* temp = static_cast<Movie*>(mediaInfo);
             this->transactionLog += " by " + temp->getDirector();
             mediaInfo->IncrementStock();
         } 

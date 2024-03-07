@@ -42,7 +42,7 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
 
         if (this->movie_type == MovieType::classic) {
 
-            Classic* temp = dynamic_cast<Classic*>(mediaInfo);
+            Classic* temp = static_cast<Classic*>(mediaInfo);
  
             this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
             
@@ -51,7 +51,8 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
                 flag = true;
             }
         } else {
-            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
+            
+            Movie* temp = static_cast<Movie*>(mediaInfo);
             this->transactionLog += " by " + temp->getDirector();
             
             // Unable to remove Movie form stock

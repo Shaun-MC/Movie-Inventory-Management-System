@@ -110,14 +110,14 @@ void BorrowReturn::ProcessComedy(stringstream& trans_line, Media*& newMedia){ //
     getline(trans_line, title, ',');
     trans_line.ignore(); // Space
     
-    dynamic_cast<Comedy*>(newMedia)->setTitle(title); // Sets the Director instead
+    static_cast<Comedy*>(newMedia)->setTitle(title); // Sets the Director instead
 
     // Get & Set the Movies Release Year
     trans_line >> year;
-    dynamic_cast<Comedy*>(newMedia)->setYear(year);
+    static_cast<Comedy*>(newMedia)->setYear(year);
 
     // Add to transaction string
-    this->transactionLog += ' ' + dynamic_cast<Comedy*>(newMedia)->getTitle();
+    this->transactionLog += ' ' + static_cast<Comedy*>(newMedia)->getTitle();
 }
 
 void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ // UNTESTED
@@ -132,14 +132,14 @@ void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ // 
     getline(trans_line, director, ',');
     trans_line.ignore(); // Space
 
-    dynamic_cast<Drama*>(newMedia)->setDirector(director);
+    static_cast<Drama*>(newMedia)->setDirector(director);
 
 	// Get & Set the Movies Title
 	getline(trans_line, title, ',');
-    dynamic_cast<Drama*>(newMedia)->setTitle(title);
+    static_cast<Drama*>(newMedia)->setTitle(title);
 
 	// Add to transaction string
-	this->transactionLog += ' ' + dynamic_cast<Drama*>(newMedia)->getTitle();
+	this->transactionLog += ' ' + static_cast<Drama*>(newMedia)->getTitle();
 }
 
 void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ // UNTESTED
@@ -154,18 +154,18 @@ void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ /
     // Get & Set the Release Month and Release Year 
     trans_line >> month >> year; // Doesn't Error Check
 	
-    dynamic_cast<Classic*>(newMedia)->setReleaseMonth(month);
-    dynamic_cast<Classic*>(newMedia)->setYear(year);
+    static_cast<Classic*>(newMedia)->setReleaseMonth(month);
+    static_cast<Classic*>(newMedia)->setYear(year);
 
 	trans_line.ignore(); // Space
 
     // Get & Set the Major Actor 
     getline(trans_line, majorActor, '\n');
 	
-    dynamic_cast<Classic*>(newMedia)->InsertMajorActor(majorActor, 1); 
+    static_cast<Classic*>(newMedia)->InsertMajorActor(majorActor, 1); 
 
     // Add to transaction string
-	//this->transactionLog += ' ' + dynamic_cast<Classic*>(newMedia)->getTitle(); // Doesn't Have a Title Hear
+	//this->transactionLog += ' ' + static_cast<Classic*>(newMedia)->getTitle(); // Doesn't Have a Title Hear
 }
 
 // If called in movie_type switch statment, movie type is not included

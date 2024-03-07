@@ -56,7 +56,7 @@ void MovieManager::ReadMovies(ifstream& movie_list) { // NOT DONE
         // Else - new_media is a Classic, and nothing happens if the insertion 'fails' because 
         //        the movie will get merged, adding the stock & M.A. to the orignial movie
 
-        Classic* temp = dynamic_cast<Classic*>(new_media);
+        Classic* temp = static_cast<Classic*>(new_media);
 
         if (temp == nullptr && !this->stocks.Insert(new_media)) { 
 
