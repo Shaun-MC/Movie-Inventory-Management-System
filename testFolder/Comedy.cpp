@@ -47,7 +47,7 @@ ostream& operator << (ostream& ostrm, const Comedy& comedy) { // DONE
 bool Comedy::operator < (const Media& rval) const { // DONE
 
     // Sorting Criteria: Title & Year
-    const Comedy rval_temp = dynamic_cast<const Comedy& >(rval);
+    const Comedy rval_temp = static_cast<const Comedy& >(rval);
 
     // Could condence into a single return statement, less readable
     if (this->getTitle() != rval_temp.getTitle()) {
@@ -67,7 +67,7 @@ bool Comedy::operator > (const Media& rval) const {
 bool Comedy::operator == (const Media& rval) const { // DONE
 
     // Sorting Criteria: Title & Year
-    const Comedy rval_temp = dynamic_cast<const Comedy& >(rval);
+    const Comedy rval_temp = static_cast<const Comedy& >(rval);
 
     return (this->getTitle() == rval_temp.getTitle() && 
             this->getYear() == rval_temp.getYear());

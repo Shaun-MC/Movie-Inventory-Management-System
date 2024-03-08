@@ -90,7 +90,7 @@ void Transaction::Process(MediaCollection &movies, CustomerCollection &customers
         break;
     }
 
-    if (!flag || (this->commandType == CommandType::inventory || this->commandType == CommandType::history)) {
+    if (!flag || !(this->commandType == CommandType::borrow)) {
 
         delete this;
     }

@@ -34,6 +34,8 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
         // Run Time Error Condition
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " 
              << static_cast<Movie*>(mediaInfo)->getTitle() << endl;
+            
+        return false;
 
     } else { // Basic Course
 
@@ -46,17 +48,20 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
             temp->IncrementStock(static_cast<Classic*>(this->movie)->getMajorActor());
            
         } else {
+
             Movie* temp = static_cast<Movie*>(mediaInfo);
+
             this->transactionLog += " by " + temp->getDirector();
+
             mediaInfo->IncrementStock();
         } 
     }
-            
-    customerInfo->BorrowMedia(this->movie);
+    
+    customerInfo->ReturnMedia(this->movie);
     customerInfo->AddHistory(this->transactionLog);
 
+    delete this->movie;
     this->movie = nullptr;
 
     return true;
-     
 }
