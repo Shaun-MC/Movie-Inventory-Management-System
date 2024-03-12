@@ -51,7 +51,7 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
                 flag = true;
             }
         } else {
-            
+
             Movie* temp = static_cast<Movie*>(mediaInfo);
             this->transactionLog += " by " + temp->getDirector();
             
@@ -66,8 +66,6 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
 
             // Error Condition
             cerr << "ERROR: Borrow Transaction Failed -- Not enough in the Stock" << endl;
-            // cerr << "Borrow::processBorrow() | Media is Out of Stock (" 
-            //  << dynamic_cast<Movie*>(mediaInfo)->getTitle() << ")" << endl;
 
         } else {
             
@@ -79,7 +77,6 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
             this->movie = nullptr;
 
             return true;
-
         }
     }
 

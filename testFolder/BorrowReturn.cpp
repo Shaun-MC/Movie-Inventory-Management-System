@@ -100,7 +100,7 @@ bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
 void BorrowReturn::ProcessComedy(stringstream& trans_line, Media*& newMedia){ // DONE
     
     this->movie_type = MovieType::comedy;
-    newMedia = new Comedy();
+    newMedia = new Comedy(); // Potential Memory Leak
 
     // Intialize Sorting Criteria variables    
     string title = ""; 
@@ -123,7 +123,7 @@ void BorrowReturn::ProcessComedy(stringstream& trans_line, Media*& newMedia){ //
 void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ // UNTESTED
 
     this->movie_type = MovieType::drama;
-    newMedia = new Drama();
+    newMedia = new Drama(); // Potential Memory Leak
 
     // Intialize Sorting Criteria variables
     string title = "", director = "";
@@ -145,7 +145,7 @@ void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ // 
 void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ // UNTESTED
     
     this->movie_type = MovieType::classic;
-    newMedia = new Classic();
+    newMedia = new Classic(); // Potential Memory Leak
 
     // Intialize Sorting Criteria variables
     int month = 0, year = 0; 
@@ -163,9 +163,6 @@ void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ /
     getline(trans_line, majorActor, '\n');
 	
     static_cast<Classic*>(newMedia)->InsertMajorActor(majorActor, 1); 
-
-    // Add to transaction string
-	//this->transactionLog += ' ' + static_cast<Classic*>(newMedia)->getTitle(); // Doesn't Have a Title Hear
 }
 
 // If called in movie_type switch statment, movie type is not included

@@ -82,7 +82,7 @@ Transaction* TransactionFactory::CreateReturn(stringstream& str) // DONE
 
 Transaction *TransactionFactory::CreateBorrow(stringstream& str) // DONE
 {
-    Transaction* newBorrow = new Borrow();
+    Transaction* newBorrow = new Borrow(); // Memory Leak
     
     newBorrow->setCommandType(CommandType::borrow);
     
