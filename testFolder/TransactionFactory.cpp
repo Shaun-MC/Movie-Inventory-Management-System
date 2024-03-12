@@ -32,7 +32,10 @@ Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // 
 
         default: 
         cerr << "ERROR: " << command << " Invalid Transaction Type. Try Again." << endl;
-        return nullptr;
+        
+        Transaction* placeholder = nullptr;
+        return placeholder;
+        
         break;
     }
 }
@@ -80,9 +83,9 @@ Transaction* TransactionFactory::CreateReturn(stringstream& str) // DONE
     return newReturn;
 }
 
-Transaction *TransactionFactory::CreateBorrow(stringstream& str) // DONE
+Transaction* TransactionFactory::CreateBorrow(stringstream& str) // DONE
 {
-    Transaction* newBorrow = new Borrow(); // Memory Leak
+    Transaction* newBorrow = new Borrow(); // Not properly deleted at the end of life cycle, memory leak
     
     newBorrow->setCommandType(CommandType::borrow);
     

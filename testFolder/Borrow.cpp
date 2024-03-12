@@ -36,10 +36,11 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
 
         // cerr << "Borrow::processBorrow() | Could Not Retrieve " << dynamic_cast<Movie*>(this->movie)->getTitle()
         //      << " From the Collection" << endl;
-    } else { // NOT GOOD DESIGN / STRUCTURE
+    } else { // Condtionals are not well structure but work for the moment
 
         bool flag = false;
 
+        // Logic specific for the Classic Movie Type
         if (this->movie_type == MovieType::classic) {
 
             Classic* temp = static_cast<Classic*>(mediaInfo);

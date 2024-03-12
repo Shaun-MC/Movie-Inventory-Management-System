@@ -37,7 +37,7 @@ class Customer {
   void AddHistory(string newTransaction);
 
   void BorrowMedia(Media* newMedia);
-  bool ReturnMedia(Media*& oldMedia);
+  bool ReturnMedia(Media* oldMedia);
 
   // Operator Overloads
   bool operator < (const Customer& rval) const;

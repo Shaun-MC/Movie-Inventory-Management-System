@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": ["data4customers.txt", "data4movies.txt", "data4commands.txt"],
+            "args": ["data4customers.txt", "data4movies.txt", "testCommands.txt"],
             "cwd": "${fileDirname}",
             "externalConsole": false,
             "MIMode": "lldb",

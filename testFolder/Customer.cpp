@@ -32,7 +32,7 @@ Customer::Customer(const Customer& rval) {
     this->name = rval.name;
 
     this->history = rval.history;
-    this->outstandingMedia = rval.outstandingMedia; // Don't know if it'll be a deep copy
+    this->outstandingMedia = rval.outstandingMedia; // Don't know if it'll be a deep copy, assuming not
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Getters - Setters
@@ -53,12 +53,12 @@ void Customer::setName(string first, string last){
     this->name = first + " " + last;  
 }
 
-const vector<string>& Customer::getHistory() const{ // UNTESTED
+const vector<string>& Customer::getHistory() const{ // DONE
     
     return this->history;
 }
 
-const vector<Media*>& Customer::getOutstanding() const{ // UNTESTED
+const vector<Media*>& Customer::getOutstanding() const{ // DONE
     
     return outstandingMedia;
 }
@@ -66,17 +66,17 @@ const vector<Media*>& Customer::getOutstanding() const{ // UNTESTED
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Actions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void Customer::AddHistory(string newTransaction){ // UNTESTED
+void Customer::AddHistory(string newTransaction){ // DONE
     
     history.push_back(newTransaction);
 }
 
-void Customer::BorrowMedia(Media* newMedia){ // UNTESTED
+void Customer::BorrowMedia(Media* newMedia){ // DONE
     
     outstandingMedia.push_back(newMedia);
 }
 
-bool Customer::ReturnMedia(Media*& oldMedia){ // UNTESTED
+bool Customer::ReturnMedia(Media* oldMedia){ // DONE
     
     bool ret = false;
 

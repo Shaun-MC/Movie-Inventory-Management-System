@@ -18,13 +18,13 @@ class TransactionFactory {
 
  private:
 
-  static Transaction *CreateInventory(stringstream& trans_line);
+  static Transaction* CreateInventory(stringstream& trans_line);
 
-  static Transaction *CreateHistory(stringstream& trans_line);
+  static Transaction* CreateHistory(stringstream& trans_line);
 
-  static Transaction *CreateReturn(stringstream& trans_line);
+  static Transaction* CreateReturn(stringstream& trans_line);
 
-  static Transaction *CreateBorrow(stringstream& trans_line);
+  static Transaction* CreateBorrow(stringstream& trans_line);
 }; 
 
 #endif
