@@ -1,16 +1,12 @@
 #include "TransactionFactory.h"
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Actions
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // DONE
-    
+// Create a transaction based on the provided transaction line
+Transaction* TransactionFactory::CreateTransaction(const string trans_line){ 
     stringstream str(trans_line);
     char command = 0;
 
-    // Cannot support command types being more than 1 character
     str >> command;
-    str.ignore(); // Space
+    str.ignore(); 
 
     switch (command) {
 
@@ -43,9 +39,9 @@ Transaction* TransactionFactory::CreateTransaction(const string trans_line){ // 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Transaction* TransactionFactory::CreateInventory(stringstream& str){ // DONE
-    
-    // Doesn't always get deleted
+
+// Create an inventory transaction
+Transaction* TransactionFactory::CreateInventory(stringstream& str){ 
     Transaction* newInventory = new Inventory();
 
     newInventory->setCommandType(CommandType::inventory);
@@ -53,14 +49,13 @@ Transaction* TransactionFactory::CreateInventory(stringstream& str){ // DONE
     return newInventory;
 }
 
-Transaction* TransactionFactory::CreateHistory(stringstream& str){ // DONE
-    
+// Create a history transaction
+Transaction* TransactionFactory::CreateHistory(stringstream& str){ 
     Transaction* newHistory = new History();
     
     newHistory->setCommandType(CommandType::history);
     
     if (!newHistory->setData(str)) {
-       
         delete newHistory;
         newHistory = nullptr;
     }
@@ -68,14 +63,13 @@ Transaction* TransactionFactory::CreateHistory(stringstream& str){ // DONE
     return newHistory;
 }
 
-Transaction* TransactionFactory::CreateReturn(stringstream& str) // DONE
-{
+// Create a return transaction
+Transaction* TransactionFactory::CreateReturn(stringstream& str){
     Transaction* newReturn = new Return();
 
     newReturn->setCommandType(CommandType::return_);
     
     if (!newReturn->setData(str)) {
-        
         delete newReturn;
         newReturn = nullptr;
     }
@@ -83,14 +77,13 @@ Transaction* TransactionFactory::CreateReturn(stringstream& str) // DONE
     return newReturn;
 }
 
-Transaction* TransactionFactory::CreateBorrow(stringstream& str) // DONE
-{
-    Transaction* newBorrow = new Borrow(); // Should be getting deleted in Transaction::Process(...)
+// Create a borrow transaction
+Transaction* TransactionFactory::CreateBorrow(stringstream& str) {
+    Transaction* newBorrow = new Borrow(); 
     
     newBorrow->setCommandType(CommandType::borrow);
     
     if (!newBorrow->setData(str)) {
-        
         delete newBorrow;
         newBorrow = nullptr;
     }

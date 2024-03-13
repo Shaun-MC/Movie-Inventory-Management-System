@@ -1,48 +1,43 @@
 #include "MovieFactory.h"
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Actions
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Movie* MovieFactory::CreateMovie(string& movie_line) { // DONE
-
+// Function to create a Movie object based on the provided movie line
+Movie* MovieFactory::CreateMovie(string& movie_line) { 
     stringstream str(movie_line);
     char movie_type = 0;
 
-    // Cannot support movie types being more than 1 character
     str >> movie_type;
 
-    str.ignore(); // Comma
-    str.ignore(); // Space
+    str.ignore();
+    str.ignore(); 
 
     switch (movie_type) {
-
         case 'F':
-        return CreateComedy(str);
-        break;
+            return CreateComedy(str);
+            break;
 
         case 'D':
-        return CreateDrama(str);
-        break;
+            return CreateDrama(str);
+            break;
 
         case 'C':
-        return CreateClassic(str);
-        break;
+            return CreateClassic(str);
+            break;
 
         default: 
-        cerr << "Error: " << movie_type << " Invaild Genre. Try Again." << endl;
-        return nullptr;
+            cerr << "Error: " << movie_type << " Invaild Genre. Try Again." << endl;
+            return nullptr;
     }
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Movie* MovieFactory::CreateComedy(stringstream& movie_line) { // DONE
 
+// Function to create a Comedy movie object from the provided stringstream
+Movie* MovieFactory::CreateComedy(stringstream& movie_line) { 
     Movie* new_movie = new Comedy();
 
    if (!new_movie->setData(movie_line)) {
-
         delete new_movie;
         new_movie = nullptr;
     }
@@ -50,12 +45,11 @@ Movie* MovieFactory::CreateComedy(stringstream& movie_line) { // DONE
     return new_movie;
 }
 
-Movie* MovieFactory::CreateDrama(stringstream& movie_line) { // DONE
-
+// Function to create a Drama movie object from the provided stringstream
+Movie* MovieFactory::CreateDrama(stringstream& movie_line) { 
     Movie* new_movie = new Drama();
 
     if (!new_movie->setData(movie_line)) {
-
         delete new_movie;
         new_movie = nullptr;
     }
@@ -63,12 +57,11 @@ Movie* MovieFactory::CreateDrama(stringstream& movie_line) { // DONE
     return new_movie;
 }
 
-Movie* MovieFactory::CreateClassic(stringstream& movie_line) { // DONE
-
+// Function to create a Classic movie object from the provided stringstream
+Movie* MovieFactory::CreateClassic(stringstream& movie_line) { 
     Movie* new_movie = new Classic();
 
     if (!new_movie->setData(movie_line)) {
-
         delete new_movie;
         new_movie = nullptr;
     }

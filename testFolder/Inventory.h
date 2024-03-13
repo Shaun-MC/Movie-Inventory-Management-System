@@ -1,14 +1,14 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
-
 #include "Transaction.h"
 
 class Inventory : public Transaction {
-
  public:
   
-  // Constructor - Destructor
+  // Constructor
   Inventory();
+
+  // Destructor
   ~Inventory();
 
   // Actions 

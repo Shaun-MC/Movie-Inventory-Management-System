@@ -1,13 +1,13 @@
 #include "BorrowReturn.h"
 
-BorrowReturn::BorrowReturn(){ // DONE
-    
+// Constructor 
+BorrowReturn::BorrowReturn(){ 
     this->customerID = 0;
     this->movie = nullptr;
 }
 
-BorrowReturn::~BorrowReturn(){ // DONE
-    
+// Destructor
+BorrowReturn::~BorrowReturn(){ 
     if (this->movie != nullptr) {
 		
         delete this->movie;
@@ -15,146 +15,147 @@ BorrowReturn::~BorrowReturn(){ // DONE
 	}
 }
 
-// Uses early returns for boolean return
-bool BorrowReturn::setData(stringstream& trans_line){ // UNTESTED
+// Set transaction data from a stringstream
+bool BorrowReturn::setData(stringstream& trans_line){ 
     
-    // Media *newMedia = nullptr
-    char media_type = 0, movie_type = 0;
+    Media *newMedia = nullptr;
+    char input_media_type = 0, input_movie_type = 0;
 
-    this->entireTransaction = this->commandType + " ";
+    switch (this->commandType) {
 
-    trans_line.ignore(); // Space
+        case CommandType::borrow : 
+        this->transactionLog += "Borrowed";
+        break;
 
-    // Reads and sets Customer ID Data 
-    if (Transaction::setData(trans_line)) {
+        case CommandType::return_ :
+        this->transactionLog += "Returned";
+        break;
+    }
 
-        this->processInvalid(trans_line);
+    if (!Transaction::setData(trans_line)) {
+
+        this->ProcessInvalid(trans_line, 1);
         return false;
     }  
 
-    trans_line.ignore(); // Space 
-    
-    trans_line >> media_type; // Basic Course: D
-    
-    trans_line.ignore(); // Space
+    trans_line.ignore();  
+    trans_line >> input_media_type; 
+    trans_line.ignore(); 
 
-    this->entireTransaction += media_type + " "; 
+    switch(input_media_type){
 
-    switch(media_type){
-        
         case MediaType::dvd :
-        this->movie->setMediaType(dvd);
+        this->media_type = MediaType::dvd;
         break;
 
         default: 
-        processInvalid(trans_line);
+        this->media_type = input_media_type;
+        ProcessInvalid(trans_line, 2); 
         return false;
         break;
     }
 
-    trans_line >> movie_type; // Basic Course: F, D or C 
-    trans_line.ignore(); // Space
+    trans_line >> input_movie_type; 
+    trans_line.ignore();
 
-    dynamic_cast<Movie*>(this->movie)->setMovieType(movie_type);
-
-    this->entireTransaction += movie_type + " "; 
-
-    switch (movie_type) {
+    switch (input_movie_type) {
 
         case MovieType::comedy :
-        processComedy(trans_line);
-        break;
-
-        case MovieType::classic :
-        processComedy(trans_line);
+        ProcessComedy(trans_line, newMedia);
         break;
 
         case MovieType::drama :
-        processDrama(trans_line);
+        ProcessDrama(trans_line, newMedia);
+        break;
+
+        case MovieType::classic :
+        ProcessClassic(trans_line, newMedia);
         break;
 
         default: 
-        processInvalid(trans_line);
+        this->movie_type = input_movie_type; 
+        ProcessInvalid(trans_line, 3); 
         return false;
         break;
     }
+
+    this->movie = newMedia;
     
     return true;
 }
 
-void BorrowReturn::processComedy(stringstream& trans_line){ // UNTESTED
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Private Member Functions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void BorrowReturn::ProcessComedy(stringstream& trans_line, Media*& newMedia){ 
     
-    // Intialize Sorting Criteria variables
+    this->movie_type = MovieType::comedy;
+    newMedia = new Comedy(); 
+
     string title = ""; 
     int year = 0;
 
-    // Get & Set the Movies Title
     getline(trans_line, title, ',');
-    trans_line.ignore(); // Space
+    trans_line.ignore();
     
-    dynamic_cast<Movie*>(this->movie)->setTitle(title);
+    dynamic_cast<Comedy*>(newMedia)->setTitle(title); 
 
-    // Get & Set the Movies Release Year
     trans_line >> year;
-    dynamic_cast<Movie*>(this->movie)->setYear(year);
+    dynamic_cast<Comedy*>(newMedia)->setYear(year);
 
-    // Add to transaction string
-    entireTransaction += title + ", " + to_string(year);
+    this->transactionLog += ' ' + dynamic_cast<Comedy*>(newMedia)->getTitle();
 }
 
-void BorrowReturn::processDrama(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessDrama(stringstream& trans_line, Media*& newMedia){ 
 
-    // Intialize Sorting Criteria variables
+    this->movie_type = MovieType::drama;
+    newMedia = new Drama(); 
+
     string title = "", director = "";
-    
-    // Get & Set the Movies Title
+
     getline(trans_line, director, ',');
-    trans_line.ignore(); // Space
+    trans_line.ignore();
 
-    dynamic_cast<Movie*>(this->movie)->setDirector(director);
-    trans_line.ignore(); // Space
+    dynamic_cast<Drama*>(newMedia)->setDirector(director);
 
-	// Get & Set the Movies Title
-	getline(trans_line, title, '\n');
-    dynamic_cast<Movie*>(this->movie)->setTitle(title);
+	getline(trans_line, title, ',');
+    dynamic_cast<Drama*>(newMedia)->setTitle(title);
 
-	// Add to transaction string
-	entireTransaction += director + ", " + title + ", ";
+	this->transactionLog += ' ' + dynamic_cast<Drama*>(newMedia)->getTitle();
 }
 
-void BorrowReturn::processClassic(stringstream& trans_line){ // UNTESTED
+void BorrowReturn::ProcessClassic(stringstream& trans_line, Media*& newMedia){ 
     
-    // Intialize Sorting Criteria variables
+    this->movie_type = MovieType::classic;
+    newMedia = new Classic(); 
+
     int month = 0, year = 0; 
     string majorActor = "";
 
-    // Get & Set the Release Month and Release Year 
-    trans_line >> month >> year; // Need to Error Check??
+    trans_line >> month >> year; 
 	
-    dynamic_cast<Classic*>(this->movie)->setReleaseMonth(month);
-    dynamic_cast<Movie*>(this->movie)->setYear(year);
+    dynamic_cast<Classic*>(newMedia)->setReleaseMonth(month);
+    dynamic_cast<Classic*>(newMedia)->setYear(year);
 
-	trans_line.ignore(); // Space
+	trans_line.ignore();
 
-    // Get & Set the Major Actor 
     getline(trans_line, majorActor, '\n');
 	
-    dynamic_cast<Classic*>(this->movie)->setMajorActor(majorActor, ""); // Not sure how to break first, last name - this is fine
-
-    // Add to transaction string
-	entireTransaction += to_string(month) + " " + to_string(year) + " " + majorActor;
+    dynamic_cast<Classic*>(newMedia)->InsertMajorActor(majorActor, 1); 
 }
 
-// If called in movie_type switch statment, movie type is not included
-// If called from setData conditional, cust_id not included
-void BorrowReturn::processInvalid(stringstream& trans_line){ // UNTESTED
-    
-    string temp = "";
+void BorrowReturn::ProcessInvalid(stringstream& trans_line, const int flag){ 
+    switch(flag) {
+        case 1: 
+            cerr << "Error: " << this->getCustomerID() << " Invalid Customer ID. Try Again." << endl;
+            break;
 
-    // Get the rest of trans_line
-	getline(trans_line, temp, '\n');
-	
-    this->entireTransaction += temp;
+        case 2: 
+            cerr << "Error: " << this->media_type << " Invalid Media Type. Try Again." << endl;
+            break;
 
-	cerr << "BorrowReturn::processInvalid() | Invalid Command: " << this->entireTransaction << endl;
+        case 3:
+            cerr << "Error: " << this->movie_type << " Invalid Genre. Try Again." << endl;
+            break;
+    }
 }

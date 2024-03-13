@@ -3,40 +3,43 @@
 // Constructor
 CustomerCollection::CustomerCollection() {}
 
-// Getter
+// Get a customer from the collection by ID
 Customer* CustomerCollection::getCustomer(const int ID){
-    
     return this->collection.getValue(ID);
 }
 
-// Actions
-bool CustomerCollection::insert(const int ID, const string& name) { // DONE
-    
+// Insert a new customer into the collection
+bool CustomerCollection::Insert(const int ID, const string& name) { 
     Customer new_cust = Customer(ID, name);
-
-    return this->collection.insertKeyValue(new_cust.getID(), new_cust);
+    return this->collection.InsertKeyValue(new_cust.getID(), new_cust);
 }
 
-bool CustomerCollection::retrieve(int key, Customer*& ret) { // UNTESTED
-    
-    return this->collection.retrieveValue(key, ret);
+// Retrieve a customer from the collection by key
+bool CustomerCollection::Retrieve(int key, Customer*& ret) { 
+    return this->collection.RetrieveValue(key, ret);
 }
 
-void CustomerCollection::receiveData(const string cust_line) { // DONE
-
+// Parse customer data from a line and insert it into the collection
+void CustomerCollection::ReceiveData(const string cust_line) {
     int ID = 0;
     string name = "";
 
-    this->parseCustomerLine(cust_line, ID, name);
-
-    this->insert(ID, name);
+    this->ParseCustomerLine(cust_line, ID, name);
+    this->Insert(ID, name);
 }
 
+// Display all customers in the collection
+void CustomerCollection::Display() const {
+    this->collection.Display();
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Function
-void CustomerCollection::parseCustomerLine(const string line, int& key, string& name) const { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Parse a line containing customer data into ID and name
+void CustomerCollection::ParseCustomerLine(const string line, int& key, string& name) const { 
     string f_name = "", l_name = "";
-
     stringstream parse(line);
 
     parse >> key;
@@ -49,11 +52,6 @@ void CustomerCollection::parseCustomerLine(const string line, int& key, string& 
     parse.ignore();
 
     name = f_name + " " + l_name;
-}
-
-void CustomerCollection::display() const {
-
-    this->collection.display();
 }
 
 

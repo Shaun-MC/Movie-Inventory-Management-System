@@ -1,48 +1,39 @@
 #include "Media.h"
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Constructor - Destructor
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+// Constructor 
 Media::Media() : stock(0), type(MediaType::dvd) {};
 
+// Destructor
 Media::~Media() {}
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Getter - Setters
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Get the current stock of the media
 int Media::getStock() const {
-
     return this->stock;
 }
 
+// Set the stock of the media
 void Media::setStock(const int amount) {
-
     this->stock = amount;
 }
 
+// Set the type of the media
 void Media::setMediaType(const MediaType type) {
-
     this->type = type;
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Actions
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Add stock to the media
 void Media::AddStock(const int amount) {
-
     this->stock += amount;
 }
 
+// Increment the stock of the media by one
 void Media::IncrementStock() {
-
     ++this->stock;
 }
 
-bool Media::DecrementStock() { // DONE
-
+// Decrement the stock of the media by one
+bool Media::DecrementStock() { 
     if (this->stock - 1 < 0) {
-
-        // Error Conditon: Unable to reduce Stock
         return false;
     }
 
@@ -50,12 +41,8 @@ bool Media::DecrementStock() { // DONE
     return true;
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Operator Overloads
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Output operator to display media information
 ostream& operator << (ostream& ostrm, const Media& media) {
-
     media.Display(ostrm);
-
     return ostrm;
 }

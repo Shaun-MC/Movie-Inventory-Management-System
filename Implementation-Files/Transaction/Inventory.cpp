@@ -1,19 +1,14 @@
 #include "Inventory.h"
 
+// Constructor 
 Inventory::Inventory(){
-    
     this->commandType = CommandType::inventory;
 }
 
+// Destructor
 Inventory::~Inventory(){}
 
-bool Inventory::processInventory(MediaCollection &movies){
-    
-    cout << "Inventory: " << endl;
-    
-    movies.display(); // where is display();
-
-    return true;
+// Process the inventory of movies
+void Inventory::ProcessInventory(MediaCollection &movies){
+    movies.Display();
 }
-
-//Need the ostream??

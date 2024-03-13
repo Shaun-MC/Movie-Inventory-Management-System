@@ -1,56 +1,34 @@
 #include "History.h"
 
+// Constructor 
 History::History(){
-    
     this->customerID = 0;
     this->commandType = CommandType::history;
 }
 
-History::~History(){}
+// Destructor
+History::~History() {}
 
-bool History::setHistoryData(ifstream &file){ // UNTESTED
-    
-    file.ignore();
-    file >> this->customerID;
-    
-    if(file.fail()){
-        cout << "Customer ID is Invalid" << endl;
-        file.clear();
-        file.ignore(0, '\n'); //0?
+// Process the history of a customer
+bool History::ProcessHistory(CustomerCollection &customers){
+    Customer *customerInfo = nullptr;
+
+    if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
+        cerr << "History::ProcessHistory() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
         return false;
     }
 
-    return true;
-}
-
-bool History::processHistory(CustomerCollection &customers){ // UNTESTED
-    
-    Customer *customerInfo;
-
-    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
-
-        // Run Time Error Condition
-        cerr << "History::historyProcess() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
-        return false;
-    }
-
-    cout << "History of " << this->getCustomerID() << " " << customerInfo->getName() << ':' << endl;
+    cout << endl << "History of " << customerInfo->getName() << ':' << endl;
 
     if (customerInfo->getHistory().empty()){
-        
-        // NOT an Error Condition
-        cout << " " << "History is Empty!" << endl;
-    } else {
+        cout << endl;
+    } 
 
-        for (string trans : customerInfo->getHistory()) {
+    const vector<string> cust_history = customerInfo->getHistory(); // Making a copy is unnessecary but fine for now
 
-            cout << " " << trans << endl;
-        }
-
-        return true;
+    for (int i = cust_history.size() - 1; i >= 0; i--) {
+        cout << cust_history[i] << endl;
     }
-
-    return false;
+    
+    return true;
 }
-
-//need ostream?? 

@@ -1,58 +1,41 @@
 #include "Return.h"
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Constructor - Destructor
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Constructor
 Return::Return() {};
 
+// Destructor
 Return::~Return() {};
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Actions
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
-    
+// Processes a return transaction
+bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customers){ 
     Customer* customerInfo = nullptr;
     Media* mediaInfo = nullptr;
 
     if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
-
-        // Run Time Error Condition
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;  
         return false;
     }
 
     if (this->movie == nullptr || !movies.Retrieve(this->movie, mediaInfo)) {
-        
-        // Run Time Error Condition
         cerr << "Return::processReturn() | Current Transaction Does Not Have an Associated Media" << endl;
         return false;
     }
 
     if (!customerInfo->ReturnMedia(mediaInfo)) {
-
-        // Run Time Error Condition
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " 
              << dynamic_cast<Movie*>(mediaInfo)->getTitle() << endl;
             
         return false;
 
-    } else { // Basic Course
-
+    } else { 
         if (this->movie_type == MovieType::classic) {
-
             Classic* temp = dynamic_cast<Classic*>(mediaInfo);
-
             this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
-
             temp->IncrementStock(dynamic_cast<Classic*>(this->movie)->getMajorActor());
            
         } else {
-
             Movie* temp = dynamic_cast<Movie*>(mediaInfo);
-
             this->transactionLog += " by " + temp->getDirector();
-
             mediaInfo->IncrementStock();
         } 
     }

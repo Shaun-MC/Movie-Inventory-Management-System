@@ -1,67 +1,64 @@
 #include "Drama.h"
 
-// Constructor - Destructor
-Drama::Drama() { // DONE
-
+// Constructor 
+Drama::Drama() { 
     this->movieType = MovieType::drama;
-
     this->stock = 0;
-
     this->title = this->director = "";
 }
 
+// Destructor
 Drama::~Drama() {}
 
-// Getter - Setters
-bool Drama::setData(stringstream& movie_line) { // DONE
-
-    return (!Movie::setData(movie_line) || !this->getSetYear(movie_line)) ? false : true;
+// Set data for a Drama object from a stringstream
+bool Drama::setData(stringstream& movie_line) { 
+    return (!Movie::setData(movie_line) || !this->GetSetYear(movie_line)) ? false : true;
 }
 
-// Operator Overloads
+// Print header for displaying Drama objects
+void Drama::PrintHeader() const {
+    cout << "Dramas: " << endl << endl;
+    cout << left << setw(8) << "Genre" << setw(8) << "Media" << setw(37) << "Title" << setw(25) <<
+         "Director" << setw(8) << "Year" << "Stock" << endl;
+}
+
+// Overloaded operator to output Drama object to ostream
 ostream& operator << (ostream& ostrm, const Drama& drama) {
-
-    drama.display(ostrm);
-
+    drama.Display(ostrm);
     return ostrm;
 }
 
-bool Drama::operator < (const Media& rval) const { // DONE
-
+// Overloaded less than operator for comparing Drama objects
+bool Drama::operator < (const Media& rval) const { 
     const Drama rval_temp = dynamic_cast<const Drama& >(rval);
 
-    if (this->getDirector() != rval_temp.getDirector() && this->getDirector() < rval_temp.getDirector()) {
+    if (this->getDirector() != rval_temp.getDirector()) {
+        return (this->getDirector() < rval_temp.getDirector());
 
-        return true;
+    } else {
+        return (this->getTitle() < rval_temp.getTitle());
     }
-
-    return (this->getTitle() < rval_temp.getTitle());
 }
 
+// Overloaded greater than operator for comparing Drama objects
 bool Drama::operator > (const Media& rval) const {
-
-    return !(*this < rval);
+    return (*this < rval || *this == rval) ? false : true;
 }
 
-bool Drama::operator == (const Media& rval) const { // DONE
-
+// Overloaded equality operator for comparing Drama objects
+bool Drama::operator == (const Media& rval) const { 
     const Drama rval_temp = dynamic_cast<const Drama& >(rval);
 
     return (this->getDirector() == rval_temp.getDirector() && 
             this->getTitle() == rval_temp.getTitle());
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Private Member Functions
-string Drama::reconstructLine() const { // DONE
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    string line = Movie::reconstructLine();
-
-    line += to_string(this->getYear());
-
-    return line;
-}
-
-void Drama::display(ostream& ostrm) const {
-
-    ostrm << this->reconstructLine();
+// Display information about the Drama object
+void Drama::Display(ostream& ostrm) const {
+    ostrm << setw(8) << this->getMovieType() << setw(8) << this->getMediaType() << setw(37) << this->getTitle() 
+          << setw(25) << this->getDirector() << setw(8) << this->getYear() << this->getStock() << endl;
 }

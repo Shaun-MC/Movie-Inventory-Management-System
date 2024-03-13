@@ -1,41 +1,47 @@
 #include "TransactionFactory.h"
 
-Transaction* TransactionFactory::createTransaction(const string trans_line){ // DONE
-    
+// Create a transaction based on the provided transaction line
+Transaction* TransactionFactory::CreateTransaction(const string trans_line){ 
     stringstream str(trans_line);
-    char command;
+    char command = 0;
 
-    // Cannot support command types being more than 1 character
     str >> command;
-    str.ignore(); // Space
+    str.ignore(); 
 
     switch (command) {
 
         case CommandType::inventory:
-        return createInventory(str);
+        return CreateInventory(str);
         break;
 
         case CommandType::history: 
-        return createHistory(str);
+        return CreateHistory(str);
         break;
 
         case CommandType::borrow:
-        return createBorrow(str);
+        return CreateBorrow(str);
         break;
         
         case CommandType::return_:
-        return createReturn(str);
+        return CreateReturn(str);
         break;
 
         default: 
-        cerr << "TransactionFactory::createTransaction() | Invalid Transaction Command: " << command << endl;
-        return nullptr;
+        cerr << "ERROR: " << command << " Invalid Transaction Type. Try Again." << endl;
+        
+        Transaction* placeholder = nullptr;
+        return placeholder;
+        
         break;
     }
 }
 
-Transaction *TransactionFactory::createInventory(stringstream& str){ // DONE
-   
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Private Member Functions
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Create an inventory transaction
+Transaction* TransactionFactory::CreateInventory(stringstream& str){ 
     Transaction* newInventory = new Inventory();
 
     newInventory->setCommandType(CommandType::inventory);
@@ -43,14 +49,13 @@ Transaction *TransactionFactory::createInventory(stringstream& str){ // DONE
     return newInventory;
 }
 
-Transaction *TransactionFactory::createHistory(stringstream& str){ // DONE
-    
+// Create a history transaction
+Transaction* TransactionFactory::CreateHistory(stringstream& str){ 
     Transaction* newHistory = new History();
     
     newHistory->setCommandType(CommandType::history);
     
     if (!newHistory->setData(str)) {
-       
         delete newHistory;
         newHistory = nullptr;
     }
@@ -58,14 +63,13 @@ Transaction *TransactionFactory::createHistory(stringstream& str){ // DONE
     return newHistory;
 }
 
-Transaction *TransactionFactory::createReturn(stringstream& str) // DONE
-{
+// Create a return transaction
+Transaction* TransactionFactory::CreateReturn(stringstream& str){
     Transaction* newReturn = new Return();
 
     newReturn->setCommandType(CommandType::return_);
     
     if (!newReturn->setData(str)) {
-        
         delete newReturn;
         newReturn = nullptr;
     }
@@ -73,14 +77,13 @@ Transaction *TransactionFactory::createReturn(stringstream& str) // DONE
     return newReturn;
 }
 
-Transaction *TransactionFactory::createBorrow(stringstream& str) // DONE
-{
-    Transaction* newBorrow = new Borrow();
+// Create a borrow transaction
+Transaction* TransactionFactory::CreateBorrow(stringstream& str) {
+    Transaction* newBorrow = new Borrow(); 
     
     newBorrow->setCommandType(CommandType::borrow);
     
     if (!newBorrow->setData(str)) {
-        
         delete newBorrow;
         newBorrow = nullptr;
     }

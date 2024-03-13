@@ -1,47 +1,50 @@
 #include "Return.h"
 
-Return::Return(){
-}
+// Constructor
+Return::Return() {};
 
-Return::~Return(){
-}
+// Destructor
+Return::~Return() {};
 
-bool Return::processReturn(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
-    
+// Processes a return transaction
+bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customers){ 
     Customer* customerInfo = nullptr;
     Media* mediaInfo = nullptr;
 
-    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
-
-        // Run Time Error Condition
+    if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;  
         return false;
     }
 
-    if (this->movie == nullptr || movies.retrieve(this->movie, mediaInfo)) {
-        
-        // Run Time Error Condition
+    if (this->movie == nullptr || !movies.Retrieve(this->movie, mediaInfo)) {
         cerr << "Return::processReturn() | Current Transaction Does Not Have an Associated Media" << endl;
         return false;
     }
 
-    if (customerInfo->returnMedia(this->movie)) {
+    if (!customerInfo->ReturnMedia(mediaInfo)) {
+        cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " 
+             << dynamic_cast<Movie*>(mediaInfo)->getTitle() << endl;
+            
+        return false;
 
-        // Run Time Error Condition
-        cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " << 
-             dynamic_cast<Movie*>(this->movie)->getTitle() << endl;
-    } else {
-
-        delete this->movie;
-        this->movie = nullptr;
-
-        mediaInfo->incrementStock();
-        customerInfo->addHistory(""); //(this) 
-
-        return true;
+    } else { 
+        if (this->movie_type == MovieType::classic) {
+            Classic* temp = dynamic_cast<Classic*>(mediaInfo);
+            this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
+            temp->IncrementStock(dynamic_cast<Classic*>(this->movie)->getMajorActor());
+           
+        } else {
+            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
+            this->transactionLog += " by " + temp->getDirector();
+            mediaInfo->IncrementStock();
+        } 
     }
+    
+    customerInfo->ReturnMedia(this->movie);
+    customerInfo->AddHistory(this->transactionLog);
 
-    return false;
+    delete this->movie;
+    this->movie = nullptr;
+
+    return true;
 }
-
-//need to add ostream?? 

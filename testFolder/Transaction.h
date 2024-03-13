@@ -1,13 +1,11 @@
 #ifndef TRANSACTION_H
 #define TRANSACTION_H
-
 #include <string>
-
 #include "CustomerCollection.h"
 #include "MediaCollection.h"
 
+// Enumeration for CommandType types
 enum CommandType : char{
-  
   borrow = 'B',
   return_ = 'R',
   history = 'H',
@@ -15,20 +13,20 @@ enum CommandType : char{
 };
 
 class Transaction {
-
  public: 
-  
-  // Constructors - Destructor 
+  // Constructors  
   Transaction();
+
+  // Copy Constructors
   Transaction(const Transaction &other);
+
+  // Destructor
   virtual ~Transaction();
 
   // Getters - Setters
   int getCustomerID() const;
   char getCommandType() const;
-
   virtual bool setData(stringstream& trans_line);
-  
   void setCustomerID(int id);
   void setCommandType(char type);
 
@@ -36,7 +34,7 @@ class Transaction {
   virtual void Process(MediaCollection& movies, CustomerCollection& customers);
   
  protected:
-
+  // Protected varibles
   int customerID;
   char commandType;
   string transactionLog;

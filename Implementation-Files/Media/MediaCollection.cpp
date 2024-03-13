@@ -1,78 +1,87 @@
 #include "MediaCollection.h"
 
-// Constructor - Destructor
-MediaCollection::MediaCollection() { // DONE
-
-    // Each insert also calls the AVLTree destructor
-    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::comedy, comedies) ); 
-
-    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::drama, dramas) );
-
-    this->stock.insert( pair<char, AVLTree<Media> >(MovieType::classic, classics) );
+// Constructor
+MediaCollection::MediaCollection() : kComedyIndex(0), kDramaIndex(1), kClassicIndex(2)  { 
+    this->stock.push_back({MovieType::comedy, this->comedies});
+    this->stock.push_back({MovieType::drama, this->dramas});
+    this->stock.push_back({MovieType::classic, this->classics});
 }
 
-MediaCollection::~MediaCollection() {}
+// Destructor
+MediaCollection::~MediaCollection() {};
 
-// Actions
-bool MediaCollection::insert(Media*& media) { // DONE
-
-    // Assumed all movies are DVD
-    char insert_type = dynamic_cast<const Movie*>(media)->getMovieType();
+// Insert a media item into the collection
+bool MediaCollection::Insert(Media*& media) { 
+    char insert_type = dynamic_cast<Movie*>(media)->getMovieType();
 
     switch (insert_type) {
+        case MovieType::comedy :
+            return stock[kComedyIndex].second.Insert(media);
+            break;
 
-        case ('C'):
-        return stock.at(insert_type).insert(*media);
-        break;
+        case MovieType::drama :
+            return stock[kDramaIndex].second.Insert(media);
+            break;
 
-        case ('D'):
-        return stock.at(insert_type).insert(*media);
-        break;
-
-        case ('F'): 
-        return stock.at(insert_type).insert(*media);
-        break;
+        case MovieType::classic :
+            return stock[kClassicIndex].second.Insert(media); 
+            break;
 
         default:
         return false;
     }
 }
 
-bool MediaCollection::retrieve(Media*& target, Media*& ret) { // UNTESTED
-
-    Media* cpy_target = const_cast<Media*>(target);
-    
-    char retrieve_type = dynamic_cast<Movie*>(cpy_target)->getMovieType();
+// Retrieve a media item from the collection
+bool MediaCollection::Retrieve(Media*& target, Media*& ret) { 
+    char retrieve_type = dynamic_cast<const Movie*>(target)->getMovieType();
 
     switch (retrieve_type) {
 
-        case 'F':
-        return stock.at(retrieve_type).retrieve(*target, ret);
-        break;
+        case MovieType::comedy :
+            return stock[kComedyIndex].second.Retrieve(*target, ret);
+            break;
 
-        case 'D':
-        return stock.at(retrieve_type).retrieve(*target, ret);
-        break;
+        case MovieType::drama :
+            return stock[kDramaIndex].second.Retrieve(*target, ret);
+            break;
 
-        case 'C':
-        return stock.at(retrieve_type).retrieve(*target, ret);
-        break;
+        case MovieType::classic :
+            return stock[kClassicIndex].second.Retrieve(*target, ret);
+            break;
 
         default:
-        
-        cout << "MediaCollection::retrieve() | Unsupported Movie Type " << retrieve_type << endl;
-        ret = nullptr;
+            cout << "MediaCollection::Retrieve() | Unsupported Movie Type " << retrieve_type << endl;
+            ret = nullptr;
         
         return false;
     }
 }
 
-void MediaCollection::display() const { // DONE
+// Display the contents of the media collection
+void MediaCollection::Display() const {
+    const int kLineLength = 100;
+    
+    for (int i = 0; i < this->stock.size(); i++) {
+        cout << setfill('-') << setw(kLineLength) << " " << setfill(' ') << endl;
 
-    for (auto pair : this->stock) {
+        Movie* movie = dynamic_cast<Movie*>(stock[i].second.getRootValue()); 
 
-        cout << pair.first << endl;
-        pair.second.displayTree();
+        movie->PrintHeader();
+
+        switch (stock[i].first) {
+
+            case MovieType::comedy :
+            stock[kComedyIndex].second.DisplayByLine();
+            break;
+
+            case MovieType::drama :
+            stock[kDramaIndex].second.DisplayByLine();
+            break;
+
+            case MovieType::classic :
+            stock[kClassicIndex].second.DisplayByLine();
+            break;
+        }
     }
 }
-

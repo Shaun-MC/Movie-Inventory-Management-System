@@ -1,44 +1,63 @@
 #include "Borrow.h"
 
+// Default constructor
 Borrow::Borrow(){}
 
+// Destructor
 Borrow::~Borrow(){}
 
-bool Borrow::processBorrow(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
-    
+// Process a borrow transaction
+bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customers){ 
     Customer *customerInfo = nullptr;
     Media* mediaInfo = nullptr;
-
-    // Customer not in CustomerCollection
-    if (!customers.retrieve(this->getCustomerID(), customerInfo)) {
-
-        // Error Condition
-        cerr << "Borrow::processBorrow() | Customer " << this->getCustomerID() << " Does Not Exist" << endl;
+ 
+    if (!customers.Retrieve(this->getCustomerID(), customerInfo)) {
+        cerr << "ERROR: Borrow Transaction Failed -- Customer " << this->getCustomerID() << " does not exist" << endl;
         return false;
     }
 
-    // Movies not in MediaCollection
-    if (this->movie == nullptr || movies.retrieve(this->movie, mediaInfo)) {
-
-        // Error Condition
-        cerr << "Borrow::processBorrow() | Current Transaction Does Not Have an Associated Media" << endl;
+    if (this->movie == nullptr) {
+        cerr << "ERROR: Borrow::processBorrow() | Current Transaction Does Not Have an Associated Media" << endl;
         return false;
-    }
 
-    // Unable to remove Movie form stock
-    if (!mediaInfo->decrementStock()) {
+    } else if (!movies.Retrieve(this->movie, mediaInfo)) { 
+        cerr << "ERROR: Borrow Transaction Failed -- Movie does not Exist in the Inventory" << endl;
 
-        // Error Condition
-        cerr << "Borrow::processBorrow() | Media is Out of Stock (" << mediaInfo << ")" << endl;
+    } else { 
+        bool flag = false;
+        if (this->movie_type == MovieType::classic) {
 
-    } else { // Happy Path
+            Classic* temp = dynamic_cast<Classic*>(mediaInfo); 
+ 
+            this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
+            
+            if (!temp->DecrementStock(temp->getMajorActor())) {
+                
+                flag = true;
+            }
+        } else {
 
-        customerInfo->borrowMedia(this->movie);
-        customerInfo->addHistory(""); // (this)
+            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
+            this->transactionLog += " by " + temp->getDirector();
+            
+            if (!mediaInfo->DecrementStock()) {
+               
+                flag = true;
+            }
+        }
 
-        this->movie = nullptr;
+        if (flag == true) {
+            cerr << "ERROR: Borrow Transaction Failed -- Not enough in the Stock" << endl;
 
-        return true;
+        } else {
+            customerInfo->BorrowMedia(mediaInfo);
+            customerInfo->AddHistory(this->transactionLog);
+
+            delete this->movie;
+            this->movie = nullptr;
+
+            return true;
+        }
     }
 
     return false;

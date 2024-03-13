@@ -1,86 +1,87 @@
 #include "Transaction.h"
 
+// Constructors 
 Transaction::Transaction(){
     
-    this->commandType = 0;
-    this->customerID = 0;
-    this->entireTransaction = " ";
+    this->commandType = this->customerID = 0;
+    this->transactionLog = " ";
 }
 
+// Copy Constructors
 Transaction::Transaction(const Transaction &other){
     
     this->commandType = other.commandType;
     this->customerID = other.customerID;
-    this->entireTransaction = other.entireTransaction;
+    this->transactionLog = other.transactionLog;
 }
 
+// Destructor
 Transaction::~Transaction(){}
 
+// Getter for customer ID
 int Transaction::getCustomerID() const{
     return this->customerID;
 }
 
+// Getter for command type
 char Transaction::getCommandType() const{
     return this->commandType;
 }
 
-// Assumes the sstream is pointing the cust ID
-// Only commonality between transactions is the ID 
+// Set transaction data from stringstream 
 bool Transaction::setData(stringstream& trans_line) {
-
     int ID = 0;
     bool flag = true;
     
     trans_line >> ID;
 
-    if (ID <= kMinID || ID >= kMaxID) {
-
+    if (ID < kMinID || ID > kMaxID) {
         flag = false;
-    } else {
+    } 
 
-        this->setCustomerID(ID);
-    }
+    this->setCustomerID(ID); 
 
     return flag;
 }
 
+// Setter for customer ID
 void Transaction::setCustomerID(int id){
     this->customerID = id;
 }
 
+// Setter for command type
 void Transaction::setCommandType(char type){
     this->commandType = type;
 }
 
-void Transaction::process(MediaCollection &movies, CustomerCollection &customers){ // UNTESTED
-
+// Process the transaction
+void Transaction::Process(MediaCollection &movies, CustomerCollection &customers){ 
     bool flag = false;
 
     switch (this->commandType) {
         
-        case 'I':
-        dynamic_cast<Inventory*>(this)->processInventory(movies);
-        break;
+        case CommandType::inventory :
+            dynamic_cast<Inventory*>(this)->ProcessInventory(movies);
+            break;
 
-        case 'H':
-        dynamic_cast<History*>(this)->processHistory(customers);
-        break;
+        case CommandType::history :
+            flag = dynamic_cast<History*>(this)->ProcessHistory(customers);
+            break;
 
-        case 'B':
-        flag = dynamic_cast<Borrow*>(this)->processBorrow(movies, customers); 
-        break;
+        case CommandType::borrow :
+            flag = dynamic_cast<Borrow*>(this)->ProcessBorrow(movies, customers); 
+            break;
 
-        flag = dynamic_cast<Return*>(this)->processReturn(movies, customers);
-        break;
+        case CommandType::return_ :
+            flag = dynamic_cast<Return*>(this)->ProcessReturn(movies, customers);
+            break;
 
         default:
-        // Error Condition
-        cerr << "Transaction::process() | No Command To Process" << endl;
-        break;
+            cerr << "Transaction::process() | No Command To Process" << endl;
+            break;
     }
 
-    if (!flag || this->commandType == CommandType::inventory || this->commandType == CommandType::history) {
+    this->transactionLog.clear();
 
-        delete this;
-    }
+    delete this;
 }

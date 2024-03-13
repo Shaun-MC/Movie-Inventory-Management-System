@@ -4,9 +4,7 @@
 #include "Movie.h"
 
 class Drama : public Movie {
-
  public: 
-
   // Constructor - Destructor
   Drama();
   ~Drama();
@@ -14,18 +12,18 @@ class Drama : public Movie {
   // Getter - Setters
   virtual bool setData(stringstream& movie_line);
 
+  // Actions
+  void PrintHeader() const;
+
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Drama& drama);
-
   bool operator < (const Media& rval) const;
   bool operator > (const Media& rval) const;
   bool operator == (const Media& rval) const;
 
  private: 
-
-  string reconstructLine() const;
-
-  void display(ostream& ostrm) const;
+  // Member Functions
+  void Display(ostream& ostrm) const;
 };
 
 #endif 

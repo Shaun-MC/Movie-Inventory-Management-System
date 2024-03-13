@@ -1,38 +1,31 @@
 #include <iostream>
 #include <fstream>
-
-using namespace std;
-
 #include "ValidateSystemInput.h"
 #include "MovieManager.h"
-
-// The File/#include system currently implemented is very slow, optimize if time allows
-
-// Warning: Unable to process IntelliSense for file with same canonicalized path as existing file - Error across multiple files 
-//          ??Duplicate Includes??
-
-// Current Errors: 
-
+using namespace std;
 
 int main(int args, char* argv[]) {
-
+    // Create a MovieManager object to manage the inventory
     MovieManager inventory;
     ifstream customer_list, movie_list, transaction_list;
 
+    // Validate the number of files passed into the system
     if (!Validate::CheckfileAmount(args)) {
-
         cerr << "Invalid amount of files passed into the system." << endl;
 
     } else {
-
+        // Parse and disperse the files provided as command-line arguments
         Validate::DispurseFiles(customer_list, movie_list, transaction_list, argv);
 
-        inventory.ReadCustomers(customer_list); // FINE
+        // Read customer data from the customer list file and close it
+        inventory.ReadCustomers(customer_list); 
         customer_list.close();
 
-        inventory.ReadMovies(movie_list); // FINE - The map creates copies of AVLList which it has to delete, slower than it could be, maybe still the case
+        // Read movie data from the movie list file and close it
+        inventory.ReadMovies(movie_list); 
         movie_list.close();
 
+        // Read transaction data from the transaction list file and close it
         inventory.ReadTransactions(transaction_list);
         transaction_list.close();
     }

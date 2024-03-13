@@ -1,91 +1,86 @@
 #include "MovieManager.h"
 
-MovieManager::MovieManager() {}; // Member data intialize themsevles
+// Constructor 
+MovieManager::MovieManager() {}; 
 
-void MovieManager::ReadCustomers(ifstream& customer_file) { // DONE
+// Destructor
+MovieManager::~MovieManager() {}; 
 
+// Reads customer data from the provided file stream
+void MovieManager::ReadCustomers(ifstream& customer_file) { 
     if (!customer_file) {
-
         cout << "MovieManager::ReadCustomers() | Input File Could Not be Opened" << endl;
     }
 
     string line = "";
 
     while (!customer_file.eof()) {
-        
-        getline(customer_file, line);
-
-        customers.receiveData(line);
+        getline(customer_file, line, '\n');
+        customers.ReceiveData(line);
     }
 }
 
-void MovieManager::ReadMovies(ifstream& movie_list) { // FINE
-
+// Reads movie data from the provided file stream
+void MovieManager::ReadMovies(ifstream& movie_list) { 
     if (!movie_list) {
-
         cout << "MovieManager::ReadMovies() | Input File Could Not Be Opened" << endl;
         return;
     }
 
     while (!movie_list.eof()) {
-
         string movie_line = "";
+        getline(movie_list, movie_line, '\n');
 
-        getline(movie_list, movie_line);
+        Media* new_media = MediaFactory::CreateDVDMovie(movie_line);
 
-        Media* new_media = MediaFactory::createDVDMovie(movie_line);
+        if (new_media == nullptr) { 
+            continue;
+        } 
 
-        if (new_media == nullptr) { // Do nothing - creating the Movie failed due to bad input
+        Classic* temp = dynamic_cast<Classic*>(new_media);
 
-        // Unhandled Use Case: 2 Classic Movies's stock get 'combined'??
-        } else if (!this->stocks.insert(new_media)) {  // Insertion fails because of a duplicate
-
+        if (temp == nullptr && !this->stocks.Insert(new_media)) { 
             Media* dup_media = nullptr;
         
-            this->stocks.retrieve(new_media, dup_media);
+            this->stocks.Retrieve(new_media, dup_media);
+            dup_media->AddStock(new_media->getStock());
 
-            dup_media->addStock(new_media->getStock());
-
-            // Does dup_media get cleaned up??
+        } else {
+            this->stocks.Insert(new_media);
         }
-
-        // Does new_media get cleaned up??
     }  
 }
 
+// Reads transaction data from the provided file stream
 void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
 
     if (!transaction_list) {
-
         cerr << "MovieManager::ReadTransactions() | Input File Could Not Be Opened" << endl;
     }
 
-    Transaction* new_trans = nullptr;
-
     while (!transaction_list.eof()) {
 
+        Transaction* new_trans = nullptr;
         string trans_line = "";
 
-        getline(transaction_list, trans_line);   
+        getline(transaction_list, trans_line, '\r');
+        transaction_list.ignore(); // '\n' that doesn't get caught by the getline for some reason 
 
-        new_trans = TransactionFactory::createTransaction(trans_line);
+        new_trans = TransactionFactory::CreateTransaction(trans_line);
 
         if (new_trans != nullptr) {
-
-            new_trans->process(this->stocks, this->customers);
-
-            delete new_trans;
-            new_trans = nullptr;
-        } 
+            new_trans->Process(this->stocks, this->customers);
+            new_trans = nullptr;    
+        }
     }
 }
 
-void MovieManager::displayCustomers() const {
-
-    this->customers.display();
+// Displays the list of customers
+void MovieManager::DisplayCustomers() const {
+    this->customers.Display();
 }
 
-void MovieManager::displayMedia() const {
-
-    this->stocks.display();
+// Displays the list of media
+void MovieManager::DisplayMedia() const {
+    this->stocks.Display();
 }

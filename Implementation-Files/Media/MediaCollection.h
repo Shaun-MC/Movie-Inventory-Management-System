@@ -1,44 +1,33 @@
 #ifndef MEDIACOLLECTION_H
 #define MEDIACOLLECTION_H
-
-#include <map>
-
-#include "../Data-Structures/AVLTree.h"
-
-#include "Media.h"
+#include "AVLTree.h"
 #include "MediaFactory.h"
+#include <vector>
 
-// Idea: Make it a Singleton
 class MediaCollection { 
-
  public:
-  
-  // Constructor - Destructor
+  // Constructor
   MediaCollection();
 
+  // Destructor
   ~MediaCollection();
   
   // Actions
-  bool insert(Media*& insert_media);
+  bool Insert(Media*& insert_media);
+  bool Retrieve(Media*& target, Media*& ret);
+  void Display() const;
 
-  bool retrieve(Media*& target, Media*& ret);
-
-  void display() const;
- 
  private:
+  //Private member function
+  vector< pair<char, AVLTree> > stock;
 
-  // Underlieing Data Structure - Dictionary
-  // Key: Type of Movie (Only Dvd's for this proj.)
-  // Value: AVLTree Storing the movies related to that type
+  AVLTree comedies;
+  AVLTree dramas;
+  AVLTree classics;
 
-  map<char, AVLTree<Media> > stock;
-  
-  AVLTree<Media> comedies;
-  AVLTree<Media> dramas;
-  AVLTree<Media> classics;
-
-  // Private Memeber Functions
-  void clear();
+  const int kComedyIndex;
+  const int kDramaIndex;
+  const int kClassicIndex;
 };
 
 #endif

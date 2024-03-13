@@ -1,43 +1,44 @@
 #ifndef CLASSIC_H
 #define CLASSIC_H
-
+#include <map>
 #include "Movie.h"
 
 class Classic : public Movie {
-
  public: 
-
-  // Constructor - Destructor
+  // Constructor 
   Classic();
+  // Destructor
   ~Classic();
 
   // Getters - Setters
   string getMajorActor() const;
   int getReleaseMonth() const;
-
   virtual bool setData(stringstream& movie_line);
-
-  void setMajorActor(const string f_name, const string l_name);
   void setReleaseMonth(const int month);
+
+  // Actions
+  void PrintHeader() const;
+  void InsertMajorActor(const string name, const int stock_amount);
+  void Merge(Classic* rval);
+  void IncrementStock(const string actor_name);
+  bool DecrementStock(const string actor_name);
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Classic& drama);
-
   bool operator < (const Media& rval) const;
   bool operator > (const Media& rval) const;
   bool operator == (const Media& rval) const;
 
  private: 
+  // Member Functions
+  bool CompareMajorActors(const string& actor) const;
+  bool GetSetMA(stringstream& movie_line);
+  bool GetSetMonth(stringstream& movie_line);
+  virtual void Display(ostream& ostrm) const;
 
-  string major_actor;
+  // Member Data
   int release_month;
-  
-  bool getSetMA(stringstream& movie_line);
-  bool getSetMonth(stringstream& movie_line);
-
-  virtual string reconstructLine() const;
-
-  virtual void display(ostream& ostrm) const;
+  map<string, int> major_actors; // Insertion Keeps it sorted
 };
 
 #endif 

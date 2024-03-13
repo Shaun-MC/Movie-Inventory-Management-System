@@ -1,20 +1,17 @@
 #ifndef HISTORY_H
 #define HISTORY_H 
-
 #include "Transaction.h"
 
 class History : public Transaction {
-
  public: 
-  
-  // Constructor - Destructor
+  // Constructor
   History();
+
+  // Destructor
   ~History();
 
   // Actions
-  bool processHistory(CustomerCollection& customers);
-
-  // Operator Overloads
+  bool ProcessHistory(CustomerCollection& customers);
 };
 
 #endif

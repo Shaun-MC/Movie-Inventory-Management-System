@@ -1,6 +1,5 @@
 #ifndef VALIDATESYSTEMINPUT_H
 #define VALIDATESYSTEMINPUT_H
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -9,7 +8,6 @@ using namespace std;
 
 class Validate {
  public:
-
   // Function are checking the correct amount of files (4)
   static bool CheckfileAmount(const int files);
 
@@ -17,7 +15,6 @@ class Validate {
   static void DispurseFiles(ifstream& cust, ifstream& movie, ifstream& trans, char* file_names[]); // Large Memory Leak
 
  private:
-  
   // Helper Function
   static int CheckFile(ifstream& curr);
 };

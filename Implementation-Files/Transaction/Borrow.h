@@ -1,20 +1,17 @@
 #ifndef BORROW_H
 #define BORROW_H
-
 #include "BorrowReturn.h"
 
 class Borrow : public BorrowReturn {
-
  public:
-
-  // Constructor - Destructor
+  // Constructor
   Borrow();
+
+  // Destructor
   ~Borrow();
 
   // Actions
-  bool processBorrow(MediaCollection &movies, CustomerCollection& customers);
-
-  // Operator Overloads 
+  bool ProcessBorrow(MediaCollection &movies, CustomerCollection& customers);
 };
 
 #endif

@@ -1,17 +1,11 @@
 #ifndef CUSTOMERCOLLECTION_H
 #define CUSTOMERCOLLECTION_H
-
 #include <sstream>
-
-#include "../Data-Structures/HashTable.h"
-#include "Customer.h"
-
+#include "HashTable.h"
 using namespace std;
 
 class CustomerCollection {
-
  public: 
-
   // Constructor
   CustomerCollection(); 
 
@@ -19,19 +13,17 @@ class CustomerCollection {
   Customer* getCustomer(int key);
 
   // Actions
-  bool insert(const int ID, const string& name);
-  
-  bool retrieve(int key, Customer*& ret);
-
-  void receiveData(const string cust_line); 
-
-  void display() const;
+  bool Insert(const int ID, const string& name);
+  bool Retrieve(int key, Customer*& ret);
+  void ReceiveData(const string cust_line); 
+  void Display() const;
  
  private: 
+  // Member Function
+  void ParseCustomerLine(const string line, int& key, string& name) const;
 
-  void parseCustomerLine(const string line, int& key, string& name) const;
-
-  HashTable<int, Customer> collection; // ?? use of undeclared identifier 'Customer'
+  // Member Data
+  HashTable collection;
 };
 
 #endif

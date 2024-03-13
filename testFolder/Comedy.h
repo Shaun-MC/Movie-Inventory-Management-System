@@ -1,14 +1,14 @@
 #ifndef COMEDY_H
 #define COMEDY_H
-
 #include "Movie.h"
 
 class Comedy : public Movie {
-
  public: 
 
-  // Constructor - Destructor
+  // Constructor
   Comedy();
+
+  // Destructor
   ~Comedy();
 
   // Setter
@@ -19,7 +19,6 @@ class Comedy : public Movie {
 
   // Operator Overloads
   friend ostream& operator << (ostream& ostrm, const Comedy& drama);
-
   bool operator < (const Media& rval) const;
   bool operator > (const Media& rval) const;
   bool operator == (const Media& rval) const;
