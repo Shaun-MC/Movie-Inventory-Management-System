@@ -9,12 +9,12 @@
 
 ### Polymorphism  
 
-* Used to store the data and execute the action tailord to each movie type (EX: Classics having a 'Major Actor' and Release Month)  
-* Used to store the data and execute the actions tailored to each transaction type  
+* To store the data and execute the action tailord to each movie type (EX: Classics having a 'Major Actor' and Release Month)  
+* To store the data and execute the actions tailored to each transaction type  
 
 ### Factory Builder Design Pattern
 
-* Used when data is passed into the system and specific movie or transaction objects need to be dynamically allocated
+* When data is passed into the system and a specific type of movie or transaction object needs to be dynamically allocated
 
 ## System Constraints
 
