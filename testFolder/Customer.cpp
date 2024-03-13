@@ -13,10 +13,7 @@ Customer::~Customer() { // No changes in memory leak
 
     for (int i = this->outstandingMedia.size() - 1; i >= 0; i--) {
 
-        delete this->outstandingMedia[i];
         this->outstandingMedia[i] = nullptr;
-
-        this->outstandingMedia.pop_back();
     }
 }
 

@@ -20,7 +20,6 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
 
         // Error Condition
         cerr << "ERROR: Borrow Transaction Failed -- Customer " << this->getCustomerID() << " does not exist" << endl;
-        //cerr << "Borrow::processBorrow() | Customer " <<  << " Does Not Exist" << endl;
         return false;
     }
 
@@ -34,8 +33,6 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
 
         cerr << "ERROR: Borrow Transaction Failed -- Movie does not Exist in the Inventory" << endl;
 
-        // cerr << "Borrow::processBorrow() | Could Not Retrieve " << dynamic_cast<Movie*>(this->movie)->getTitle()
-        //      << " From the Collection" << endl;
     } else { // Condtionals are not well structure but work for the moment
 
         bool flag = false;
@@ -43,7 +40,7 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
         // Logic specific for the Classic Movie Type
         if (this->movie_type == MovieType::classic) {
 
-            Classic* temp = static_cast<Classic*>(mediaInfo);
+            Classic* temp = static_cast<Classic*>(mediaInfo); // Needs to be a Classic* to have access to parameterized DecrementStock()
  
             this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
             
@@ -71,10 +68,11 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
         } else {
             
             // Basic Course
-            customerInfo->BorrowMedia(this->movie);
+            customerInfo->BorrowMedia(mediaInfo);
             
             customerInfo->AddHistory(this->transactionLog);
 
+            delete this->movie;
             this->movie = nullptr;
 
             return true;

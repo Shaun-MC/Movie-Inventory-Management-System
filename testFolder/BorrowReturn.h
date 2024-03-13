@@ -9,7 +9,7 @@ class BorrowReturn : public Transaction {
   
   // Constructor - Destructor
   BorrowReturn();
-  ~BorrowReturn();
+  virtual ~BorrowReturn();
 
   // Getter - Setter
   bool setData(stringstream& trans_line);
@@ -28,7 +28,6 @@ class BorrowReturn : public Transaction {
   char movie_type;
 
   Media* movie;
-
 };
 
 #include "Borrow.h"

@@ -85,7 +85,7 @@ Transaction* TransactionFactory::CreateReturn(stringstream& str) // DONE
 
 Transaction* TransactionFactory::CreateBorrow(stringstream& str) // DONE
 {
-    Transaction* newBorrow = new Borrow(); // Not properly deleted at the end of life cycle, memory leak
+    Transaction* newBorrow = new Borrow(); // Should be getting deleted in Transaction::Process(...)
     
     newBorrow->setCommandType(CommandType::borrow);
     

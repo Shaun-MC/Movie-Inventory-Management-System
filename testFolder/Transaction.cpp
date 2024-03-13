@@ -90,8 +90,12 @@ void Transaction::Process(MediaCollection &movies, CustomerCollection &customers
         break;
     }
 
-    if (!flag || !(this->commandType == CommandType::borrow)) {
+    this->transactionLog.clear();
+
+    delete this;
+
+    /*if (!flag || !(this->commandType == CommandType::borrow)) {
 
         delete this;
-    }
+    }*/
 }

@@ -94,7 +94,7 @@ void MovieManager::ReadTransactions(ifstream& transaction_list) { // UNTESTED
 
             new_trans->Process(this->stocks, this->customers);
 
-            new_trans = nullptr;
+            new_trans = nullptr;    
         }
     }
 }

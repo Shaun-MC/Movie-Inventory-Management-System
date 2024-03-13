@@ -21,7 +21,7 @@ class Transaction {
   // Constructors - Destructor 
   Transaction();
   Transaction(const Transaction &other);
-  ~Transaction();
+  virtual ~Transaction();
 
   // Getters - Setters
   int getCustomerID() const;

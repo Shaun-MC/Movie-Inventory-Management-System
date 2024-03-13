@@ -108,7 +108,7 @@ ostream& operator << (ostream& ostrm, const Classic& classic) {
 bool Classic::operator < (const Media& rval) const { // DONE
 
     // Sorting Criteria: Release Date & Headline Actor
-    const Classic rval_temp = static_cast<const Classic& >(rval);
+    const Classic rval_temp = dynamic_cast<const Classic& >(rval);
 
     if (this->getYear() != rval_temp.getYear()) {
 
@@ -130,9 +130,9 @@ bool Classic::operator > (const Media& rval) const {
 
 bool Classic::operator == (const Media& rval) const { // DONE
 
-    const Classic rval_temp = static_cast<const Classic& >(rval);
+    const Classic rval_temp = dynamic_cast<const Classic&>(rval);
 
-    if (this->getDirector() == "" && this->getTitle() == "" && 
+    if (this->getDirector() == "" && rval_temp.getTitle() == "" && 
         (this->getYear() == rval_temp.getYear() && 
         this->getReleaseMonth() == rval_temp.getReleaseMonth() && 
         this->CompareMajorActors(rval_temp.getMajorActor()))) {
