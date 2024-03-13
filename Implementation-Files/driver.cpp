@@ -1,19 +1,24 @@
 #include <iostream>
 #include <fstream>
+
 #include "ValidateSystemInput.h"
 #include "MovieManager.h"
+
 using namespace std;
 
 int main(int args, char* argv[]) {
-    // Create a MovieManager object to manage the inventory
+
+    // Create a MovieManager object to manage the movie storage system
     MovieManager inventory;
     ifstream customer_list, movie_list, transaction_list;
 
     // Validate the number of files passed into the system
     if (!Validate::CheckfileAmount(args)) {
+        
         cerr << "Invalid amount of files passed into the system." << endl;
 
     } else {
+
         // Parse and disperse the files provided as command-line arguments
         Validate::DispurseFiles(customer_list, movie_list, transaction_list, argv);
 
