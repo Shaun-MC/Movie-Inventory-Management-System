@@ -22,4 +22,4 @@
 
 ## System Design
 
-![alt text](<Design-Files/Class Diagram.pdf>)  
+![alt text](<Design-Files/Class Diagram.png>)  
