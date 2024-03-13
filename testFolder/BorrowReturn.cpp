@@ -88,7 +88,6 @@ bool BorrowReturn::setData(stringstream& trans_line){
 // Private Member Functions
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void BorrowReturn::ProcessComedy(stringstream& trans_line, Media*& newMedia){ 
-    
     this->movie_type = MovieType::comedy;
     newMedia = new Comedy(); 
 
