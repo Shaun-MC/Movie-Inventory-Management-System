@@ -40,7 +40,7 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
         // Logic specific for the Classic Movie Type
         if (this->movie_type == MovieType::classic) {
 
-            Classic* temp = static_cast<Classic*>(mediaInfo); // Needs to be a Classic* to have access to parameterized DecrementStock()
+            Classic* temp = dynamic_cast<Classic*>(mediaInfo); // Needs to be a Classic* to have access to parameterized DecrementStock()
  
             this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
             
@@ -50,7 +50,7 @@ bool Borrow::ProcessBorrow(MediaCollection &movies, CustomerCollection &customer
             }
         } else {
 
-            Movie* temp = static_cast<Movie*>(mediaInfo);
+            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
             this->transactionLog += " by " + temp->getDirector();
             
             // Unable to remove Movie form stock

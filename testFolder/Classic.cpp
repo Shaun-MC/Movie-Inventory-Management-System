@@ -108,19 +108,19 @@ ostream& operator << (ostream& ostrm, const Classic& classic) {
 bool Classic::operator < (const Media& rval) const { // DONE
 
     // Sorting Criteria: Release Date & Headline Actor
-    const Classic rval_temp = dynamic_cast<const Classic& >(rval);
+    //const Classic rval_temp = dynamic_cast<const Classic& >(rval);
 
-    if (this->getYear() != rval_temp.getYear()) {
+    if (this->getYear() != dynamic_cast<const Classic& >(rval).getYear()) {
 
-        return this->getYear() < rval_temp.getYear();
+        return this->getYear() < dynamic_cast<const Classic& >(rval).getYear();
     }
 
-    if (this->getReleaseMonth() != rval_temp.getReleaseMonth()) {
+    if (this->getReleaseMonth() != dynamic_cast<const Classic& >(rval).getReleaseMonth()) {
 
-        return this->getReleaseMonth() < rval_temp.getReleaseMonth();  
+        return this->getReleaseMonth() < dynamic_cast<const Classic& >(rval).getReleaseMonth();  
     }
 
-    return this->getMajorActor() < rval_temp.getMajorActor();
+    return this->getMajorActor() < dynamic_cast<const Classic& >(rval).getMajorActor();
 }
 
 bool Classic::operator > (const Media& rval) const {
@@ -130,19 +130,19 @@ bool Classic::operator > (const Media& rval) const {
 
 bool Classic::operator == (const Media& rval) const { // DONE
 
-    const Classic rval_temp = dynamic_cast<const Classic&>(rval);
+    //const Classic rval_temp = dynamic_cast<const Classic&>(rval);
 
-    if (this->getDirector() == "" && rval_temp.getTitle() == "" && 
-        (this->getYear() == rval_temp.getYear() && 
-        this->getReleaseMonth() == rval_temp.getReleaseMonth() && 
-        this->CompareMajorActors(rval_temp.getMajorActor()))) {
+    if (this->getDirector() == "" && this->getTitle() == "" && 
+        (this->getYear() == dynamic_cast<const Classic&>(rval).getYear() && 
+        this->getReleaseMonth() == dynamic_cast<const Classic&>(rval).getReleaseMonth() && 
+        this->CompareMajorActors(dynamic_cast<const Classic&>(rval).getMajorActor()))) {
 
             return true;
     } else {
 
         // Able to combine movie stocks if we know they're the same movie, the date is irrelevant here
-        return (this->getDirector() == rval_temp.getDirector() &&
-                this->getTitle() == rval_temp.getTitle());
+        return (this->getDirector() == dynamic_cast<const Classic&>(rval).getDirector() &&
+                this->getTitle() == dynamic_cast<const Classic&>(rval).getTitle());
 
     }
 }

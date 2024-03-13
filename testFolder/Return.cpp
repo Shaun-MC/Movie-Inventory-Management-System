@@ -33,7 +33,7 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
 
         // Run Time Error Condition
         cerr << "Return::processReturn() | Customer " << this->getCustomerID() << " Never Checked Out " 
-             << static_cast<Movie*>(mediaInfo)->getTitle() << endl;
+             << dynamic_cast<Movie*>(mediaInfo)->getTitle() << endl;
             
         return false;
 
@@ -41,15 +41,15 @@ bool Return::ProcessReturn(MediaCollection &movies, CustomerCollection &customer
 
         if (this->movie_type == MovieType::classic) {
 
-            Classic* temp = static_cast<Classic*>(mediaInfo);
+            Classic* temp = dynamic_cast<Classic*>(mediaInfo);
 
             this->transactionLog += ' ' + temp->getTitle() + " by " + temp->getDirector();
 
-            temp->IncrementStock(static_cast<Classic*>(this->movie)->getMajorActor());
+            temp->IncrementStock(dynamic_cast<Classic*>(this->movie)->getMajorActor());
            
         } else {
 
-            Movie* temp = static_cast<Movie*>(mediaInfo);
+            Movie* temp = dynamic_cast<Movie*>(mediaInfo);
 
             this->transactionLog += " by " + temp->getDirector();
 

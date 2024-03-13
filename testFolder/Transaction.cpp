@@ -69,19 +69,19 @@ void Transaction::Process(MediaCollection &movies, CustomerCollection &customers
     switch (this->commandType) {
         
         case CommandType::inventory :
-        static_cast<Inventory*>(this)->ProcessInventory(movies);
+        dynamic_cast<Inventory*>(this)->ProcessInventory(movies);
         break;
 
         case CommandType::history :
-        flag = static_cast<History*>(this)->ProcessHistory(customers);
+        flag = dynamic_cast<History*>(this)->ProcessHistory(customers);
         break;
 
         case CommandType::borrow :
-        flag = static_cast<Borrow*>(this)->ProcessBorrow(movies, customers); 
+        flag = dynamic_cast<Borrow*>(this)->ProcessBorrow(movies, customers); 
         break;
 
         case CommandType::return_ :
-        flag = static_cast<Return*>(this)->ProcessReturn(movies, customers);
+        flag = dynamic_cast<Return*>(this)->ProcessReturn(movies, customers);
         break;
 
         default:

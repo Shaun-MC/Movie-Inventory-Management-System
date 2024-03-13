@@ -148,11 +148,11 @@ AVLTree::TreeNode* AVLTree::InsertHelper(TreeNode*& currNode, Media*& val) { // 
         // Merge the Media objects if that Classic Movie is already in the system
             // Destory the passed in Media object 
 
-        Classic* test = static_cast<Classic*>(val); 
+        Classic* test = dynamic_cast<Classic*>(val); 
 
         if (test != nullptr) {
 
-            Classic* temp = static_cast<Classic*>(currNode->value);
+            Classic* temp = dynamic_cast<Classic*>(currNode->value);
 
             temp->Merge(test);
 

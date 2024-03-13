@@ -81,7 +81,6 @@ bool Customer::ReturnMedia(Media* oldMedia){ // DONE
 
         if (*outstandingMedia[i] == *oldMedia) {
 
-            delete outstandingMedia[i];
             outstandingMedia[i] = nullptr;
 
             outstandingMedia[i] = outstandingMedia.back();

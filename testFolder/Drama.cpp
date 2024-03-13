@@ -46,7 +46,7 @@ ostream& operator << (ostream& ostrm, const Drama& drama) {
 // Sorting Criteria: Director & Title
 bool Drama::operator < (const Media& rval) const { // DONE
 
-    const Drama rval_temp = static_cast<const Drama& >(rval);
+    const Drama rval_temp = dynamic_cast<const Drama& >(rval);
 
     if (this->getDirector() != rval_temp.getDirector()) {
 
@@ -64,7 +64,7 @@ bool Drama::operator > (const Media& rval) const {
 
 bool Drama::operator == (const Media& rval) const { // DONE
 
-    const Drama rval_temp = static_cast<const Drama& >(rval);
+    const Drama rval_temp = dynamic_cast<const Drama& >(rval);
 
     return (this->getDirector() == rval_temp.getDirector() && 
             this->getTitle() == rval_temp.getTitle());
